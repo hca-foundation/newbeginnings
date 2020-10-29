@@ -259,6 +259,7 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DAL\AdminRepository.cs" />
     <Compile Include="DAL\ClientRepository.cs" />
+    <Compile Include="DAL\QuestionRepository.cs" />
     <Compile Include="DAL\SurveyAnswerRepository.cs" />
     <Compile Include="DAL\SurveyTicketRepository.cs" />
     <Compile Include="Global.asax.cs">
@@ -275,6 +276,7 @@
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\SurveyAnswer.cs" />
+    <Compile Include="Models\SurveyExportAnswer.cs" />
     <Compile Include="Models\SurveyQuestion.cs" />
     <Compile Include="Models\SurveyTicket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -20,12 +20,14 @@ namespace TNBCSurvey.Controllers
     {
         readonly SurveyAnswerRepository _repoA;
         readonly SurveyTicketRepository _repoT;
+        readonly QuestionRepository _repoQ;
         private ApplicationDbContext _context;
         public SurveyController()
         {
             _context = new ApplicationDbContext();
             _repoA = new SurveyAnswerRepository();
             _repoT = new SurveyTicketRepository();
+            _repoQ = new QuestionRepository();
         }
 
         [Route("api/survey/{id}")]
@@ -67,11 +69,34 @@ namespace TNBCSurvey.Controllers
         [HttpGet]
         public HttpResponseMessage exportToExcel(string surveyPeriod)
         {
-            var fileId = "%HOME%\\data\\excelExport.xlsx";
+            var fileId = "C:\\Users\\ahill\\excelExport.xlsx";
 
             var excel = new Application();
             var workbook = excel.Workbooks.Add();
             Worksheet sheet = workbook.Sheets.Add();
+
+            // Header
+            var questions = _repoQ.GetQuestions();
+
+
+            // Body
+            var surveyResults = _repoA.GetSurveyResultsByPeriod(surveyPeriod).ToList();
+            var currentRowNum = 1;
+            int currentColumnNum = 1;
+            int currentClientId = -1;
+            for(var i = 0; i < surveyResults.Count(); i++)
+            {
+                var result = surveyResults[i];
+                
+                if(result.Client_SID != currentClientId)
+                {
+                    sheet.Cells[currentRowNum, 1] = $"{result.LastName}, {result.FirstName}";
+                    currentRowNum++;
+                    currentColumnNum = 2;
+                }
+
+                sheet.Cells[currentRowNum, currentColumnNum] = result.Answer_Text;
+            }
             sheet.Cells[1, 1] = "Hello World!";
 
             workbook.SaveAs(fileId);
