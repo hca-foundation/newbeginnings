@@ -31,5 +31,13 @@ namespace TNBCSurvey.DAL
             return Convert.ToInt32(_dbConnection.ExecuteScalar(sql, new { Email = email }));
         }
 
+        public IEnumerable<Client> GetAllActiveClients()
+        {
+            var sql = @"
+                select Client_SID, FirstName, LastName, GroupNumber, Phone, Email
+                from dbo.Clients";
+            return _dbConnection.Query<Client>(sql);
+        }
+
     }
 }

@@ -6,14 +6,23 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace TNBCSurvey.Services
 {
-    class Email
+    class EmailService
     {
-        public Email()
+        public EmailService()
         {
         }
+
+        public string getMailBody(string surveyLinkUrl)
+        {
+            var emailTemplate = File.ReadAllText("emailTemplate.html");
+            emailTemplate.Replace("{surveyLinkUrl}", surveyLinkUrl);
+            return emailTemplate;
+        }
+
         public void sendMail(string subject, string msg, string receiver)
         {
             MailMessage objeto_mail = new MailMessage();
@@ -23,7 +32,7 @@ namespace TNBCSurvey.Services
             client.Timeout = 10000;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = true;
-            objeto_mail.From = new MailAddress("comet.support@hcahealthcare.com");
+            objeto_mail.From = new MailAddress("NoReply@thenewbeginningscenter.org");
             objeto_mail.To.Add(new MailAddress(receiver));
             objeto_mail.Subject = subject;
             objeto_mail.Body = msg;

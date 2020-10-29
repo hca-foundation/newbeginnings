@@ -31,10 +31,11 @@ namespace TNBCSurvey.DAL
                             values (@ClientId, @Token, @ExpirationDate , @TokenUsed)";
 
              _dbConnection.Execute(sql, new { ClientId = client.Client_SID, Token = tokenString, ExpirationDate = DateTime.Now.AddDays(14), TokenUsed = false });
-            // 3. Send the email:
-            String link = "https://example.com/survey?clientid=" + client.Client_SID.ToString() + "&token=" + tokenString;
 
-            (new Email()).sendMail("TEST", link, "bin.li@hcahealthcare.com");
+            var emailService = new EmailService();
+            var link = "https://example.com/survey?clientid=" + client.Client_SID.ToString() + "&token=" + tokenString;
+            var body = emailService.getMailBody(link);
+            emailService.sendMail("New Beginnings Follow Up Survey", body, client.Email);
         }
 
         public int GetOneByToken(int id, string token)

@@ -18,6 +18,7 @@ namespace TNBCSurvey.Controllers
   
     public class SurveyController : ApiController
     {
+        readonly ClientRepository _repoC;
         readonly SurveyAnswerRepository _repoA;
         readonly SurveyTicketRepository _repoT;
         readonly QuestionRepository _repoQ;
@@ -25,17 +26,21 @@ namespace TNBCSurvey.Controllers
         public SurveyController()
         {
             _context = new ApplicationDbContext();
+            _repoC = new ClientRepository();
             _repoA = new SurveyAnswerRepository();
             _repoT = new SurveyTicketRepository();
             _repoQ = new QuestionRepository();
         }
 
-        [Route("api/survey/{id}")]
+        [Route("api/survey")]
         [HttpPost]
-        public void sendSurveyLink(int id)
+        public void sendSurveyLinks()
         {
-            Client user = _context.Client.Find(id);
-            _repoT.CreateSurveyTicket(user);
+            var clients = _repoC.GetAllActiveClients();
+            foreach(var client in clients)
+            {
+                _repoT.CreateSurveyTicket(client);
+            }
         }
 
         [Route("api/survey/{id}/{token}")]
@@ -124,11 +129,11 @@ namespace TNBCSurvey.Controllers
             List<string> rows = new List<string>();
 
             // Header
-            var row = "Name,Survey Period,";
+            var row = "\"Name\",\"Survey Period\",";
             var questions = _repoQ.GetQuestions().ToList();
             foreach(var question in questions)
             {
-                row += question.Question_Text + ",";
+                row += $"\"{question.Question_Text}\",";
             }
             rows.Add(row);
 
@@ -151,7 +156,7 @@ namespace TNBCSurvey.Controllers
                     row = $"\"{result.LastName}, {result.FirstName}\",";
                 }
 
-                row += result.Answer_Text + ",";
+                row += $"\"{result.Answer_Text}\",";
             }
             rows.Add(row);
 
