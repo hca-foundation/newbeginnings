@@ -65,11 +65,11 @@ namespace TNBCSurvey.Controllers
             }
         }
 
-        [Route("api/survey/export/{surveyPeriod}")]
+        [Route("api/survey/excel/{surveyPeriod}")]
         [HttpGet]
         public HttpResponseMessage exportToExcel(string surveyPeriod)
         {
-            var fileId = "C:\\Users\\ahill\\excelExport.xlsx";
+            var fileId = $"/excelExport-{Guid.NewGuid()}.xlsx";
 
             var excel = new Application();
             var workbook = excel.Workbooks.Add();
@@ -114,6 +114,61 @@ namespace TNBCSurvey.Controllers
             response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
             response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             response.Content.Headers.ContentDisposition.FileName = surveyPeriod + ".xlsx";
+            return response;
+        }
+
+        [Route("api/survey/csv/{surveyPeriod}")]
+        [HttpGet]
+        public HttpResponseMessage exportToCsv(string surveyPeriod)
+        {
+            List<string> rows = new List<string>();
+
+            // Header
+            var row = "Name,Survey Period,";
+            var questions = _repoQ.GetQuestions().ToList();
+            foreach(var question in questions)
+            {
+                row += question.Question_Text + ",";
+            }
+            rows.Add(row);
+
+            // Body
+            var surveyResults = _repoA.GetSurveyResultsByPeriod(surveyPeriod).ToList();
+            int currentClientId = -1;
+            row = null;
+            for (var i = 0; i < surveyResults.Count; i++)
+            {
+                var result = surveyResults[i];
+
+                if (result.Client_SID != currentClientId)
+                {
+                    if(row != null)
+                    {
+                        rows.Add(row);
+                    }
+
+                    currentClientId = result.Client_SID;
+                    row = $"\"{result.LastName}, {result.FirstName}\",";
+                }
+
+                row += result.Answer_Text + ",";
+            }
+            rows.Add(row);
+
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            foreach(var r in rows)
+            {
+                writer.Write(r);
+                writer.Write('\n');
+            }
+            writer.Flush();
+            stream.Position = 0;
+
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            response.Content = new StreamContent(stream);
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
+            response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment") { FileName = surveyPeriod + ".csv" };
             return response;
         }
     }
