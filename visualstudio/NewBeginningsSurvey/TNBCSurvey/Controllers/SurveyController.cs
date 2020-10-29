@@ -76,28 +76,34 @@ namespace TNBCSurvey.Controllers
             Worksheet sheet = workbook.Sheets.Add();
 
             // Header
-            var questions = _repoQ.GetQuestions();
-
+            sheet.Cells[1, 1] = "Name";
+            sheet.Cells[1, 2] = "Survey Period";
+            var questions = _repoQ.GetQuestions().ToList();
+            for(int i = 0; i < questions.Count; i++)
+            {
+                sheet.Cells[1, i + 3] = questions[i].Question_Text;
+            }
 
             // Body
             var surveyResults = _repoA.GetSurveyResultsByPeriod(surveyPeriod).ToList();
             var currentRowNum = 1;
             int currentColumnNum = 1;
             int currentClientId = -1;
-            for(var i = 0; i < surveyResults.Count(); i++)
+            for(var i = 0; i < surveyResults.Count; i++)
             {
                 var result = surveyResults[i];
                 
                 if(result.Client_SID != currentClientId)
                 {
-                    sheet.Cells[currentRowNum, 1] = $"{result.LastName}, {result.FirstName}";
+                    currentClientId = result.Client_SID;
                     currentRowNum++;
                     currentColumnNum = 2;
+                    sheet.Cells[currentRowNum, 1] = $"{result.LastName}, {result.FirstName}";
                 }
 
                 sheet.Cells[currentRowNum, currentColumnNum] = result.Answer_Text;
+                currentColumnNum++;
             }
-            sheet.Cells[1, 1] = "Hello World!";
 
             workbook.SaveAs(fileId);
             workbook.Close();
