@@ -1,0 +1,14 @@
+﻿<div id="home" class="col-sm-8 col-sm-offset-2">
+    <header id="home-header">
+        <h1>Welcome to TNBC's survey website, <span id="username">{{currentUser.userName}}</span>!</h1>
+    </header>
+
+    <div class="game-set" ng-repeat="item in worldGame" ng-mouseover="item[$index]=true" ng-mouseleave="item[$index]=false">
+        <div class="row">
+            <a class="btn btn-lg btn-custom col-sm-8 col-sm-offset-2" ng-click="loadLinks(item.url)">{{item.name}}</a>
+            <div class="caption col-sm-8 col-sm-offset-2" ng-show="item[$index]">
+                {{item.description}}
+            </div>
+        </div>
+    </div>
+</div>
