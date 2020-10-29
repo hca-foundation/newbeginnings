@@ -1,0 +1,107 @@
+﻿<!--
+<div ng-if="dataLoading">
+    Verifying...
+</div>
+<div ng-if="!dataLoading && !validLink">
+    Sorry, the link is invalid!
+</div>
+<div ng-if="!dataLoading && validLink">
+
+</div>
+<h1>Hello {{selectedItem.FirstName + selectedItem.LastName}},</h1>
+-->
+<div ng-if="!thankyou">
+    <h3>Survey Questions:</h3>
+    <form>
+        <div calss="form-group">
+            <label>Have you lost additional weight?*</label>
+            <input type="radio" value="Yes" name="Q1" ng-Model="survey.Q1"> Yes
+            <input type="radio" value="No" name="Q1" ng-Model="survey.Q1"> No
+        </div>
+        <div calss="form-group">
+            <label>Have you maintained your weight since graduating the program?*</label>
+            <input type="radio" value="Yes" name="Q2" ng-Model="survey.Q2"> Yes
+            <input type="radio" value="No" name="Q2" ng-Model="survey.Q2"> No
+        </div>
+        <div calss="form-group">
+            <label>What is your current weight?</label>
+            <input type="text" class="form-control" placeholder="" ng-model="survey.Q3">
+        </div>
+        <div calss="form-group">
+            <label>What is your height (in inches)?</label>
+            <input type="text" class="form-control" placeholder="" ng-model="survey.Q4">
+        </div>
+        <div calss="form-group">
+            <label>Have you lost inches (waist) or decreased in clothing size(s)?*</label>
+            <input type="radio" value="Yes" name="Q5" ng-Model="survey.Q5"> Yes
+            <input type="radio" value="No" name="Q5" ng-Model="survey.Q5"> No
+        </div>
+        <div calss="form-group">
+            <label>Blood Pressure?</label>
+            <input type="text" class="form-control" placeholder="" ng-model="survey.Q6">
+        </div>
+        <div calss="form-group">
+            <label>Fasting Glucose/A1C?</label>
+            <input type="text" class="form-control" placeholder="" ng-model="survey.Q7">
+        </div>
+        <div calss="form-group">
+            <label>Cholesterol?</label>
+            <input type="text" class="form-control" placeholder="" ng-model="survey.Q8">
+        </div>
+        <div calss="form-group">
+            <label>Do you prepare meals in advance (food prep)?</label>
+            <input type="radio" value="Yes" name="Q9" ng-Model="survey.Q9"> Yes
+            <input type="radio" value="No" name="Q9" ng-Model="survey.Q9"> No
+        </div>
+        <div calss="form-group">
+            <label>Do you exercise 2 to 5 times per week?</label>
+            <input type="radio" value="Yes" name="Q10" ng-Model="survey.Q10"> Yes
+            <input type="radio" value="No" name="Q10" ng-Model="survey.Q10"> No
+        </div>
+        <div calss="form-group">
+            <label>Are you following the eating habits most of the time? Select an option</label>
+            <input type="radio" value="Yes" name="Q11" ng-Model="survey.Q11"> Yes
+            <input type="radio" value="No" name="Q11" ng-Model="survey.Q11"> No
+        </div>
+        <div calss="form-group">
+            <label>Have you decreased or stopped taking any medications? If YES, please list what medications below.</label>
+            <input type="text" class="form-control" placeholder="" ng-model="survey.Q12">
+        </div>
+        <div calss="form-group">
+            <label>Are you currently taking any medications?</label>
+            <input type="radio" value="Yes" name="Q2" ng-Model="survey.Q13"> Yes
+            <input type="radio" value="No" name="Q2" ng-Model="survey.Q13"> No
+        </div>
+        <div calss="form-group">
+            <label>Are you attending Reward Group Classes on Mondays and Wednesdays?</label>
+            <input type="radio" value="Yes" name="Q14" ng-Model="survey.Q14"> Yes
+            <input type="radio" value="No" name="Q14" ng-Model="survey.Q14"> No
+        </div>
+        <div calss="form-group">
+            <label>Are you attending Saturday Bonus Classes?</label>
+            <input type="radio" value="Yes" name="Q15" ng-Model="survey.Q15"> Yes
+            <input type="radio" value="No" name="Q15" ng-Model="survey.Q15"> No
+        </div>
+        <div calss="form-group">
+            <label>Do you need a follow-up call?</label>
+            <input type="radio" value="Yes" name="Q16" ng-Model="survey.Q16"> Yes
+            <input type="radio" value="No" name="Q16" ng-Model="survey.Q16"> No
+        </div>
+        <div calss="form-group">
+            <label>If yes, please list the best phone number and/or e-mail address we can reach out to:</label>
+            <input type="text" class="form-control" placeholder="" ng-model="survey.Q17">
+        </div>
+        <div calss="form-group">
+            <label>What was the most challenging part of the program for you?</label>
+            <input type="text" class="form-control" placeholder="" ng-model="survey.Q18">
+        </div>
+        <div calss="form-group">
+            <label>Share Your Success! Have a success story of how you implemented what you learned in class at The New Beginnings Center? Did it positively impact you, your family, and/or your life? Please share this with us so that we can use testimonies like yours to help us with recruiting, fundraising, and more!</label>
+            <input type="text" class="form-control" placeholder="" ng-model="survey.Q19">
+        </div>
+        <button type="button" class="btn btn-primary btn-lg col-xs-2 " ng-click="sendAnswers()">Submit</button>
+    </form>
+</div>
+<div ng-if="thankyou">
+    Your survey answers submitted. Thank you!
+</div>
