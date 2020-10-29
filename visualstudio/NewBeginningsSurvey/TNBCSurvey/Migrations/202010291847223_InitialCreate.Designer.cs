@@ -13,7 +13,7 @@ namespace TNBCSurvey.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202010290341454_InitialCreate"; }
+            get { return "202010291847223_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source
