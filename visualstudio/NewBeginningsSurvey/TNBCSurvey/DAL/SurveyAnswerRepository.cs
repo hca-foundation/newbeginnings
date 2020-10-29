@@ -42,7 +42,7 @@ namespace TNBCSurvey.DAL
                 and sq.Active = 1
                 order by c.LastName, c.FirstName, c.Client_SID, sq.DisplayOrder";
 
-            var surveyResults = (IEnumerable<SurveyExportAnswer>)_dbConnection.Query(sql, period);
+            var surveyResults = _dbConnection.Query<SurveyExportAnswer>(sql, new { period = period });
             return surveyResults;
         }
     }

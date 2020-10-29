@@ -26,12 +26,12 @@ namespace TNBCSurvey.DAL
         public IEnumerable<SurveyQuestion> GetQuestions()
         {
             var sql = @"
-                select sq.Question_SID, sq.Question_Type, sq.Question_Text
+                select sq.Question_SID, sq.Question_Type, sq.Question_Text, sq.DisplayOrder, sq.Active
                 from dbo.SurveyQuestions sq
                 where sq.Active = 1
                 order by sq.DisplayOrder";
 
-            var questions = (IEnumerable<SurveyQuestion>)_dbConnection.Query(sql);
+            var questions = _dbConnection.Query<SurveyQuestion>(sql);
             return questions;
         }
     }
