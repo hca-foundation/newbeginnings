@@ -4,11 +4,14 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Web.Http;
+using Microsoft.Office.Interop.Excel;
 
 namespace TNBCSurvey.Controllers
 {
@@ -58,6 +61,29 @@ namespace TNBCSurvey.Controllers
                     _repoA.Add(client_SID, question_Period, question_SID, answer_Text);
                 }
             }
+        }
+
+        [Route("api/survey/export/{surveyPeriod}")]
+        [HttpGet]
+        public HttpResponseMessage exportToExcel(string surveyPeriod)
+        {
+            var fileId = "%HOME%\\data\\excelExport.xlsx";
+
+            var excel = new Application();
+            var workbook = excel.Workbooks.Add();
+            Worksheet sheet = workbook.Sheets.Add();
+            sheet.Cells[1, 1] = "Hello World!";
+
+            workbook.SaveAs(fileId);
+            workbook.Close();
+            excel.Quit();
+
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            response.Content = new StreamContent(new FileStream(fileId, FileMode.Open, FileAccess.Read));
+            response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            response.Content.Headers.ContentDisposition.FileName = surveyPeriod + ".xlsx";
+            return response;
         }
     }
 }
