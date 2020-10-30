@@ -17,6 +17,7 @@
           url: "/survey",
           description: "View, download survey results"
       }
+<<<<<<< HEAD
      ];
 
 
@@ -69,5 +70,8 @@
         
     }
 
+=======
+    ];
+>>>>>>> 6f833f77287e8d499be64e1d4522e3adf7b7e0f9
 
 }]);

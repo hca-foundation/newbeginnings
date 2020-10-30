@@ -1,17 +1,24 @@
 ﻿
+<<<<<<< HEAD
 app.controller("ClientListCtrl", ['$scope', '$rootScope', '$http', '$location', '$filter', function ($scope, $rootScope, $http, $location, $filter) {
+=======
+app.controller("ClientListCtrl", ['$scope', '$rootScope', '$http', '$location', function ($scope, $rootScope, $http, $location) {
+>>>>>>> 6f833f77287e8d499be64e1d4522e3adf7b7e0f9
     $scope.items = [];
 
     var getItems = function () {
         $http.get('/api/client/list')
             .then(function (res) {
                 $scope.items = res.data;
+<<<<<<< HEAD
                 var i;
                 for (i = 0; i < $scope.items.length; i++) {
                     if ($scope.items[i].Active == true) $scope.items[i].Active = "Yes";
                     else $scope.items[i].Active = "No";
                     $scope.items[i].ProgramStartDate = $filter('date')($scope.items[i].ProgramStartDate, 'MM-dd-yyyy');
                 }
+=======
+>>>>>>> 6f833f77287e8d499be64e1d4522e3adf7b7e0f9
             });
     }
     getItems();

@@ -34,8 +34,13 @@ namespace TNBCSurvey.Migrations
                 new Admin { Name = "z", Email = "z@z.com" }
             );
             context.Client.AddOrUpdate(
+<<<<<<< HEAD
                 new Client { FirstName = "cc", LastName = "dd", Email = "c@d.com", Phone = "1234567890", GroupNumber = "1", Survey_Status = "Pending" },
                 new Client { FirstName = "aa", LastName = "bb",Email = "a@b.com",Phone = "1234567890", GroupNumber = "2", Survey_Status = "Pending" }
+=======
+                new Client { FirstName = "cc", LastName = "dd", Email = "c@d.com", GroupNumber = 1, ProgramStartDate = Convert.ToDateTime("2020-07-10"), Active = true },
+                new Client { FirstName = "aa", LastName = "bb",Email = "a@b.com", GroupNumber = 2, ProgramStartDate = Convert.ToDateTime("2020-03-22"), Active = true }
+>>>>>>> 6f833f77287e8d499be64e1d4522e3adf7b7e0f9
             );
         }
     }

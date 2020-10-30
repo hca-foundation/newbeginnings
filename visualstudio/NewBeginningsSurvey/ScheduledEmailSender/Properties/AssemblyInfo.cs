@@ -5,16 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TNBCSurvey")]
+[assembly: AssemblyTitle("ScheduledEmailSender")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TNBCSurvey")]
-<<<<<<< HEAD
-[assembly: AssemblyCopyright("Copyright ©  2017")]
-=======
+[assembly: AssemblyProduct("ScheduledEmailSender")]
 [assembly: AssemblyCopyright("")]
->>>>>>> 6f833f77287e8d499be64e1d4522e3adf7b7e0f9
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -24,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8a7d518f-8b0b-42ba-95d7-f0262c34cd18")]
+[assembly: Guid("7694a224-b1f9-444e-9ce6-9a3dc51ae681")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -33,7 +29,8 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Revision and Build Numbers
+// You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
+// [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
