@@ -26,9 +26,7 @@
                                 <tr>
                                     <td>Respondent Name</td>
                                     <td>Respondent Email Address</td>
-                                    <td>Employees Assigned</td>
                                     <td>Survey Status</td>
-                                    <td>Date Submitted</td>
                                     <td>Action</td>
                                 </tr>
                             </thead>
@@ -36,9 +34,7 @@
                                 <tr ng-repeat="item in submittedItems">
                                     <td>{{item.FirstName+" "+item.LastName }}</td>
                                     <td>{{item.Email }}</td>
-                                    <td>{{item.Phone }}</td>
                                     <td>{{item.Survey_Status }}</td>
-                                    <td></td>
                                     <td>
                                         <!---->
                                         <button class="btn fa fad fa-link" ng-click="editResponse(item.Client_SID)"></button>
