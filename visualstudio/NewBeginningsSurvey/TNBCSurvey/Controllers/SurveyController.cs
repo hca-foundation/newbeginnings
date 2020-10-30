@@ -27,7 +27,15 @@ namespace TNBCSurvey.Controllers
 
         [Route("api/survey/{id}")]
         [HttpPost]
-        public void sendSurveyLink(int id)
+        public void resendSurveyTicket(int id)
+        {
+            Client user = _context.Client.Find(id);
+            _repoT.ResendSurveyTicket(user);
+        }
+
+        [Route("api/survey/create/{id}")]
+        [HttpPost]
+        public void createSurveyLink(int id)
         {
             Client user = _context.Client.Find(id);
             _repoT.CreateSurveyTicket(user);

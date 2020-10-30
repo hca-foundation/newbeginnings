@@ -7,13 +7,13 @@ namespace TNBCSurvey.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class InitalCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitalCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "202010290341454_InitialCreate"; }
+            get { return "202010300313589_InitalCreate"; }
         }
         
         string IMigrationMetadata.Source

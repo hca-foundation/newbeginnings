@@ -58,7 +58,10 @@ namespace TNBCSurvey.Controllers
             Client x = _context.Client.Find(client.Client_SID);
             x.FirstName = client.FirstName;
             x.LastName = client.LastName;
+            x.GroupNumber = client.GroupNumber;
+            x.ProgramStartDate = client.ProgramStartDate;
             x.Email = client.Email;
+            x.Active = client.Active;
             _context.Entry(x).State = EntityState.Modified;
             _context.SaveChanges();
         }

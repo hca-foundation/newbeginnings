@@ -3,7 +3,7 @@ namespace TNBCSurvey.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class InitalCreate : DbMigration
     {
         public override void Up()
         {
@@ -24,10 +24,10 @@ namespace TNBCSurvey.Migrations
                         Client_SID = c.Int(nullable: false, identity: true),
                         FirstName = c.String(maxLength: 50),
                         LastName = c.String(maxLength: 50),
-                        GroupNumber = c.String(nullable: false, maxLength: 50),
-                        Phone = c.String(maxLength: 20),
+                        GroupNumber = c.Int(nullable: false),
+                        ProgramStartDate = c.DateTime(nullable: false),
                         Email = c.String(nullable: false, maxLength: 50),
-                        Survey_Status = c.String(),
+                        Active = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Client_SID);
             
@@ -83,7 +83,7 @@ namespace TNBCSurvey.Migrations
                 c => new
                     {
                         Ticket_SID = c.Int(nullable: false, identity: true),
-                        User_SID = c.Int(nullable: false),
+                        Client_SID = c.Int(nullable: false),
                         Token = c.String(nullable: false, maxLength: 50),
                         ExpirationDate = c.DateTime(nullable: false),
                         TokenUsed = c.Boolean(nullable: false),

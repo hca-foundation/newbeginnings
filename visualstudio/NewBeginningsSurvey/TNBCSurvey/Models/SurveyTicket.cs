@@ -12,7 +12,7 @@ namespace TNBCSurvey.Models
         [Key]
         public int Ticket_SID { get; set; }
         [Required]
-        public int User_SID { get; set; }
+        public int Client_SID { get; set; }
         [Required]
         [StringLength(50)]
         public string Token { get; set; }
