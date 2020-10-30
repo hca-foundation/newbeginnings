@@ -53,22 +53,6 @@ namespace TNBCSurvey.Controllers
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
-        [Route("HealthCheck")]
-        public IHttpActionResult HealthCheck()
-        {
-            try
-            {
-                // Make sure a database call is successful.
-                var repo = new QuestionRepository();
-                var questions = repo.GetQuestions();
-                return Ok("SUCCESS");
-            }
-            catch (Exception e)
-            {
-                return Content(HttpStatusCode.InternalServerError, e);
-            }
-        }
-
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
