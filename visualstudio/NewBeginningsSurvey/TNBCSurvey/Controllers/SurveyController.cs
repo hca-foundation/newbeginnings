@@ -14,6 +14,7 @@ using System.Web.Http;
 using Microsoft.Office.Interop.Excel;
 using System.Dynamic;
 using TNBCSurvey.Service;
+using System.Web.UI;
 
 namespace TNBCSurvey.Controllers
 {
@@ -41,6 +42,7 @@ namespace TNBCSurvey.Controllers
             var clients = _repoC.GetAllActiveClients();
             foreach(var client in clients)
             {
+                _repoC.SetSurveyStatusPending(client.Client_SID);
                 _repoT.CreateSurveyTicket(client);
             }
             return $"Sent emails to {clients.Count()} clients.";
