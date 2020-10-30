@@ -338,13 +338,7 @@ namespace TNBCSurvey.Controllers
 
             if (!result.Succeeded)
             {
-                var response = "";
-                foreach(var error in result.Errors)
-                {
-                    response += error + "\n";
-                    return Content(HttpStatusCode.InternalServerError, response);
-                }
-                //return GetErrorResult(result);
+                return GetErrorResult(result);
             }
 
             return Ok();
