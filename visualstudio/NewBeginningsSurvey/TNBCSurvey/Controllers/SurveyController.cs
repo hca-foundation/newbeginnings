@@ -81,12 +81,15 @@ namespace TNBCSurvey.Controllers
             {
                 if (value.survey["Q" + i] != null)
                 {
-                    int client_SID = Convert.ToInt32(value.survey["client_SID"]);
+                    int client_SID = Convert.ToInt32(id);
                     int question_SID = i;
                     string answer_Text = value.survey["Q" + i];
                     _repoA.Add(client_SID, surveyPeriod, question_SID, answer_Text);
                 }
             }
+
+            _repoT.SetTokenUsed(id, token);
+            _repoC.SetSurveyStatusCompleted(id);
         }
 
 

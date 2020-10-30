@@ -28,25 +28,25 @@ namespace TNBCSurvey.DAL
         {
             string tokenString = Guid.NewGuid().ToString();
             var sql = @"insert into SurveyTickets
-                            values (@ClientId, @Token, @ExpirationDate , @TokenUsed)";
+                            values (@Client_SID, @Token, @ExpirationDate , @TokenUsed)";
 
-             _dbConnection.Execute(sql, new { ClientId = client.Client_SID, Token = tokenString, ExpirationDate = DateTime.Now.AddDays(14), TokenUsed = false });
+            _dbConnection.Execute(sql, new { Client_SID = client.Client_SID, Token = tokenString, ExpirationDate = DateTime.Now.AddDays(21), TokenUsed = false });
+            String link = "https://newbegininingcenter.azurewebsites.net/#!/survey/" + client.Client_SID.ToString() + "/" + tokenString;
 
             var emailService = new EmailService();
-            var link = "https://example.com/survey?clientid=" + client.Client_SID.ToString() + "&token=" + tokenString;
             var body = emailService.getMailBody(link);
             emailService.sendMail("New Beginnings Follow Up Survey", body, client.Email);
         }
+
         public string CreateandCopySurveyTicket(Client client)
         {
-            string tokenString = Guid.NewGuid().ToString();
-            var sql = @"Select TokenUsed from SurveyTickets
+            var sql = @"Select Token from SurveyTickets
                             where Client_SID = @ClientId";
 
             var token = Convert.ToString(_dbConnection.ExecuteScalar(sql, new { ClientId = client.Client_SID }));
 
-            var link = "https://example.com/survey?clientid=" + client.Client_SID.ToString() + "&token=" + token;
-           
+            String link = "https://newbegininingcenter.azurewebsites.net/#!/survey/" + client.Client_SID.ToString() + "/" + token;
+
             return link;
         }
 

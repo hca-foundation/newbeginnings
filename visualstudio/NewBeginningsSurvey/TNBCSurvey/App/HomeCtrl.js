@@ -43,7 +43,7 @@
     }
 
     $scope.exportExcel = function () {
-        $http.get('/api/survey/excel/2020Q4');    
+        $http.get('/api/survey/csv');    
     }
 
     $scope.resendLink = function (id) {
