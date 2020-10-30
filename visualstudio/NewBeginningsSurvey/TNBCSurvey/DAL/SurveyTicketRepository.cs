@@ -27,14 +27,16 @@ namespace TNBCSurvey.DAL
         public void CreateSurveyTicket(Client client)
         {
             string tokenString = Guid.NewGuid().ToString();
-            var sql = @"insert into SurveyTickets
-                            values (@Client_SID, @Token, @ExpirationDate , @TokenUsed)";
+            var sql = @"insert into SurveyTickets (Client_SID, Token, ExpirationDate, TokenUsed, TokenUsedDate)
+                            values (@Client_SID, @Token, @ExpirationDate , @TokenUsed, null)";
 
             _dbConnection.Execute(sql, new { Client_SID = client.Client_SID, Token = tokenString, ExpirationDate = DateTime.Now.AddDays(21), TokenUsed = false });
             String link = "https://newbegininingcenter.azurewebsites.net/#!/survey/" + client.Client_SID.ToString() + "/" + tokenString;
 
+            var emailTemplateService = new EmailTemplateService();
+            var body = emailTemplateService.getMailBody(link);
+
             var emailService = new EmailService();
-            var body = emailService.getMailBody(link);
             emailService.sendMail("New Beginnings Follow Up Survey", body, client.Email);
         }
 
@@ -61,8 +63,11 @@ namespace TNBCSurvey.DAL
             if (dt.Rows.Count > 0)
             {
                 link = "https://newbeginningscenter.azurewebsites.net/survey/" + client.Client_SID.ToString() + "/" + dt.Rows[0]["Token"].ToString();
+
+                var emailTemplateService = new EmailTemplateService();
+                var body = emailTemplateService.getMailBody(link);
+
                 EmailService emailService = new EmailService();
-                var body = emailService.getMailBody(link);
                 emailService.sendMail("New Beginnings Follow Up Survey", body, client.Email);
             }
         }
