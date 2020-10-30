@@ -1,5 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+<<<<<<< HEAD
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNBCSurvey", "TNBCSurvey\TNBCSurvey.csproj", "{0E0E1BF3-ACFF-4838-90BE-4CFD5F170397}"
+EndProject
+=======
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -7,6 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNBCSurvey", "TNBCSurvey\TN
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduledEmailSender", "ScheduledEmailSender\ScheduledEmailSender.csproj", "{7694A224-B1F9-444E-9CE6-9A3DC51AE681}"
 EndProject
+>>>>>>> 6f833f77287e8d499be64e1d4522e3adf7b7e0f9
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +25,13 @@ Global
 		{0E0E1BF3-ACFF-4838-90BE-4CFD5F170397}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E0E1BF3-ACFF-4838-90BE-4CFD5F170397}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E0E1BF3-ACFF-4838-90BE-4CFD5F170397}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
+=======
 		{7694A224-B1F9-444E-9CE6-9A3DC51AE681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7694A224-B1F9-444E-9CE6-9A3DC51AE681}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7694A224-B1F9-444E-9CE6-9A3DC51AE681}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7694A224-B1F9-444E-9CE6-9A3DC51AE681}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> 6f833f77287e8d499be64e1d4522e3adf7b7e0f9
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

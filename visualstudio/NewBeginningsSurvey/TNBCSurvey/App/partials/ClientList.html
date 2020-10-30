@@ -20,6 +20,19 @@
     </tr>
     </thead>
     <tbody>
+<<<<<<< HEAD
+        <tr ng-repeat="item in items | orderBy: ['LastName', 'FirstName'] | offset: (currentPage-1)*itemPerPage | limitTo: itemPerPage">
+            <td>{{item.LastName +  ", " + item.FirstName }}</td>
+            <!--
+            <td><button class="btn btn-primary" ng-click="questionItem(item.Client_SID)">Create Email</button></td>
+            <td><button class="btn btn-primary" ng-click="resendquestionItem(item.Client_SID)">ReSend Email</button></td>
+        -->
+            <td>{{item.Email }}</td>
+            <td>{{item.GroupNumber }}</td>
+            <td>{{item.ProgramStartDate }}</td>
+            <td>{{item.Active }}</td>
+            <td><button class="btn btn-info fa fa-pencil-square-o" ng-click="editItem(item.Client_SID)"></button> || <button class="btn btn-danger fa fa-trash-o" ng-confirm-click="Are you sure to delete this record ?" confirmed-click="deleteItem(item.Client_SID)"></button></td>
+=======
     <tr ng-repeat="item in items | offset: (currentPage-1)*itemPerPage | limitTo: itemPerPage">
         <td>{{item.FirstName+" "+item.LastName }}</td>
         <td><button class="btn btn-primary" ng-click="questionItem(item.Client_SID)">Create Email</button></td>
@@ -29,6 +42,7 @@
         <td>{{item.ProgramStartDate }}</td>
         <td>{{item.Active }}</td>
         <td><button class="btn btn-info fa fa-pencil-square-o" ng-click="editItem(item.Client_SID)"></button> || <button class="btn btn-danger fa fa-trash-o" ng-confirm-click="Are you sure to delete this record ?" confirmed-click="deleteItem(item.Client_SID)">Delete</button></td>
+>>>>>>> 6f833f77287e8d499be64e1d4522e3adf7b7e0f9
         </tr>
     </tbody>
 </table>
