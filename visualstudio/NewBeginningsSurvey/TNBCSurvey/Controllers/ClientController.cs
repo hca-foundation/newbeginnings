@@ -38,6 +38,7 @@ namespace TNBCSurvey.Controllers
         [HttpPost]
         public void Add(Client newClient)
         {
+            newClient.Survey_Status = "None";
             _context.Client.Add(newClient);
             _context.SaveChanges();
         }

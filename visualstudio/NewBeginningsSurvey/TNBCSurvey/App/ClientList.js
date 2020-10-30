@@ -6,6 +6,7 @@ app.controller("ClientListCtrl", ['$scope', '$rootScope', '$http', '$location', 
         $http.get('/api/client/list')
             .then(function (res) {
                 $scope.items = res.data;
+                $scope.total = $scope.items.length;
                 var i;
                 for (i = 0; i < $scope.items.length; i++) {
                     if ($scope.items[i].Active == true) $scope.items[i].Active = "Yes";
@@ -75,7 +76,6 @@ app.controller("ClientListCtrl", ['$scope', '$rootScope', '$http', '$location', 
     //$scope.makeTodos();
     //$scope.total = $scope.todos.length;
 
-    $scope.total = $scope.items.length;
     $scope.currentPage = 1;
     $scope.itemPerPage = 10;
     $scope.start = 0;
