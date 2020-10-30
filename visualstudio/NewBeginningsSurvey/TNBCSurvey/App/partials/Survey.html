@@ -1,16 +1,12 @@
-﻿<!--
-<div ng-if="dataLoading">
+﻿<div ng-if="dataLoading">
     Verifying...
 </div>
 <div ng-if="!dataLoading && !validLink">
     Sorry, the link is invalid!
 </div>
-<div ng-if="!dataLoading && validLink">
+<div ng-if="!dataLoading && validLink && !thankyou">
 
-</div>
-<h1>Hello {{selectedItem.FirstName + selectedItem.LastName}},</h1>
--->
-<div ng-if="!thankyou">
+    <h1>Hello {{selectedItem.FirstName + selectedItem.LastName}},</h1>
     <h3>Survey Questions:</h3>
     <form>
         <div calss="form-group">

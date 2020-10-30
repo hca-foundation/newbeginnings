@@ -1,5 +1,20 @@
 ﻿var app = angular.module("TNBCSurveyApp", ["ngRoute"]);
 
+app.directive('ngConfirmClick', [
+    function () {
+        return {
+            link: function (scope, element, attr) {
+                var msg = attr.ngConfirmClick || "Are you sure?";
+                var clickAction = attr.confirmedClick;
+                element.bind('click', function (event) {
+                    if (window.confirm(msg)) {
+                        scope.$eval(clickAction)
+                    }
+                });
+            }
+        };
+    }])
+
 var isAuth = ($rootScope) => new Promise((resolve, reject) => {
     if ($rootScope.user ? true : false) {
         resolve();
@@ -43,14 +58,14 @@ app.config(function ($routeProvider) {
             controller: 'ClientEditCtrl',
             resolve: { isAuth }
         })
-        //.when('/survey/:id/:token', {
-        //    templateUrl: 'App/partials/Survey.html',
-        //    controller: 'SurveyCtrl'
-        //})
-        .when('/survey', {
+        .when('/survey/:id/:token', {
             templateUrl: 'App/partials/Survey.html',
-            controller: 'SurveyCtrl',
-            resolve: { isAuth }
+            controller: 'SurveyCtrl'
         })
+        //.when('/survey', {
+        //    templateUrl: 'App/partials/Survey.html',
+        //    controller: 'SurveyCtrl',
+        //    resolve: { isAuth }
+        //})
 		.otherwise('/auth');
 });

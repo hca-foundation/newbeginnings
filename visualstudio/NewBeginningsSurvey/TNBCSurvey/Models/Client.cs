@@ -16,13 +16,13 @@ namespace TNBCSurvey.Models
         [StringLength(50)]
         public string LastName { get; set; }
         [Required]
-        [StringLength(50)]
-        public string GroupNumber { get; set; }
-        [StringLength(20)]
-        public string Phone { get; set; }
+        public int GroupNumber { get; set; }
+        [Required]
+        public DateTime ProgramStartDate { get; set; }
         [Required]
         [StringLength(50)]
         public string Email { get; set; }
-        public string Survey_Status { get; set; }
+        [Required]
+        public bool Active { get; set; }
     }
 }

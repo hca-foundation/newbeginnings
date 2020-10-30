@@ -34,7 +34,13 @@ namespace TNBCSurvey.Controllers
 
         [Route("api/survey")]
         [HttpPost]
-        public string sendSurveyLinks()
+        public void resendSurveyTicket(int id)
+        {
+            Client user = _context.Client.Find(id);
+            _repoT.ResendSurveyTicket(user);
+        }
+
+        public void sendSurveyLinks()
         {
             var clients = _repoC.GetAllActiveClients();
             foreach(var client in clients)
@@ -54,9 +60,9 @@ namespace TNBCSurvey.Controllers
             return null;
         }
 
-        [Route("api/survey/answers")]
+        [Route("api/survey/answers/{id}/{token}")]
         [HttpPost]
-        public void saveSurveyAnswers([FromBody]dynamic value)
+        public void saveSurveyAnswers(int id, string token, [FromBody]dynamic value)
         {
             DateTime dt = DateTime.Now;
             string question_Period = dt.Year + "Q" + (dt.Month + 2) / 3;
@@ -70,6 +76,8 @@ namespace TNBCSurvey.Controllers
                     _repoA.Add(client_SID, question_Period, question_SID, answer_Text);
                 }
             }
+
+            _repoT.SetTokenUsed(id, token);
         }
 
         [Route("api/survey/excel/{surveyPeriod}")]
