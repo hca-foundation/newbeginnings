@@ -756,7 +756,7 @@ pre code {
   overflow-y: scroll;
 }
 
-.container {
+/*.container {
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
@@ -781,14 +781,14 @@ pre code {
 
 .container:after {
   clear: both;
-}
+}*/
 
-.row {
+/*.row {
   margin-right: -15px;
   margin-left: -15px;
-}
+}*/
 
-.row:before,
+/*.row:before,
 .row:after {
   display: table;
   content: " ";
@@ -806,7 +806,7 @@ pre code {
 
 .row:after {
   clear: both;
-}
+}*/
 
 .col-xs-1,
 .col-xs-2,
@@ -924,7 +924,8 @@ pre code {
   width: 100%;
 }
 
-@media (min-width: 768px) {
+/*@media (min-width: 768px) {*/
+@media (min-width: 360px) {
   .container {
     max-width: 750px;
   }
@@ -5036,9 +5037,6 @@ a.thumbnail:focus {
 }
 
 .alert-success {
-  color: #468847;
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
 }
 
 .alert-success hr {

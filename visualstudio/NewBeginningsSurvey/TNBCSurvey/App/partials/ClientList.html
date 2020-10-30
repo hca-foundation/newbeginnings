@@ -1,15 +1,17 @@
 ﻿
-<pagination total-items="total" items-per-page="itemPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+<pagination class="clientList_pagination" total-items="total" items-per-page="itemPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>
 <!-- To specify your choice of items Per Pages-->
-<div class="btn-group">
+<div class="btn-group" id="clientList_pagination-button-group">
     <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Left'" data-ng-click="previousPage()">Previous</label>
     <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Middle'" data-ng-click="setItems(10)">10</label>
     <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Middle'" data-ng-click="setItems(20)">20</label>
     <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Middle'" data-ng-click="setItems(50)">50</label>
     <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Right'" data-ng-click="nextPage()">Next</label>
 </div>
+<div class="clientList_table-section">
+<div class="clientList_table-container">
 <!-- table here -->
-<table class="table table-striped table-key-info alert-success">
+<table class="table">
     <thead>
     <tr>
         <td>Name</td>
@@ -34,4 +36,5 @@
         </tr>
     </tbody>
 </table>
-
+</div>
+</div>
