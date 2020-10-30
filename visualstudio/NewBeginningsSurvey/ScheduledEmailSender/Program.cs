@@ -9,17 +9,17 @@ namespace ScheduledEmailSender
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
             Console.WriteLine("Sending emails...");
 
             try
             {
                 HttpClient client = new HttpClient();
-                var response = await client.PostAsync("", null);
+                var response = client.PostAsync("", null).Result;
                 response.EnsureSuccessStatusCode();
 
-                var responseContent = await response.Content.ReadAsStringAsync();
+                var responseContent = response.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(responseContent);
                 Console.WriteLine("Done.");
             }
