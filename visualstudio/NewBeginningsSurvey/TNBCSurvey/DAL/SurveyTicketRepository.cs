@@ -5,10 +5,10 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using Dapper;
-using TNBCSurvey.Services;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
+using TNBCSurvey.Service;
 
 namespace TNBCSurvey.DAL
 {
@@ -31,10 +31,11 @@ namespace TNBCSurvey.DAL
                             values (@Client_SID, @Token, @ExpirationDate , @TokenUsed)";
 
              _dbConnection.Execute(sql, new { Client_SID = client.Client_SID, Token = tokenString, ExpirationDate = DateTime.Now.AddDays(21), TokenUsed = false });
-            // Send the email:
             String link = "https://newbeginningscenter.azurewebsites.net/survey/" + client.Client_SID.ToString() + "/" + tokenString;
 
-            (new Email()).sendMail("TEST", link, client.Email);
+            var emailService = new EmailService();
+            var body = emailService.getMailBody(link);
+            emailService.sendMail("New Beginnings Follow Up Survey", body, client.Email);
         }
 
         public void ResendSurveyTicket(Client client)
@@ -48,9 +49,9 @@ namespace TNBCSurvey.DAL
             if (dt.Rows.Count > 0)
             {
                 link = "https://newbeginningscenter.azurewebsites.net/survey/" + client.Client_SID.ToString() + "/" + dt.Rows[0]["Token"].ToString();
-                var body = link;
-                //var body = emailService.getMailBody(link);
-                (new Email()).sendMail("New Beginnings Follow Up Survey", body, client.Email);
+                EmailService emailService = new EmailService();
+                var body = emailService.getMailBody(link);
+                emailService.sendMail("New Beginnings Follow Up Survey", body, client.Email);
             }
         }
 
