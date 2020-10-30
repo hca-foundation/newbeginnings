@@ -65,6 +65,22 @@ namespace TNBCSurvey.Controllers
            return  _repoT.CreateandCopySurveyTicket(client);
         }
 
+        [Route("api/emailtest")]
+        [HttpPost]
+        public IHttpActionResult emailTest()
+        {
+            try
+            {
+                var emailService = new EmailService();
+                emailService.sendMail("Test email", "Hello World!", "andrew.hill@infoworks-tn.com");
+                return Ok("SUCCESS");
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.InternalServerError, e);
+            }
+        }
+
         [Route("api/survey/{id}/{token}")]
         [HttpGet]
         public Client validSurveyLink(int id, string token)
