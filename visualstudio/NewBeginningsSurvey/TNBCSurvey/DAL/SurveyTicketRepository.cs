@@ -5,17 +5,10 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using Dapper;
-<<<<<<< HEAD
-using TNBCSurvey.Services;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Security.Cryptography;
-=======
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
 using TNBCSurvey.Service;
->>>>>>> 6f833f77287e8d499be64e1d4522e3adf7b7e0f9
 
 namespace TNBCSurvey.DAL
 {
@@ -35,7 +28,6 @@ namespace TNBCSurvey.DAL
         {
             string tokenString = Guid.NewGuid().ToString();
             var sql = @"insert into SurveyTickets
-<<<<<<< HEAD
                             values (@ClientId, @Token, @ExpirationDate , @TokenUsed)";
 
              _dbConnection.Execute(sql, new { ClientId = client.Client_SID, Token = tokenString, ExpirationDate = DateTime.Now.AddDays(14), TokenUsed = false });
@@ -56,25 +48,6 @@ namespace TNBCSurvey.DAL
             var link = "https://example.com/survey?clientid=" + client.Client_SID.ToString() + "&token=" + token;
            
             return link;
-        }
-
-
-
-        public int GetOneByToken(int id, string token)
-        {
-            var sql = @"select count(1) from SurveyTickets
-                            where Client_SID = @id and Token = @token and getdate() < ExpirationDate and TokenUsed <> 1;";
-
-            return Convert.ToInt32(_dbConnection.ExecuteScalar(sql, new { Id = id, Token = token }));
-=======
-                            values (@Client_SID, @Token, @ExpirationDate , @TokenUsed)";
-
-             _dbConnection.Execute(sql, new { Client_SID = client.Client_SID, Token = tokenString, ExpirationDate = DateTime.Now.AddDays(21), TokenUsed = false });
-            String link = "https://newbeginningscenter.azurewebsites.net/survey/" + client.Client_SID.ToString() + "/" + tokenString;
-
-            var emailService = new EmailService();
-            var body = emailService.getMailBody(link);
-            emailService.sendMail("New Beginnings Follow Up Survey", body, client.Email);
         }
 
         public void ResendSurveyTicket(Client client)
@@ -108,7 +81,6 @@ namespace TNBCSurvey.DAL
                             where Client_SID = @Client_SID and Token = @Token and getdate() <= ExpirationDate and TokenUsed <> 1;";
 
             return Convert.ToInt32(_dbConnection.ExecuteScalar(sql, new { Client_SID = id, Token = token }));
->>>>>>> 6f833f77287e8d499be64e1d4522e3adf7b7e0f9
         }
     }
 }

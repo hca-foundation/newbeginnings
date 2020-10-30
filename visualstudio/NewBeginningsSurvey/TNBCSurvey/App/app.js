@@ -1,7 +1,5 @@
 ﻿var app = angular.module("TNBCSurveyApp", ["ngRoute"]);
 
-<<<<<<< HEAD
-=======
 app.directive('ngConfirmClick', [
     function () {
         return {
@@ -17,7 +15,6 @@ app.directive('ngConfirmClick', [
         };
     }])
 
->>>>>>> 6f833f77287e8d499be64e1d4522e3adf7b7e0f9
 var isAuth = ($rootScope) => new Promise((resolve, reject) => {
     if ($rootScope.user ? true : false) {
         resolve();
@@ -61,7 +58,6 @@ app.config(function ($routeProvider) {
             controller: 'ClientEditCtrl',
             resolve: { isAuth }
         })
-<<<<<<< HEAD
         .when('/client/editResponse/:id', {
             templateUrl: 'App/partials/SurveyResultView.html',
             controller: 'ClientSurveyEditCtrl',
@@ -76,7 +72,6 @@ app.config(function ($routeProvider) {
             controller: 'SurveyCtrl',
             resolve: { isAuth }
         })
-=======
         .when('/survey/:id/:token', {
             templateUrl: 'App/partials/Survey.html',
             controller: 'SurveyCtrl'
@@ -86,6 +81,5 @@ app.config(function ($routeProvider) {
         //    controller: 'SurveyCtrl',
         //    resolve: { isAuth }
         //})
->>>>>>> 6f833f77287e8d499be64e1d4522e3adf7b7e0f9
 		.otherwise('/auth');
 });

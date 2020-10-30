@@ -31,7 +31,6 @@ namespace TNBCSurvey.DAL
             _dbConnection.Execute(sql, new { Client_SID = client_SID, Question_Period = question_Period, Question_SID = question_SID, Answer_Text = answer_Text });
         }
 
-<<<<<<< HEAD
         public IEnumerable<SurveyExportAnswer> GetSurveyResultsByClientId(string clientId)
         {
             var sql = @"
@@ -47,8 +46,6 @@ namespace TNBCSurvey.DAL
             return surveyResults;
         }
 
-=======
->>>>>>> 6f833f77287e8d499be64e1d4522e3adf7b7e0f9
         public IEnumerable<SurveyExportAnswer> GetSurveyResultsByPeriod(string period)
         {
             var sql = @"

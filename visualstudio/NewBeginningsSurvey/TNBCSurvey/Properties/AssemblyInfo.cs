@@ -10,11 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("TNBCSurvey")]
-<<<<<<< HEAD
-[assembly: AssemblyCopyright("Copyright ©  2017")]
-=======
 [assembly: AssemblyCopyright("")]
->>>>>>> 6f833f77287e8d499be64e1d4522e3adf7b7e0f9
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
