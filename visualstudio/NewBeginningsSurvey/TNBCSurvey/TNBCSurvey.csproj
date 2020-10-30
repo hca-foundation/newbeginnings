@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -284,9 +286,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202010301333558_Andrew-3.cs" />
-    <Compile Include="Migrations\202010301333558_Andrew-3.Designer.cs">
-      <DependentUpon>202010301333558_Andrew-3.cs</DependentUpon>
+    <Compile Include="Migrations\202010301922355_Andrew-4.cs" />
+    <Compile Include="Migrations\202010301922355_Andrew-4.Designer.cs">
+      <DependentUpon>202010301922355_Andrew-4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -294,6 +296,7 @@
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Survey.cs" />
     <Compile Include="Models\SurveyAnswer.cs" />
     <Compile Include="Models\SurveyExportAnswer.cs" />
     <Compile Include="Models\SurveyQuestion.cs" />
@@ -321,10 +324,17 @@
     <Content Include="App\partials\ClientView.html" />
     <Content Include="App\partials\Home.html" />
     <Content Include="App\partials\navbar.html" />
+    <Content Include="App\partials\SurveyResultView.html" />
     <Content Include="App\partials\Survey.html" />
     <Content Include="App\QuestionList.js" />
     <Content Include="App\QuestionNew.js" />
     <Content Include="App\SurveyCtrl.js" />
+    <Content Include="App\SurveyEditCtrl.js" />
+    <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\survey.css" />
+    <Content Include="Content\TNBSurvey.css" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -429,19 +439,10 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-    <COMReference Include="VBIDE">
-      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>5</VersionMajor>
-      <VersionMinor>3</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202010301333558_Andrew-3.resx">
-      <DependentUpon>202010301333558_Andrew-3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202010301922355_Andrew-4.resx">
+      <DependentUpon>202010301922355_Andrew-4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

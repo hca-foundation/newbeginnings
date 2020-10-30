@@ -1,11 +1,18 @@
 ﻿
-app.controller("ClientListCtrl", ['$scope', '$rootScope', '$http', '$location', function ($scope, $rootScope, $http, $location) {
+app.controller("ClientListCtrl", ['$scope', '$rootScope', '$http', '$location', '$filter', function ($scope, $rootScope, $http, $location, $filter) {
     $scope.items = [];
 
     var getItems = function () {
         $http.get('/api/client/list')
             .then(function (res) {
                 $scope.items = res.data;
+                $scope.total = $scope.items.length;
+                var i;
+                for (i = 0; i < $scope.items.length; i++) {
+                    if ($scope.items[i].Active == true) $scope.items[i].Active = "Yes";
+                    else $scope.items[i].Active = "No";
+                    $scope.items[i].ProgramStartDate = $filter('date')($scope.items[i].ProgramStartDate, 'MM-dd-yyyy');
+                }
             });
     }
     getItems();
@@ -69,7 +76,6 @@ app.controller("ClientListCtrl", ['$scope', '$rootScope', '$http', '$location', 
     //$scope.makeTodos();
     //$scope.total = $scope.todos.length;
 
-    $scope.total = $scope.items.length;
     $scope.currentPage = 1;
     $scope.itemPerPage = 10;
     $scope.start = 0;

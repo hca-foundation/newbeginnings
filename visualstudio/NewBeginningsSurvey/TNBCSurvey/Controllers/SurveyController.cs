@@ -12,7 +12,9 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Web.Http;
 using Microsoft.Office.Interop.Excel;
+using System.Dynamic;
 using TNBCSurvey.Service;
+using System.Web.UI;
 
 namespace TNBCSurvey.Controllers
 {
@@ -33,6 +35,19 @@ namespace TNBCSurvey.Controllers
             _repoQ = new QuestionRepository();
         }
 
+        [Route("api/survey")]
+        [HttpPost]
+        public string sendSurveyLinks()
+        {
+            var clients = _repoC.GetAllActiveClients();
+            foreach(var client in clients)
+            {
+                _repoC.SetSurveyStatusPending(client.Client_SID);
+                _repoT.CreateSurveyTicket(client);
+            }
+            return $"Sent emails to {clients.Count()} clients.";
+        }
+
         [Route("api/survey/{id}")]
         [HttpPost]
         public void resendSurveyTicket(int id)
@@ -41,17 +56,13 @@ namespace TNBCSurvey.Controllers
             _repoT.ResendSurveyTicket(user);
         }
 
-        [Route("api/survey")]
+        [Route("api/survey/resend/{clientId}")]
         [HttpPost]
-        public string sendSurveyLinks()
+        public string resendSurveyLink(int clientId)
         {
             var clients = _repoC.GetAllActiveClients();
-            foreach(var client in clients)
-            {
-                _repoT.CreateSurveyTicket(client);
-            }
-
-            return $"Sent emails to {clients.Count()} clients.";
+            var client = clients.Where(x => x.Client_SID == clientId).FirstOrDefault();
+           return  _repoT.CreateandCopySurveyTicket(client);
         }
 
         [Route("api/emailtest")]
@@ -88,7 +99,7 @@ namespace TNBCSurvey.Controllers
             {
                 if (value.survey["Q" + i] != null)
                 {
-                    int client_SID = Convert.ToInt32(value.survey["client_SID"]);
+                    int client_SID = Convert.ToInt32(id);
                     int question_SID = i;
                     string answer_Text = value.survey["Q" + i];
                     _repoA.Add(client_SID, surveyPeriod, question_SID, answer_Text);
@@ -96,13 +107,49 @@ namespace TNBCSurvey.Controllers
             }
 
             _repoT.SetTokenUsed(id, token);
+            _repoC.SetSurveyStatusCompleted(id);
+        }
+
+
+        [Route("api/survey/getanswers/{clientId}")]
+        [HttpGet]
+        public dynamic getSurveyAnswers(string clientId)
+        {
+
+            var list = _repoA.GetSurveyResultsByClientId(clientId);
+            dynamic output = new List<dynamic>();
+
+            dynamic row = new ExpandoObject();
+            
+
+            var surveyAnswerList = list?.ToList(); 
+
+
+            for (int i= 0 ;i< surveyAnswerList.Count(); i++)
+            {
+                int queNum = (i + 1);
+                string propertyName = "Q" + queNum;
+                ((IDictionary<String, Object>)row)[propertyName] = surveyAnswerList[i].Answer_Text;
+                ((IDictionary<String, Object>)row)["FirstName"] = surveyAnswerList[i].FirstName;
+                ((IDictionary<String, Object>)row)["LastName"] = surveyAnswerList[i].LastName;
+
+            }
+            output.Add(row);
+            return output;
+            
+        }
+
+        [Route("api/survey/list")]
+        public List<Client> GetAll()
+        {
+            return _context.Client.ToList();
         }
 
         [Route("api/survey/excel/{surveyPeriod}")]
         [HttpGet]
         public HttpResponseMessage exportToExcel(string surveyPeriod)
         {
-            var fileId = $"/excelExport-{Guid.NewGuid()}.xlsx";
+            var fileId = @"excelExport{Guid.NewGuid()}.xlsx";
 
             var excel = new Application();
             var workbook = excel.Workbooks.Add();

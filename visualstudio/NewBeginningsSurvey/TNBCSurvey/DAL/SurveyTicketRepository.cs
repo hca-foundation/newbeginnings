@@ -30,12 +30,24 @@ namespace TNBCSurvey.DAL
             var sql = @"insert into SurveyTickets
                             values (@Client_SID, @Token, @ExpirationDate , @TokenUsed)";
 
-             _dbConnection.Execute(sql, new { Client_SID = client.Client_SID, Token = tokenString, ExpirationDate = DateTime.Now.AddDays(21), TokenUsed = false });
-            String link = "https://newbeginningscenter.azurewebsites.net/survey/" + client.Client_SID.ToString() + "/" + tokenString;
+            _dbConnection.Execute(sql, new { Client_SID = client.Client_SID, Token = tokenString, ExpirationDate = DateTime.Now.AddDays(21), TokenUsed = false });
+            String link = "https://newbegininingcenter.azurewebsites.net/#!/survey/" + client.Client_SID.ToString() + "/" + tokenString;
 
             var emailService = new EmailService();
             var body = emailService.getMailBody(link);
             emailService.sendMail("New Beginnings Follow Up Survey", body, client.Email);
+        }
+
+        public string CreateandCopySurveyTicket(Client client)
+        {
+            var sql = @"Select Token from SurveyTickets
+                            where Client_SID = @ClientId";
+
+            var token = Convert.ToString(_dbConnection.ExecuteScalar(sql, new { ClientId = client.Client_SID }));
+
+            String link = "https://newbegininingcenter.azurewebsites.net/#!/survey/" + client.Client_SID.ToString() + "/" + token;
+
+            return link;
         }
 
         public void ResendSurveyTicket(Client client)
@@ -65,7 +77,7 @@ namespace TNBCSurvey.DAL
 
         public int SetTokenUsed(int id, string token)
         {
-            var sql = @"update SurveyTickets set TokenUsed = 1
+            var sql = @"update SurveyTickets set TokenUsed = 1, TokenUsedDate = GETDATE()
                             where Client_SID = @Client_SID and Token = @Token and getdate() <= ExpirationDate and TokenUsed <> 1;";
 
             return Convert.ToInt32(_dbConnection.ExecuteScalar(sql, new { Client_SID = id, Token = token }));

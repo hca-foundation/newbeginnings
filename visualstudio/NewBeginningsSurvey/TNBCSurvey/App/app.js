@@ -58,6 +58,20 @@ app.config(function ($routeProvider) {
             controller: 'ClientEditCtrl',
             resolve: { isAuth }
         })
+        .when('/client/editResponse/:id', {
+            templateUrl: 'App/partials/SurveyResultView.html',
+            controller: 'ClientSurveyEditCtrl',
+            resolve: { isAuth }
+        })
+        //.when('/survey/:id/:token', {
+        //    templateUrl: 'App/partials/Survey.html',
+        //    controller: 'SurveyCtrl'
+        //})
+        .when('/survey', {
+            templateUrl: 'App/partials/Survey.html',
+            controller: 'SurveyCtrl',
+            resolve: { isAuth }
+        })
         .when('/survey/:id/:token', {
             templateUrl: 'App/partials/Survey.html',
             controller: 'SurveyCtrl'

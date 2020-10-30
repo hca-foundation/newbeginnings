@@ -1,11 +1,11 @@
 using TNBCSurvey.Models;
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
 
 namespace TNBCSurvey.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<TNBCSurvey.Models.ApplicationDbContext>
     {

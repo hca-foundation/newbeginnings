@@ -13,7 +13,8 @@
     color: #333 !important;
     font-weight: bold !important;
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.99);
-    -webkit-font-smoothing: antialiased; }
+    -webkit-font-smoothing: antialiased;
+}
 
 html, body {
     height: 100%;
