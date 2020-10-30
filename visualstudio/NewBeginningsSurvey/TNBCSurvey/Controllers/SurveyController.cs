@@ -12,6 +12,7 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Web.Http;
 using Microsoft.Office.Interop.Excel;
+using TNBCSurvey.Service;
 
 namespace TNBCSurvey.Controllers
 {
@@ -32,7 +33,7 @@ namespace TNBCSurvey.Controllers
             _repoQ = new QuestionRepository();
         }
 
-        [Route("api/survey")]
+        [Route("api/survey/{id}")]
         [HttpPost]
         public void resendSurveyTicket(int id)
         {
@@ -40,7 +41,9 @@ namespace TNBCSurvey.Controllers
             _repoT.ResendSurveyTicket(user);
         }
 
-        public void sendSurveyLinks()
+        [Route("api/survey")]
+        [HttpPost]
+        public string sendSurveyLinks()
         {
             var clients = _repoC.GetAllActiveClients();
             foreach(var client in clients)
@@ -64,8 +67,7 @@ namespace TNBCSurvey.Controllers
         [HttpPost]
         public void saveSurveyAnswers(int id, string token, [FromBody]dynamic value)
         {
-            DateTime dt = DateTime.Now;
-            string question_Period = dt.Year + "Q" + (dt.Month + 2) / 3;
+            var surveyPeriod = SurveyPeriodService.GetCurrentSurveyPeriod();
             for (int i = 1; i <= 19; i++)
             {
                 if (value.survey["Q" + i] != null)
@@ -73,7 +75,7 @@ namespace TNBCSurvey.Controllers
                     int client_SID = Convert.ToInt32(value.survey["client_SID"]);
                     int question_SID = i;
                     string answer_Text = value.survey["Q" + i];
-                    _repoA.Add(client_SID, question_Period, question_SID, answer_Text);
+                    _repoA.Add(client_SID, surveyPeriod, question_SID, answer_Text);
                 }
             }
 
@@ -132,10 +134,11 @@ namespace TNBCSurvey.Controllers
             return response;
         }
 
-        [Route("api/survey/csv/{surveyPeriod}")]
+        [Route("api/survey/csv")]
         [HttpGet]
-        public HttpResponseMessage exportToCsv(string surveyPeriod)
+        public HttpResponseMessage exportToCsv()
         {
+            var surveyPeriod = SurveyPeriodService.GetCurrentSurveyPeriod();
             List<string> rows = new List<string>();
 
             // Header
