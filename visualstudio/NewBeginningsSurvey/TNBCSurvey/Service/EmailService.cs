@@ -7,6 +7,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Net;
 
 namespace TNBCSurvey.Service
 {
@@ -42,7 +43,10 @@ namespace TNBCSurvey.Service
             client.Timeout = 10000;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = true;
-            objeto_mail.From = new MailAddress("andrewparttwo@gmail.com");
+            client.EnableSsl = true;
+            client.Credentials = new NetworkCredential("andrewparttwo@gmail.com", "moonimoonio0");
+
+            objeto_mail.From = new MailAddress("andrewparttwo@gmail.com", "Andrew Hill");
             objeto_mail.To.Add(new MailAddress(receiver));
             objeto_mail.Subject = subject;
             objeto_mail.Body = msg;
