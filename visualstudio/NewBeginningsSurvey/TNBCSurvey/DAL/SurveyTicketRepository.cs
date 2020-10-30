@@ -57,7 +57,15 @@ namespace TNBCSurvey.DAL
         public int GetOneByToken(int id, string token)
         {
             var sql = @"select count(1) from SurveyTickets
-                            where Client_SID = @Client_SID and Token = @Token and getdate() < ExpirationDate and TokenUsed <> 1;";
+                            where Client_SID = @Client_SID and Token = @Token and getdate() <= ExpirationDate and TokenUsed <> 1;";
+
+            return Convert.ToInt32(_dbConnection.ExecuteScalar(sql, new { Client_SID = id, Token = token }));
+        }
+
+        public int SetTokenUsed(int id, string token)
+        {
+            var sql = @"update SurveyTickets set TokenUsed = 1
+                            where Client_SID = @Client_SID and Token = @Token and getdate() <= ExpirationDate and TokenUsed <> 1;";
 
             return Convert.ToInt32(_dbConnection.ExecuteScalar(sql, new { Client_SID = id, Token = token }));
         }

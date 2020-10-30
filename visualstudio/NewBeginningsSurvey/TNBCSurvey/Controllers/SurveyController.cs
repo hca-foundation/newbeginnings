@@ -50,9 +50,9 @@ namespace TNBCSurvey.Controllers
             return null;
         }
 
-        [Route("api/survey/answers")]
+        [Route("api/survey/answers/{id}/{token}")]
         [HttpPost]
-        public void saveSurveyAnswers([FromBody]dynamic value)
+        public void saveSurveyAnswers(int id, string token, [FromBody]dynamic value)
         {
             DateTime dt = DateTime.Now;
             string question_Period = dt.Year + "Q" + (dt.Month + 2) / 3;
@@ -66,6 +66,8 @@ namespace TNBCSurvey.Controllers
                     _repoA.Add(client_SID, question_Period, question_SID, answer_Text);
                 }
             }
+
+            _repoT.SetTokenUsed(id, token);
         }
     }
 }

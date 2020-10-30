@@ -24,7 +24,7 @@ app.controller("SurveyCtrl", function ($scope, $rootScope, $location, $http) {
 
     $scope.survey = {};
     $scope.sendAnswers = function () {
-        $http.post('/api/survey/answers', { survey: $scope.survey })
+        $http.post(`/api/survey/answers/${id}/${token}`, { survey: $scope.survey })
             .then(function(res) {
                 $scope.thankyou = true;
                 $scope.survey = {};
