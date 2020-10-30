@@ -47,6 +47,8 @@ namespace TNBCSurvey.Controllers
             {
                 _repoT.CreateSurveyTicket(client);
             }
+
+            return $"Sent emails to {clients.Count()} clients.";
         }
 
         [Route("api/survey/{id}/{token}")]
