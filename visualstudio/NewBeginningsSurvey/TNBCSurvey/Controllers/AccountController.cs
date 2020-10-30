@@ -16,6 +16,8 @@ using TNBCSurvey.Models;
 using TNBCSurvey.Providers;
 using TNBCSurvey.Results;
 using TNBCSurvey.DAL;
+using System.Web.Http.Results;
+using System.Net;
 
 namespace TNBCSurvey.Controllers
 {
@@ -50,6 +52,22 @@ namespace TNBCSurvey.Controllers
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
+
+        [Route("HealthCheck")]
+        public IHttpActionResult HealthCheck()
+        {
+            try
+            {
+                // Make sure a database call is successful.
+                var repo = new QuestionRepository();
+                var questions = repo.GetQuestions();
+                return Ok("SUCCESS");
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.InternalServerError, e);
+            }
+        }
 
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -336,7 +354,13 @@ namespace TNBCSurvey.Controllers
 
             if (!result.Succeeded)
             {
-                return GetErrorResult(result);
+                var response = "";
+                foreach(var error in result.Errors)
+                {
+                    response += error + "\n";
+                    return Content(HttpStatusCode.InternalServerError, response);
+                }
+                //return GetErrorResult(result);
             }
 
             return Ok();
