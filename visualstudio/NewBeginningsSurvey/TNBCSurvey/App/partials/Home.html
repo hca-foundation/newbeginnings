@@ -1,0 +1,81 @@
+﻿<div class="row">
+    <div id="home" class="col-sm-8 col-sm-offset-2">
+        <header id="home-header">
+            <h1>Survey Dashboard</h1>
+        </header>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div id="request-tabstrip">
+            <ul class="nav nav-tabs">
+                <li ng-Class="{'active': isSubmitted}"><a ng-click="ChangeTab('Submitted');">Submitted</a></li>
+                <li ng-Class="{'active': !isSubmitted}"><a ng-click="ChangeTab('NotSubmitted');">Not Submitted</a></li>
+            </ul>
+        </div>
+        <div class="panel panel-default" id="survey-response-panel">
+            <div class="panel-heading">Survey Responses</div>
+            <div class="panel-body">
+                <div class="row" ng-if="isSubmitted">
+                    <button ng-click="exportExcel()" class="btn btn-default pull-right">Export to Excel</button>
+                </div>
+                <div class="row">
+                    <div class="table-responsive" ng-if="isSubmitted">
+                        <table class="table table-striped table-key-info alert-success table-responsive-sm">
+                            <thead>
+                                <tr>
+                                    <td>Respondent Name</td>
+                                    <td>Respondent Email Address</td>
+                                    <td>Employees Assigned</td>
+                                    <td>Survey Status</td>
+                                    <td>Date Submitted</td>
+                                    <td>Action</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in submittedItems">
+                                    <td>{{item.FirstName+" "+item.LastName }}</td>
+                                    <td>{{item.Email }}</td>
+                                    <td>{{item.Phone }}</td>
+                                    <td>{{item.Survey_Status }}</td>
+                                    <td></td>
+                                    <td>
+                                        <!---->
+                                        <button class="btn fa fad fa-link" ng-click="editResponse(item.Client_SID)"></button>
+                                    </td>
+                                   
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="table-responsive" ng-if="!isSubmitted">
+                    <table class="table table-striped table-key-info alert-success table-responsive-sm">
+                        <thead>
+                            <tr>
+                                <td>Respondent Name</td>
+                                <td>Respondent Email Address</td>
+                                <td>Employees Assigned</td>
+                                <td>Survey Status</td>
+                                <td>Action</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in unsubmitteditems">
+                                <td>{{item.FirstName+" "+item.LastName }}</td>
+                                <td>{{item.Email }}</td>
+                                <td>{{item.Phone }}</td>
+                                <td>{{item.Survey_Status }}</td>
+                                <td>
+                                    <button class="btn fa fa-envelope-o" ng-click="questionItem(item.Client_SID)"></button>
+                                    <button class="btn fa fa-paperclip" ng-click="resendLink(item.Client_SID)"></button>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
