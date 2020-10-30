@@ -34,13 +34,15 @@ namespace TNBCSurvey.Controllers
 
         [Route("api/survey")]
         [HttpPost]
-        public void sendSurveyLinks()
+        public string sendSurveyLinks()
         {
             var clients = _repoC.GetAllActiveClients();
             foreach(var client in clients)
             {
                 _repoT.CreateSurveyTicket(client);
             }
+
+            return $"Sent emails to {clients.Count()} clients.";
         }
 
         [Route("api/survey/{id}/{token}")]
