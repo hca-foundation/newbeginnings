@@ -232,6 +232,7 @@ namespace TNBCSurvey.Controllers
 
                     currentClientId = result.Client_SID;
                     row = $"\"{result.LastName}, {result.FirstName}\",";
+                    row += $"\"{result.Question_Period}\",";
                 }
 
                 row += $"\"{result.Answer_Text}\",";

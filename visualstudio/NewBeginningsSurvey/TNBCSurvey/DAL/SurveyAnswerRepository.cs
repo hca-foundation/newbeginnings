@@ -49,7 +49,7 @@ namespace TNBCSurvey.DAL
         public IEnumerable<SurveyExportAnswer> GetSurveyResultsByPeriod(string period)
         {
             var sql = @"
-                select c.Client_SID, c.LastName, c.FirstName, sq.Question_Text, sa.Answer_Text
+                select c.Client_SID, c.LastName, c.FirstName, sa.Question_Period, sq.Question_Text, sa.Answer_Text
                 from dbo.SurveyQuestions sq
                 left join dbo.SurveyAnswers sa on sa.Question_SID = sq.Question_SID
                 left join dbo.Clients c on sa.Client_SID = c.Client_SID
