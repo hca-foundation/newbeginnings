@@ -91,7 +91,7 @@
                             <td>{{item.GroupNumber }}</td>
                             <td>{{item.Email }}</td>
                             <td>
-                                <button class="btn fa fa-envelope-o" ng-if="!item.TokenExpired" ng-click="resendLinkEmail(item.Client_SID)"></button>
+                                <!--<button class="btn fa fa-envelope-o" ng-if="!item.TokenExpired" ng-click="resendLinkEmail(item.Client_SID)"></button>-->
                                 <button class="btn fa fa-paperclip" ng-if="!item.TokenExpired" ng-click="resendLink(item.Client_SID)"></button>
 
                             </td>
