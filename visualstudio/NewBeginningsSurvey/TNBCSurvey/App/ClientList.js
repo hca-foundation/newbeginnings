@@ -26,7 +26,6 @@ app.controller("ClientListCtrl", ['$scope', '$rootScope', '$http', '$location', 
     };
 
     $scope.editItem = function (itemId) {
-        console.log(itemId);
         $location.url("/client/edit/" + itemId);
     }
 
@@ -43,8 +42,6 @@ app.controller("ClientListCtrl", ['$scope', '$rootScope', '$http', '$location', 
 
 
     $scope.questionItem = function (itemId) {
-        console.log("aa");
-        console.log(itemId);
         $http.post(`/api/survey/create/${itemId}`)
             .then(function (res) {
                 getItems();
@@ -52,8 +49,6 @@ app.controller("ClientListCtrl", ['$scope', '$rootScope', '$http', '$location', 
     }
 
     $scope.resendquestionItem = function (itemId) {
-        console.log("bb");
-        console.log(itemId);
         $http.post(`/api/survey/${itemId}`)
             .then(function (res) {
                 getItems();

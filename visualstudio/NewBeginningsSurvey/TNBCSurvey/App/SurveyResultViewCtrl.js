@@ -6,7 +6,6 @@
     $http.get(`/api/survey/getanswers/${itemId}/${timePeriod}`)
         .then(function (oneItem) {
             $scope.survey = oneItem.data[0];
-            console.log($scope.survey);
         });
 
    

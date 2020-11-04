@@ -46,7 +46,6 @@
     }
 
     $scope.exportExcel = function (TimePeriod) {
-        console.log(TimePeriod);
         $http.get('/api/survey/csv/' + TimePeriod);
     }
 
