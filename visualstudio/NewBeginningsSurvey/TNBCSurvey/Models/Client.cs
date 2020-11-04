@@ -24,8 +24,5 @@ namespace TNBCSurvey.Models
         public string Email { get; set; }
         [Required]
         public bool Active { get; set; }
-        [Required]
-        [StringLength(50)]
-        public string Survey_Status { get; set; }
     }
 }

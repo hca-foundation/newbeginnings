@@ -28,7 +28,6 @@ namespace TNBCSurvey.Migrations
                         ProgramStartDate = c.DateTime(nullable: false),
                         Email = c.String(nullable: false, maxLength: 50),
                         Active = c.Boolean(nullable: false),
-                        Survey_Status = c.String(nullable: false, maxLength: 50),
                     })
                 .PrimaryKey(t => t.Client_SID);
             

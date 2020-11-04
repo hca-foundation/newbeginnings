@@ -330,7 +330,7 @@
     <Content Include="App\QuestionList.js" />
     <Content Include="App\QuestionNew.js" />
     <Content Include="App\SurveyCtrl.js" />
-    <Content Include="App\SurveyEditCtrl.js" />
+    <Content Include="App\SurveyResultViewCtrl.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />

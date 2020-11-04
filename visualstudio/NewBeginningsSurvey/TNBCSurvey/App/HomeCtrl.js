@@ -1,39 +1,42 @@
 ﻿app.controller("HomeCtrl", ['$scope', '$rootScope', '$http', '$location', function ($scope, $rootScope, $http, $location) {
 
-    $scope.worldGame =
-    [
-      {
-          name: "Manage User",
-          url: "/user/list",
-          description: "View, add or delete users"
-      },
-      {
-          name: "Manage Qustions",
-          url: "/question/list",
-          description: "View, add or delete questions"
-      },
-      {
-          name: "Review Results",
-          url: "/survey",
-          description: "View, download survey results"
-      }
-     ];
-
-
+    $scope.qtrs = [];
+    $scope.selectedQtr = "";
     $scope.unsubmitteditems = [];
     $scope.submittedItems = [];
     $scope.isSubmitted = true;
 
-    let getSurveyItems = function () {
-        $http.get('/api/survey/list')
+    var getQtrs = function() {
+        $scope.qtrs.push("2020Q4");
+        var today = new Date();
+        var yyyy = today.getFullYear();
+        if (yyyy <= 2020) return $scope.qtrs.push("all");
+        var mm = parseInt(String(today.getMonth() + 1).padStart(2, "0"), 10);
+        var qq = Math.floor((mm + 2) / 3);
+        var i;
+        for (i = 2021; i < yyyy; i++) {
+            $scope.qtrs.unshift(i + "Q1");
+            $scope.qtrs.unshift(i + "Q2");
+            $scope.qtrs.unshift(i + "Q3");
+            $scope.qtrs.unshift(i + "Q4");
+        }
+        for (i = 1; i <= qq; i++) {
+            $scope.qtrs.unshift(yyyy + "Q" + i);
+        }
+        $scope.qtrs.push("all");
+    }
+    getQtrs();
+
+    $scope.getSurveyItems = function (timePeriod) {
+        $http.get(`/api/survey/list/${timePeriod}`)
             .then(function (res) {
                 if (res && res.data && res.data != undefined) {
-                    $scope.submittedItems = res.data.filter(x => x.Survey_Status == 'Submitted')
-                    $scope.unsubmitteditems = res.data.filter(x => x.Survey_Status == 'Pending');
+                    $scope.submittedItems = res.data.filter(x => x.TokenUsed == true)
+                    $scope.unsubmitteditems = res.data.filter(x => x.TokenUsed == false);
                 }
             });
     }
-    getSurveyItems();
+    //getSurveyItems();
 
     $scope.ChangeTab = function (type) {
         if (type == "Submitted")
@@ -42,8 +45,16 @@
             $scope.isSubmitted = false;
     }
 
-    $scope.exportExcel = function () {
-        $http.get('/api/survey/csv');    
+    $scope.exportExcel = function (TimePeriod) {
+        console.log(TimePeriod);
+        $http.get('/api/survey/csv/' + TimePeriod);
+    }
+
+    $scope.resendLinkEmail = function (itemId) {
+        $http.post(`/api/survey/${itemId}`)
+            .then(function (res) {
+                getItems();
+            });
     }
 
     $scope.resendLink = function (id) {
@@ -53,8 +64,8 @@
             });
     }
 
-    $scope.editResponse = function (id) {
-        $location.url("/client/editResponse/" + id);
+    $scope.viewResponse = function (id, TimePeriod) {
+        $location.url(`/client/viewResponse/${id}/${TimePeriod}`);
     }
 
     $scope.copyToClipboard = function (name) {
@@ -66,8 +77,5 @@
         body.appendChild(copyElement);
         copyElement.select();
         document.execCommand('copy');
-        
     }
-
-
 }]);

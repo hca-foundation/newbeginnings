@@ -10,7 +10,6 @@ app.controller("ClientEditCtrl", ["$scope", "$rootScope", "$routeParams", "$http
         });
 
     $scope.addNewItem = function () {
-        console.log($scope.newItem);
         $http.put('/api/client/editcontent', $scope.newItem)
             .then(function (res) {
                 $location.url("/client/list");

@@ -4,14 +4,14 @@ app.controller("AuthCtrl", function ($scope, $rootScope, $location, $http) {
     $scope.registerContainer = false;
     $scope.register = {};
 
-    //$scope.register.username = 'b@b.com';
-    //$scope.register.email = 'b@b.com';
-    //$scope.register.password = '123456Nss!';
-    //$scope.register.passwordconfirm = '123456Nss!';
-    //$scope.login = {};
-    //$scope.login.email = 'b@b.com';
-    //$scope.login.username = 'b@b.com';
-    //$scope.login.password = '123456Nss!';
+    $scope.register.username = 'bin.li@hcahealthcare.com';
+    $scope.register.email = 'bin.li@hcahealthcare.com';
+    $scope.register.password = '123456Nss!';
+    $scope.register.passwordconfirm = '123456Nss!';
+    $scope.login = {};
+    $scope.login.email = 'bin.li@hcahealthcare.com';
+    $scope.login.username = 'bin.li@hcahealthcare.com';
+    $scope.login.password = '123456Nss!';
 
     if ($location.path() === "/logout") {
 

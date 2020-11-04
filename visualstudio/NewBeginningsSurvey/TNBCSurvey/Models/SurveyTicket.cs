@@ -20,5 +20,8 @@ namespace TNBCSurvey.Models
         public DateTime ExpirationDate { get; set; }
         [Required]
         public bool TokenUsed { get; set; }
+        [Required]
+        [StringLength(6)]
+        public string TimePeriod { get; set; }
     }
 }

@@ -31,18 +31,18 @@ namespace TNBCSurvey.DAL
             _dbConnection.Execute(sql, new { Client_SID = client_SID, Question_Period = question_Period, Question_SID = question_SID, Answer_Text = answer_Text });
         }
 
-        public IEnumerable<SurveyExportAnswer> GetSurveyResultsByClientId(string clientId)
+        public IEnumerable<SurveyExportAnswer> GetSurveyResultsByClientId(string clientId, string TimePeriod)
         {
             var sql = @"
-                select c.Client_SID, c.LastName, c.FirstName, sq.Question_Text, sa.Answer_Text
+                select c.Client_SID, c.LastName, c.FirstName, c.GroupNumber, sa.Question_Period, sq.Question_Text, sa.Answer_Text
                 from dbo.SurveyQuestions sq
                 left join dbo.SurveyAnswers sa on sa.Question_SID = sq.Question_SID
                 left join dbo.Clients c on sa.Client_SID = c.Client_SID
                 where sa.Client_SID = @clientId
-                and sq.Active = 1
+                and sa.Question_Period = @TimePeriod
                 order by c.LastName, c.FirstName, c.Client_SID, sq.DisplayOrder";
 
-            var surveyResults = _dbConnection.Query<SurveyExportAnswer>(sql, new { clientId = clientId });
+            var surveyResults = _dbConnection.Query<SurveyExportAnswer>(sql, new { clientId = clientId, TimePeriod = TimePeriod });
             return surveyResults;
         }
 
@@ -53,8 +53,7 @@ namespace TNBCSurvey.DAL
                 from dbo.SurveyQuestions sq
                 left join dbo.SurveyAnswers sa on sa.Question_SID = sq.Question_SID
                 left join dbo.Clients c on sa.Client_SID = c.Client_SID
-                where sa.Question_Period = @period
-                and sq.Active = 1
+                where sa.Question_Period = @period or @period = 'all'
                 order by c.LastName, c.FirstName, c.Client_SID, sq.DisplayOrder";
 
             var surveyResults = _dbConnection.Query<SurveyExportAnswer>(sql, new { period = period });
