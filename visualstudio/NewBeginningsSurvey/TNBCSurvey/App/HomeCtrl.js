@@ -64,7 +64,11 @@
     }
 
     $scope.viewResponse = function (id, TimePeriod) {
-        $location.url(`/client/viewResponse/${id}/${TimePeriod}`);
+        //$location.url(`/client/viewResponse/${id}/${TimePeriod}`);
+        $http.get(`/api/survey/getanswers/${id}/${TimePeriod}`)
+            .then(function (oneItem) {
+                $scope.survey = oneItem.data[0];
+            });
     }
 
     $scope.copyToClipboard = function (name) {
