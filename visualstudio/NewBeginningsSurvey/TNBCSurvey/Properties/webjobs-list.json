@@ -3,6 +3,9 @@
   "WebJobs": [
     {
       "filePath": "../ScheduledEmailSender/ScheduledEmailSender.csproj"
+    },
+    {
+      "filePath": "../ScheduledEmailSender/ScheduledEmailSender.csproj"
     }
   ]
 }
