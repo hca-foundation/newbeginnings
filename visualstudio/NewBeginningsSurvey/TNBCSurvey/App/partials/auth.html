@@ -1,48 +1,72 @@
-﻿<div id="auth" class="col-sm-4 col-sm-offset-4">
-	<div>
-        <form id="auth_form" ng-show="loginContainer">
-            <div id="auth_input-container" class="form-group">
-                <!--<label>User Name:</label>-->
-                <input class="col-sm-offset-1 col-sm-10" type="text" placeholder="Username" ng-model="login.username" required autofocus>
-            </div>
-            <div id="auth_input-container" class="form-group">
-                <!--<label>Email Address:</label>-->
-                <input type="email" class="col-sm-offset-1 col-sm-10" placeholder="Email address" ng-model="login.email" required autofocus>
-            </div>
-            <div id="auth_input-container" class="form-group">
-                <!--<label>Password:</label>-->
-                <input type="password" class="col-sm-offset-1 col-sm-10" placeholder="Password" ng-model="login.password" required>
-            </div>
-            <div id="auth_input-container" class="form-group">
-                <a href="" class="btn btn-lg btn-custom col-sm-offset-1 col-sm-10" ng-click="loginUser(login)">Submit Login</a>
-            </div>
-            <div id="auth_button-group" class="col-sm-4 col-sm-offset-4">
-                <button id="auth_login-button" class="btn btn-custom col-sm-6" ng-click="setLoginContainer()">Login</button>
-                <button id="auth_register-button" class="btn btn-custom col-sm-6" ng-click="setRegisterContainer()">Register</button>
-            </div>
-        </form>
-        <form ng-show="registerContainer">
-            <div id="auth_input-container" class="form-group">
-                <!--<label>Email Address</label>-->
-                <input type="email" class="col-sm-offset-1 col-sm-10" placeholder="Email address" ng-model="register.email" required autofocus>
-            </div>
-            <div id="auth_input-container" class="form-group">
-                <!--<label>Password</label>-->
-                <input type="password" class="col-sm-offset-1 col-sm-10" placeholder="Password" ng-model="register.password" required>
-            </div>
-            <div id="auth_input-container" class="form-group">
-                <!--<label>Confirm Password</label>-->
-                <input type="password" class="col-sm-offset-1 col-sm-10" placeholder="Confirm Password" ng-model="register.passwordconfirm" required>
-            </div>
-            <div id="auth_input-container" class="form-group">
-                <!--<label>Username</label>-->
-                <input type="text" class="col-sm-offset-1 col-sm-10" placeholder="Username" ng-model="register.username" required>
-            </div>
-            <div id="auth_register-link" class="form-group">
-                <!--<a href="" class="btn btn-lg btn-custom col-sm-offset-1 col-sm-10" ng-click="registerUser(register)" ng-show="registerContainer">Submit Registration</a>-->
-                <button id="auth_login-button" class="btn btn-custom col-sm-6" ng-click="registerUser(register)" ng-show="registerContainer">Submit Registration</button>
+﻿<div class="auth_back-button-container">
+<button class="auth_back-button" ng-click="setDefaultContainer()" ng-show="showBackButton == true">
+    <img class="auth_back-button-image" src="../../Content/images/back-arrow-icon-white.png" />
+</button>
+</div>
+<div class="auth">
+    <div class="auth_container">
+        <div class={{authButtonGroupClass}}>
+            <button class="auth_button" ng-click="setLoginContainer()" ng-show="showLoginButton">Login</button>
+            <button class="auth_button" ng-click="setRegisterContainer()" ng-show="showRegisterButton">Register</button>
+        </div>
 
+        <div class="auth_form-container">
+            <form class="auth_form" ng-show="loginContainer">
+                <div id="auth_input-container" class="form-group">
+                    <input type="text" placeholder="Username" ng-model="login.username" required autofocus>
+                </div>
+                <div id="auth_input-container" class="form-group">
+                    <input type="email" placeholder="Email address" ng-model="login.email" required autofocus>
+                </div>
+                <div id="auth_input-container" class="form-group">
+                    <input type="password" placeholder="Password" ng-model="login.password" required>
+                </div>
+                <div id="auth_input-container">
+                    <div class="auth_button-group">
+                        <button href="" class="auth_button" ng-click="loginUser(login)" ng-show="loginContainer == true">Submit Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="auth_form-container">
+            <form class="auth_form" ng-show="registerContainer">
+                <div id="auth_input-container" class="form-group">
+                    <input type="email" placeholder="Email address" ng-model="register.email" required autofocus>
+                </div>
+                <div id="auth_input-container" class="form-group">
+                    <input type="password" placeholder="Password" ng-model="register.password" required>
+                </div>
+                <div id="auth_input-container" class="form-group">
+                    <input type="password" placeholder="Confirm Password" ng-model="register.passwordconfirm" required>
+                </div>
+                <div id="auth_input-container" class="form-group">
+                    <input type="text" placeholder="Username" ng-model="register.username" required>
+                </div>
+                <div id="auth_input-container" class="form-group">
+                    <div class="auth_button-group">
+                        <button class="auth_button" ng-click="registerUser(register)" ng-show="registerContainer">Submit Registration</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Error Container -->
+        <!-- TODO: Make this its own component,
+         add a conditional CSS class for colors (e.g., red and green)
+         and reuse for success/failures/other -->
+        <div class="auth_error-container" ng-show="errorMessage">
+            <div class="auth_error">
+                <div class="auth_error-text">
+                    <p>{{errorMessage}}</p>
+                </div>
+                <div class="auth_error-close">
+                    <img src="../../Content/images/close-icon-black.png" ng-click="closeAlert()" />
+                </div>
             </div>
-        </form>
-	</div>
+        </div>
+        <!-- Loading Spinner Container-->
+        <div class="spinner_container" ng-show="loading === true">
+            <img src="../../Content/images/ajax-loader.gif" />
+        </div>
+    </div>
 </div> <!-- /container -->

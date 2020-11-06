@@ -2,6 +2,10 @@
     height: 100%;
     margin: 0;
     padding: 0;
+    /*
+    color: #858585;
+    font-size: 16px;
+    */
 }
 
 .clientList_pagination {
@@ -44,7 +48,48 @@
     font-size: 14px;
 }
 
+.spinner_container {
+    display: flex;
+    justify-content: center;
+}
+
+.spinner_container img {
+    height: 45px;
+}
+
+.auth_back-button-container {
+    margin: 1rem 2rem;
+}
+
+.auth {
+    display: flex;
+    justify-content: center;
+}
+
+.auth_container {
+    display: flex;
+    flex-flow: column;
+    width: 30%;
+}
+
+.auth_form-container {
+    width: 100%;
+}
+
+.auth_form {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+#auth_input-container {
+    display: flex;
+    align-self: center;
+    width: 100%;
+}
+
 #auth_input-container > input {
+    width: 100%;
     background-color: white;
     border-top: 0px;
     border-left: 0px;
@@ -55,19 +100,73 @@
     border-left-color: transparent;
     border-right-color: transparent;
     outline: none;
+    max-width: none;
 }
 
-#auth_button-group {
+.auth_button-group {
+    width: 100%;
+    padding: 2rem 0;
+    justify-content: center;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
 }
 
-#auth_login-button {
+.auth_button {
     margin: 1rem;
-    width: 100px;
+    /*width: 100px;*/
+    background-color: #194056;
+    color: white;
+    border-radius: 4px;
+    height: 38px;
+    width: 50%;
+    outline: none;
+    border: none;
+    cursor: pointer;
 }
 
-#auth_register-button {
+.auth_back-button {
     margin: 1rem;
-    width: 100px;
+    background-color: #194056;
+    color: white;
+    border-radius: 24px;
+    height: 38px;
+    width: 38px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.auth_back-button-image {
+    height: 24px;
+    width: 24px;
+    border-radius: 24px;
+    background-color: #194056;
+}
+
+.auth_error-container {
+    background-color: #ffb4b4;
+    border: 2px solid red;
+    border-radius: 8px;
+}
+
+.auth_error {
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem;
+}
+
+.auth_error-text {
+    color: black;
+    font-size: 16px;
+    padding: 0 1rem 0 .5rem;
+}
+
+.auth_error img {
+    background-color: transparent;
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
 }
 
 .surveyDash_wrapper {

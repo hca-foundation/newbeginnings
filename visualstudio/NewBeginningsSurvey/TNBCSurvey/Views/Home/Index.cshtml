@@ -1,4 +1,6 @@
-﻿
-<div ng-include="'App/partials/navbar.html'"></div>
+﻿<div ng-include="'App/partials/navbar.html'"></div>
 
-<div class="row ng-view"></div>
+<div class="row ng-view">
+    <div ng-include="'App/partials/Spinner.html'" ng-if="loading === true">
+    </div>
+</div>
