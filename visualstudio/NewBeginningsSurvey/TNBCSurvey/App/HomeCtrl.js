@@ -46,7 +46,14 @@
     }
 
     $scope.exportExcel = function (TimePeriod) {
-        $http.get('/api/survey/csv/' + TimePeriod);
+        $http.get('/api/survey/csv/' + TimePeriod)
+            .then(function (res) {
+                var hiddenElement = document.createElement('a');
+                hiddenElement.href = 'data:attachment/csv,' + encodeURI(res.data);
+                hiddenElement.target = '_blank';
+                hiddenElement.download = TimePeriod + '.csv';
+                hiddenElement.click();
+        });
     }
 
     $scope.resendLinkEmail = function (itemId) {

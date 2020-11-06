@@ -20,7 +20,7 @@ using DataTable = Microsoft.Office.Interop.Excel.DataTable;
 
 namespace TNBCSurvey.Controllers
 {
-  
+    [Authorize]
     public class SurveyController : ApiController
     {
         readonly ClientRepository _repoC;
