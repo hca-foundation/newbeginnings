@@ -1,4 +1,4 @@
-﻿var app = angular.module("TNBCSurveyApp", ["ngRoute"]);
+﻿var app = angular.module("New Beginnings Survey", ["ngRoute"]);
 
 app.directive('ngConfirmClick', [
     function () {
