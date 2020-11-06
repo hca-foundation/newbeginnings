@@ -72,12 +72,16 @@ namespace TNBCSurvey.DAL
             }
         }
 
-        public int GetOneByToken(int id, string token)
+        public DataRow GetOneByToken(int id, string token)
         {
-            var sql = @"select count(1) from SurveyTickets
+            var sql = @"select * from SurveyTickets
                             where Client_SID = @Client_SID and Token = @Token and getdate() <= ExpirationDate and TokenUsed <> 1;";
-
-            return Convert.ToInt32(_dbConnection.ExecuteScalar(sql, new { Client_SID = id, Token = token }));
+            var reader = _dbConnection.ExecuteReader(sql, new { Client_SID = id, Token = token });
+            DataTable dt = new DataTable();
+            dt.Load(reader);
+            if (dt.Rows.Count > 0)
+                return dt.Rows[0];
+            return null;
         }
 
         public int SetTokenUsed(int id, string token)
@@ -86,6 +90,38 @@ namespace TNBCSurvey.DAL
                             where Client_SID = @Client_SID and Token = @Token and getdate() <= ExpirationDate and TokenUsed <> 1;";
 
             return Convert.ToInt32(_dbConnection.ExecuteScalar(sql, new { Client_SID = id, Token = token }));
+        }
+
+        public List<object> GetClientTickets(string tiemPeriod)
+        {
+            var sql = @"exec dbo.getClientTicketList @TimePeriod;";
+            var reader = _dbConnection.ExecuteReader(sql, new { TimePeriod = tiemPeriod });
+            DataTable dt = new DataTable();
+            dt.Load(reader);
+            List<object> ct = new List<object>();
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    ct.Add(
+                        new
+                        {
+                            Client_SID = dt.Rows[i]["Client_SID"],
+                            FirstName = dt.Rows[i]["FirstName"],
+                            LastName = dt.Rows[i]["LastName"],
+                            GroupNumber = dt.Rows[i]["GroupNumber"],
+                            Email = dt.Rows[i]["Email"],
+                            TimePeriod = dt.Rows[i]["TimePeriod"],
+                            Ticket_SID = dt.Rows[i]["Ticket_SID"],
+                            Token = dt.Rows[i]["Token"],
+                            TokenUsed = dt.Rows[i]["TokenUsed"],
+                            TokenUsedDate = dt.Rows[i]["TokenUsedDate"],
+                            TokenExpired = dt.Rows[i]["TokenExpired"]
+                        });
+                }
+            }
+
+            return ct;
         }
     }
 }

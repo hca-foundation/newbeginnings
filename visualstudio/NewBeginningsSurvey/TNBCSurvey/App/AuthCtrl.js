@@ -3,16 +3,7 @@ app.controller("AuthCtrl", function ($scope, $rootScope, $location, $http) {
     $scope.loginContainer = true;
     $scope.registerContainer = false;
     $scope.register = {};
-
-    //$scope.register.username = 'b@b.com';
-    //$scope.register.email = 'b@b.com';
-    //$scope.register.password = '123456Nss!';
-    //$scope.register.passwordconfirm = '123456Nss!';
-    //$scope.login = {};
-    //$scope.login.email = 'b@b.com';
-    //$scope.login.username = 'b@b.com';
-    //$scope.login.password = '123456Nss!';
-
+    
     if ($location.path() === "/logout") {
 
         sessionStorage.removeItem('token');
@@ -62,7 +53,7 @@ app.controller("AuthCtrl", function ($scope, $rootScope, $location, $http) {
             data: { grant_type: "password", username: login.email, password: login.password }
         })
         .then(function (result) {
-            console.log(result);
+            //console.log(result);
             sessionStorage.setItem('token', result.data.access_token);
             $rootScope.user = result.data;
             $http.defaults.headers.common['Authorization'] = `bearer ${result.data.access_token}`;

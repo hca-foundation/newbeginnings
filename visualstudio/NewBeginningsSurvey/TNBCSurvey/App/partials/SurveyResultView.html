@@ -6,8 +6,26 @@
             Client Name:
         </td>
         <td>
-            {{survey.FirstName}} {{survey.LastName}}
+            {{survey.LastName}}, {{survey.FirstName}}
         </td>
+    </tr>
+    <tr calss="form-group">
+        <td width="30%" style="overflow-wrap:break-word">
+            Program#:
+        </td>
+        <td width="70%">
+            {{survey.GroupNumber}}
+        </td>
+
+    </tr>    
+    <tr calss="form-group">
+        <td width="30%" style="overflow-wrap:break-word">
+            Survey Period:
+        </td>
+        <td width="70%">
+            {{survey.Question_Period}}
+        </td>
+
     </tr>
     <tr calss="form-group">
         <td width="30%" style="overflow-wrap:break-word">

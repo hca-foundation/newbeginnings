@@ -38,22 +38,5 @@ namespace TNBCSurvey.DAL
                 from dbo.Clients";
             return _dbConnection.Query<Client>(sql);
         }
-
-        public void SetSurveyStatusPending(int id)
-        {
-            var sql = @"update dbo.Clients set Survey_Status = 'Pending'
-                            where Client_SID = @Client_SID";
-
-            _dbConnection.ExecuteScalar(sql, new { Client_SID = id });
-        }
-
-        public void SetSurveyStatusCompleted(int id)
-        {
-            var sql = @"update dbo.Clients set Survey_Status = 'Submitted'
-                            where Client_SID = @Client_SID";
-
-            _dbConnection.ExecuteScalar(sql, new { Client_SID = id });
-        }
-
     }
 }

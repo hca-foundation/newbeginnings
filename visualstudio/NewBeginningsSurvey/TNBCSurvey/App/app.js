@@ -58,9 +58,9 @@ app.config(function ($routeProvider) {
             controller: 'ClientEditCtrl',
             resolve: { isAuth }
         })
-        .when('/client/editResponse/:id', {
+        .when('/client/viewResponse/:id/:TimePeriod', {
             templateUrl: 'App/partials/SurveyResultView.html',
-            controller: 'ClientSurveyEditCtrl',
+            controller: 'SurveyResultViewCtrl',
             resolve: { isAuth }
         })
         //.when('/survey/:id/:token', {

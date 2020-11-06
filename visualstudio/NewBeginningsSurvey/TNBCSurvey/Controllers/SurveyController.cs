@@ -3,6 +3,7 @@ using TNBCSurvey.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
@@ -15,6 +16,7 @@ using Microsoft.Office.Interop.Excel;
 using System.Dynamic;
 using TNBCSurvey.Service;
 using System.Web.UI;
+using DataTable = Microsoft.Office.Interop.Excel.DataTable;
 
 namespace TNBCSurvey.Controllers
 {
@@ -42,7 +44,6 @@ namespace TNBCSurvey.Controllers
             var clients = _repoC.GetAllActiveClients();
             foreach(var client in clients)
             {
-                _repoC.SetSurveyStatusPending(client.Client_SID);
                 _repoT.CreateSurveyTicket(client);
             }
             return $"Sent emails to {clients.Count()} clients.";
@@ -85,7 +86,7 @@ namespace TNBCSurvey.Controllers
         [HttpGet]
         public Client validSurveyLink(int id, string token)
         {
-            if (_repoT.GetOneByToken(id, token) > 0) //ticket is valid
+            if (_repoT.GetOneByToken(id, token) != null) //ticket is valid
                 return _context.Client.Find(id);
             return null;
         }
@@ -94,7 +95,8 @@ namespace TNBCSurvey.Controllers
         [HttpPost]
         public void saveSurveyAnswers(int id, string token, [FromBody]dynamic value)
         {
-            var surveyPeriod = SurveyPeriodService.GetCurrentSurveyPeriod();
+            DataRow dr = (DataRow)_repoT.GetOneByToken(id, token);
+            string surveyPeriod = dr["TimePeriod"].ToString();
             for (int i = 1; i <= 19; i++)
             {
                 if (value.survey["Q" + i] != null)
@@ -107,16 +109,15 @@ namespace TNBCSurvey.Controllers
             }
 
             _repoT.SetTokenUsed(id, token);
-            _repoC.SetSurveyStatusCompleted(id);
         }
 
 
-        [Route("api/survey/getanswers/{clientId}")]
+        [Route("api/survey/getanswers/{clientId}/{TimePeriod}")]
         [HttpGet]
-        public dynamic getSurveyAnswers(string clientId)
+        public dynamic getSurveyAnswers(string clientId, string TimePeriod)
         {
 
-            var list = _repoA.GetSurveyResultsByClientId(clientId);
+            var list = _repoA.GetSurveyResultsByClientId(clientId, TimePeriod);
             dynamic output = new List<dynamic>();
 
             dynamic row = new ExpandoObject();
@@ -132,6 +133,8 @@ namespace TNBCSurvey.Controllers
                 ((IDictionary<String, Object>)row)[propertyName] = surveyAnswerList[i].Answer_Text;
                 ((IDictionary<String, Object>)row)["FirstName"] = surveyAnswerList[i].FirstName;
                 ((IDictionary<String, Object>)row)["LastName"] = surveyAnswerList[i].LastName;
+                ((IDictionary<String, Object>)row)["GroupNumber"] = surveyAnswerList[i].GroupNumber;
+                ((IDictionary<String, Object>)row)["Question_Period"] = surveyAnswerList[i].Question_Period;
 
             }
             output.Add(row);
@@ -139,10 +142,10 @@ namespace TNBCSurvey.Controllers
             
         }
 
-        [Route("api/survey/list")]
-        public List<Client> GetAll()
+        [Route("api/survey/list/{timePeriod}")]
+        public List<object> GetClientTickets(string timePeriod)
         {
-            return _context.Client.ToList();
+            return _repoT.GetClientTickets(timePeriod);
         }
 
         [Route("api/survey/excel/{surveyPeriod}")]
@@ -197,11 +200,10 @@ namespace TNBCSurvey.Controllers
             return response;
         }
 
-        [Route("api/survey/csv")]
+        [Route("api/survey/csv/{TimePeriod}")]
         [HttpGet]
-        public HttpResponseMessage exportToCsv()
+        public HttpResponseMessage exportToCsv(string TimePeriod)
         {
-            var surveyPeriod = SurveyPeriodService.GetCurrentSurveyPeriod();
             List<string> rows = new List<string>();
 
             // Header
@@ -214,7 +216,7 @@ namespace TNBCSurvey.Controllers
             rows.Add(row);
 
             // Body
-            var surveyResults = _repoA.GetSurveyResultsByPeriod(surveyPeriod).ToList();
+            var surveyResults = _repoA.GetSurveyResultsByPeriod(TimePeriod).ToList();
             int currentClientId = -1;
             row = null;
             for (var i = 0; i < surveyResults.Count; i++)
@@ -230,6 +232,7 @@ namespace TNBCSurvey.Controllers
 
                     currentClientId = result.Client_SID;
                     row = $"\"{result.LastName}, {result.FirstName}\",";
+                    row += $"\"{result.Question_Period}\",";
                 }
 
                 row += $"\"{result.Answer_Text}\",";
@@ -249,7 +252,7 @@ namespace TNBCSurvey.Controllers
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             response.Content = new StreamContent(stream);
             response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
-            response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment") { FileName = surveyPeriod + ".csv" };
+            response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment") { FileName = TimePeriod + ".csv" };
             return response;
         }
     }
