@@ -207,7 +207,7 @@ namespace TNBCSurvey.Controllers
             List<string> rows = new List<string>();
 
             // Header
-            var row = "\"Name\",\"Survey Period\",";
+            var row = "\"Name\",\"Group Number\",\"Survey Period\",";
             var questions = _repoQ.GetQuestions().ToList();
             foreach(var question in questions)
             {
@@ -232,6 +232,7 @@ namespace TNBCSurvey.Controllers
 
                     currentClientId = result.Client_SID;
                     row = $"\"{result.LastName}, {result.FirstName}\",";
+                    row += $"\"{result.GroupNumber}\",";
                     row += $"\"{result.Question_Period}\",";
                 }
 
