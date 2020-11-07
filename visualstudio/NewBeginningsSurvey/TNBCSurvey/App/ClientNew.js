@@ -8,7 +8,11 @@ app.controller("ClientNewCtrl", ['$scope', '$rootScope', '$http', '$location', f
             .then(function(res) {
                 $location.url("/client/list");
                 $scope.newItem = {};
-            });
+            })
+            .catch(function (error) {
+                if (error.data.InnerException.InnerException.ExceptionMessage.toString().indexOf("Violation of UNIQUE KEY constraint") !== -1)
+                    alert("This email address already exists!")
+        });
     };
 
 }]);

@@ -46,6 +46,10 @@
     }
 
     $scope.exportExcel = function (TimePeriod) {
+        if (TimePeriod == undefined || TimePeriod.length < 1) {
+            alert("A quarter option is needed!");
+            return;
+        }
         $http.get('/api/survey/csv/' + TimePeriod)
             .then(function (res) {
                 var hiddenElement = document.createElement('a');
@@ -63,11 +67,9 @@
             });
     }
 
-    $scope.resendLink = function (id) {
-        $http.post('/api/survey/resend/' + id)
-            .then(function (res) {
-                $scope.copyToClipboard(res.data);
-            });
+    $scope.resendLink = function (item) {
+        var link = "https://newbegininingcenter.azurewebsites.net/#!/survey/" + item["Client_SID"] + "/" + item["Token"];
+        $scope.copyToClipboard(link);
     }
 
     $scope.viewResponse = function (id, TimePeriod) {
@@ -78,11 +80,11 @@
             });
     }
 
-    $scope.copyToClipboard = function (name) {
+    $scope.copyToClipboard = function (link) {
         var copyElement = document.createElement("textarea");
         copyElement.style.position = 'fixed';
         copyElement.style.opacity = '0';
-        copyElement.textContent = decodeURI(name);
+        copyElement.textContent = link;
         var body = document.getElementsByTagName('body')[0];
         body.appendChild(copyElement);
         copyElement.select();
