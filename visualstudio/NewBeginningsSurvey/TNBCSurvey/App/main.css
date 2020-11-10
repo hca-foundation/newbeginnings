@@ -2,11 +2,36 @@
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: Questrial;
     /*
     color: #858585;
     font-size: 16px;
     */
 }
+
+nav > div {
+    display: inline-flex;
+}
+
+.navbar {
+    display: inline-flex;
+}
+
+.page_banner {
+    display: flex;
+    background-color: #63b483;
+    width: 100%;
+    margin: 1rem 0;
+    height: 80px;
+    align-items: center;
+    justify-content: center;
+}
+
+    .page_banner p {
+        font-family: Questrial;
+        color: white;
+        font-size: 38px;
+    }
 
 .clientList_pagination {
 }
@@ -169,6 +194,146 @@
     cursor: pointer;
 }
 
+.home_container {
+    display: flex;
+}
+
+.home_header-container {
+}
+
+.home_header {
+}
+
+.home_header h1 {
+    font-family: Questrial;
+    color: #55555a;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.home_survey-response-container {
+    background-color: #f8f6f8;
+}
+
+.home_survey-stats-container {
+    display: flex;
+    border-top: 1px solid #55555a;
+}
+
+.home_survey-stats-left {
+    display: inline-flex;
+    align-items: center;
+}
+
+.home_survey-stats-left div {
+    display: inline-flex;
+    margin: .5rem .25rem .5rem .5rem;
+    font-family: Questrial;
+    font-size: 14px;
+    color: #55555a;
+    font-weight: 600;
+    align-items: center;
+}
+
+.home_stat-counter {
+    border: 1px solid #d7d7d8;
+    border-radius: 24px;
+    height: 24px;
+    width: 24px;
+}
+
+.home_stat-counter p {
+}
+
+.home_stat-header {
+    padding-left: .75rem;
+}
+
+.home_survey-stats-right {
+    display: inline-flex;
+    align-items: center;
+}
+
+    .home_survey-stats-right div {
+        display: inline-flex;
+        margin: .5rem .25rem .5rem .5rem;
+        font-family: Questrial;
+        font-size: 14px;
+        color: #55555a;
+        font-weight: 600;
+        align-items: center;
+    }
+
+.home_global-survey-status-button {
+    font-family: Questrial;
+    font-size: 14px;
+    color: #55555a;
+}
+
+.home_toggle-button {
+    font-family: Questrial;
+    font-size: 14px;
+    color: #55555a;
+}
+
+.home_survey-response-wrapper {
+}
+
+.home_submit-container {
+}
+
+.home_submit-tabs {
+    display: flex;
+    background-color: white;
+    box-shadow: inset -2px 3px 8px -7px rgba(0,0,0,.5);
+    padding: .25rem;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border: 1.5px solid #d7d7d8;
+    font-size: 12px;
+    font-family: 'Questrial';
+}
+
+    .home_submit-tabs .active {
+        background-color: #55555a;
+        box-shadow: inset -2px 3px 8px -7px rgba(0,0,0,.5);
+        padding: .25rem;
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+        border: 1.5px solid #d7d7d8;
+        color: white;
+        font-family: 'Questrial';
+        font-size: 12px;
+    }
+
+.home_submit-tabs-text {
+    margin-block-end: 0;
+    margin-block-start: 0;
+    padding: .25rem;
+}
+
+.home_survey-response-panel {
+    box-shadow: 0.125rem 025rem rgba(0,0,0,.15);
+}
+
+.home_survey-response-header {
+    display: flex;
+    color: #55555a;
+    font-family: Questrial;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.home_survey-response-container {
+    display: flex;
+    flex-flow: column;
+    /*box-shadow: 2px 3px 8px 0px rgba(4,8,16,0.4);*/
+    /*box-shadow: 0.125rem 025rem rgba(0,0,0,.15);*/
+}
+
+.home_survey-response-export-container {
+}
+
 .surveyDash_wrapper {
     margin-left: 2rem;
 }
@@ -179,4 +344,22 @@
 
 .survey_wrapper {
     margin-left: 2rem;
+}
+
+.surveyResponse_button {
+}
+
+.home_submit-container {
+}
+
+.home_submit-tabs {
+}
+
+#surveyResponse_table {
+}
+
+.home_survey-response-header-row {
+    font-family: Questrial;
+    font-size: 14px;
+    color: #55555a;
 }

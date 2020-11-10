@@ -5,6 +5,7 @@
     $scope.unsubmitteditems = [];
     $scope.submittedItems = [];
     $scope.isSubmitted = true;
+    console.log("HomeCtrl > scope: ", $scope);
 
     var getQtrs = function() {
         $scope.qtrs.push("2020Q4");
