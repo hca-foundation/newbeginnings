@@ -12,11 +12,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Web.Http;
-using Microsoft.Office.Interop.Excel;
 using System.Dynamic;
 using TNBCSurvey.Service;
 using System.Web.UI;
-using DataTable = Microsoft.Office.Interop.Excel.DataTable;
 
 namespace TNBCSurvey.Controllers
 {
@@ -148,57 +146,57 @@ namespace TNBCSurvey.Controllers
             return _repoT.GetClientTickets(timePeriod);
         }
 
-        [Route("api/survey/excel/{surveyPeriod}")]
-        [HttpGet]
-        public HttpResponseMessage exportToExcel(string surveyPeriod)
-        {
-            var fileId = @"excelExport{Guid.NewGuid()}.xlsx";
+        //[Route("api/survey/excel/{surveyPeriod}")]
+        //[HttpGet]
+        //public HttpResponseMessage exportToExcel(string surveyPeriod)
+        //{
+        //    var fileId = @"excelExport{Guid.NewGuid()}.xlsx";
 
-            var excel = new Application();
-            var workbook = excel.Workbooks.Add();
-            Worksheet sheet = workbook.Sheets.Add();
+        //    var excel = new Application();
+        //    var workbook = excel.Workbooks.Add();
+        //    Worksheet sheet = workbook.Sheets.Add();
 
-            // Header
-            sheet.Cells[1, 1] = "Name";
-            sheet.Cells[1, 2] = "Survey Period";
-            var questions = _repoQ.GetQuestions().ToList();
-            for(int i = 0; i < questions.Count; i++)
-            {
-                sheet.Cells[1, i + 3] = questions[i].Question_Text;
-            }
+        //    // Header
+        //    sheet.Cells[1, 1] = "Name";
+        //    sheet.Cells[1, 2] = "Survey Period";
+        //    var questions = _repoQ.GetQuestions().ToList();
+        //    for(int i = 0; i < questions.Count; i++)
+        //    {
+        //        sheet.Cells[1, i + 3] = questions[i].Question_Text;
+        //    }
 
-            // Body
-            var surveyResults = _repoA.GetSurveyResultsByPeriod(surveyPeriod).ToList();
-            var currentRowNum = 1;
-            int currentColumnNum = 1;
-            int currentClientId = -1;
-            for(var i = 0; i < surveyResults.Count; i++)
-            {
-                var result = surveyResults[i];
+        //    // Body
+        //    var surveyResults = _repoA.GetSurveyResultsByPeriod(surveyPeriod).ToList();
+        //    var currentRowNum = 1;
+        //    int currentColumnNum = 1;
+        //    int currentClientId = -1;
+        //    for(var i = 0; i < surveyResults.Count; i++)
+        //    {
+        //        var result = surveyResults[i];
                 
-                if(result.Client_SID != currentClientId)
-                {
-                    currentClientId = result.Client_SID;
-                    currentRowNum++;
-                    currentColumnNum = 2;
-                    sheet.Cells[currentRowNum, 1] = $"{result.LastName}, {result.FirstName}";
-                }
+        //        if(result.Client_SID != currentClientId)
+        //        {
+        //            currentClientId = result.Client_SID;
+        //            currentRowNum++;
+        //            currentColumnNum = 2;
+        //            sheet.Cells[currentRowNum, 1] = $"{result.LastName}, {result.FirstName}";
+        //        }
 
-                sheet.Cells[currentRowNum, currentColumnNum] = result.Answer_Text;
-                currentColumnNum++;
-            }
+        //        sheet.Cells[currentRowNum, currentColumnNum] = result.Answer_Text;
+        //        currentColumnNum++;
+        //    }
 
-            workbook.SaveAs(fileId);
-            workbook.Close();
-            excel.Quit();
+        //    workbook.SaveAs(fileId);
+        //    workbook.Close();
+        //    excel.Quit();
 
-            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-            response.Content = new StreamContent(new FileStream(fileId, FileMode.Open, FileAccess.Read));
-            response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
-            response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-            response.Content.Headers.ContentDisposition.FileName = surveyPeriod + ".xlsx";
-            return response;
-        }
+        //    HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+        //    response.Content = new StreamContent(new FileStream(fileId, FileMode.Open, FileAccess.Read));
+        //    response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
+        //    response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        //    response.Content.Headers.ContentDisposition.FileName = surveyPeriod + ".xlsx";
+        //    return response;
+        //}
 
         [Route("api/survey/csv/{TimePeriod}")]
         [HttpGet]
