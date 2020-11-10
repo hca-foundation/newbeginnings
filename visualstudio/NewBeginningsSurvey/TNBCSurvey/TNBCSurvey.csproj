@@ -343,6 +343,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\close-icon-black.png" />
+    <Content Include="Content\images\toggle_off_white.png" />
+    <Content Include="Content\images\toggle_on_white.png" />
     <Content Include="Content\survey.css" />
     <Content Include="Content\TNBSurvey.css" />
     <Content Include="Areas\HelpPage\HelpPage.css" />

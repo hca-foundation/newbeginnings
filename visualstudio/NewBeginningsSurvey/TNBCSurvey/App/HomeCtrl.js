@@ -5,7 +5,19 @@
     $scope.unsubmitteditems = [];
     $scope.submittedItems = [];
     $scope.isSubmitted = true;
+    $scope.showGlobalSurveyStatus = true;
+    // Default Global Survey Status toggle is ON
+    $scope.globalSurveyToggle = "../../Content/images/toggle_on_white.png"
     console.log("HomeCtrl > scope: ", $scope);
+
+    $scope.setGlobalSurveyToggle = function () {
+        if ($scope.showGlobalSurveyStatus === true) {
+            $scope.globalSurveyToggle = "../../Content/images/toggle_on_white.png"
+        }
+        if ($scope.showGlobalSurveyStatus === false) {
+            $scope.globalSurveyToggle = "../../Content/images/toggle_off_white.png"
+        }
+    }
 
     var getQtrs = function() {
         $scope.qtrs.push("2020Q4");

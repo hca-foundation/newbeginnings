@@ -195,7 +195,6 @@ nav > div {
 }
 
 .home_container {
-    display: flex;
 }
 
 .home_header-container {
@@ -271,40 +270,64 @@ nav > div {
 }
 
 .home_toggle-button {
-    font-family: Questrial;
-    font-size: 14px;
-    color: #55555a;
-}
-
-.home_survey-response-wrapper {
+    height: 20px;
+    width: 36px;
+    padding: 0;
+    background-color: #6ac186;
+    border: 1px solid #6ac186;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
 }
 
 .home_submit-container {
+    width: 96%;
 }
 
 .home_submit-tabs {
     display: flex;
     background-color: white;
     box-shadow: inset -2px 3px 8px -7px rgba(0,0,0,.5);
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: 'Helvetica';
+    align-items: baseline;
+    justify-content: flex-end;
+    font-weight: 600;
+}
+
+.home_submit-tabs-left .active {
+    background-color: #55555a;
+    box-shadow: inset -2px 3px 8px -7px rgba(0,0,0,.5);
     padding: .25rem;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
-    border: 1.5px solid #d7d7d8;
+    border: 1px solid #d7d7d8;
+    color: white;
+    font-family: 'Helvetica';
     font-size: 12px;
-    font-family: 'Questrial';
+    font-weight: 600;
 }
 
-    .home_submit-tabs .active {
-        background-color: #55555a;
-        box-shadow: inset -2px 3px 8px -7px rgba(0,0,0,.5);
-        padding: .25rem;
-        border-top-right-radius: 6px;
-        border-bottom-right-radius: 6px;
-        border: 1.5px solid #d7d7d8;
-        color: white;
-        font-family: 'Questrial';
-        font-size: 12px;
-    }
+.home_submit-tabs-items {
+
+}
+
+.home_submit-tabs-right .active {
+    background-color: #55555a;
+    box-shadow: inset -2px 3px 8px -7px rgba(0,0,0,.5);
+    padding: .25rem;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border: 1px solid #d7d7d8;
+    color: white;
+    font-family: 'Helvetica';
+    font-size: 12px;
+    font-weight: 600;
+}
 
 .home_submit-tabs-text {
     margin-block-end: 0;
@@ -312,8 +335,20 @@ nav > div {
     padding: .25rem;
 }
 
+.export-button {
+    background-color: #b5e2f9;
+    color: white;
+    font-family: 'Helvetica';
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 6px;
+    height: 32px;
+    width: 130px;
+    border: none;
+    outline: none;
+}
+
 .home_survey-response-panel {
-    box-shadow: 0.125rem 025rem rgba(0,0,0,.15);
 }
 
 .home_survey-response-header {
@@ -362,4 +397,8 @@ nav > div {
     font-family: Questrial;
     font-size: 14px;
     color: #55555a;
+}
+
+.home_table-responsive {
+    display: grid;
 }
