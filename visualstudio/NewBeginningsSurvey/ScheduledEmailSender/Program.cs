@@ -52,7 +52,7 @@ namespace ScheduledEmailSender
         </p>
         <p>
             I hope this finds you healthy and well. We are reaching out to all of our New Beginnings clients and would love to hear how you’re doing. Please take a moment to complete our
-            <a href='{surveyLinkUrl}'>New Beginnings Client Follow Up Survey</a>.
+            <a href='{surveyLinkUrl}'>New Beginnings Client Follow Up Survey</a>.The survey link will be expired in three weeks.
         </p>
         <p>
             If you would like a check-in call from a coach, please reply to me via email or phone. We’d be very happy to set up a call!
