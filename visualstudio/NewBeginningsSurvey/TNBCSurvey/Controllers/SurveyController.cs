@@ -81,6 +81,7 @@ namespace TNBCSurvey.Controllers
         }
 
         [Route("api/survey/{id}/{token}")]
+        [AllowAnonymous]
         [HttpGet]
         public Client validSurveyLink(int id, string token)
         {

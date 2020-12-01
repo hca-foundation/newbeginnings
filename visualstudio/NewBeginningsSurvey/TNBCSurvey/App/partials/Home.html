@@ -386,6 +386,30 @@
                             </div>
                         </div>
                     </div>
+                    <table class="table table-striped table-key-info alert-success table-responsive-sm">
+                        <thead>
+                        <tr>
+                            <td>Time Period</td>
+                            <td>Client Name</td>
+                            <td>Group#</td>
+                            <td>Email</td>
+                            <td>Action</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in unsubmitteditems | filter: searchText | orderBy: ['TimePeriod', 'LastName', 'FirstName']">
+                            <td>{{item.TimePeriod }}</td>
+                            <td>{{item.LastName + ", " + item.FirstName }}</td>
+                            <td>{{item.GroupNumber }}</td>
+                            <td>{{item.Email }}</td>
+                            <td>
+                                <!--<button class="btn fa fa-envelope-o" ng-if="!item.TokenExpired" ng-click="resendLinkEmail(item.Client_SID)"></button>-->
+                                <button class="btn fa fa-paperclip" ng-if="!item.TokenExpired" ng-click="resendLink(item)"></button>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
            </div>
         </div>
