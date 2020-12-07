@@ -77,12 +77,10 @@
                 }
             })
             .catch(function (err) {
-                console.log("getSurveyItems > err: ", err)
                 $scope.loading = false;
                 $scope.errorMessage = `${err.data.Message} Details: ${err.status} - ${err.statusText}`;
             });
     }
-    // getSurveyItems();
 
     $scope.ChangeTab = function (type) {
         if (type == "Submitted")
@@ -108,7 +106,6 @@
                 $scope.loading = false;
             })
             .catch(function (err) {
-                console.log("Error exporting to Excel. Error: ", err);
                 $scope.loading = false;
                 $scope.errorMessage = `${err.data.Message} Details: ${err.status} - ${err.statusText}`;
             });
@@ -127,15 +124,11 @@
     }
 
     $scope.viewResponse = function (id, TimePeriod) {
-        //$scope.loading = true;
         $http.get(`/api/survey/getanswers/${id}/${TimePeriod}`)
             .then(function (oneItem) {
-                console.log("viewResponse > oneItem.data: ", oneItem.data)
-                //$scope.loading = false;
                 $scope.survey = oneItem.data[0];
             })
             .catch(function (err) {
-                //$scope.loading = false;
                 $scope.errorMessage = `${err.data.Message} Details: ${err.status} - ${err.statusText}`;
             });
     }

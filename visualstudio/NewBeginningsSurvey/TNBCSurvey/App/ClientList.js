@@ -6,7 +6,6 @@ app.controller("ClientListCtrl", ['$scope', '$rootScope', '$http', '$location', 
         $http.get('/api/client/list')
             .then(function (res) {
                 $scope.items = res.data;
-                console.log("getItems > res.data: ", res.data);
                 $scope.total = $scope.items.length;
                 var i;
                 for (i = 0; i < $scope.items.length; i++) {
