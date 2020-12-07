@@ -38,8 +38,15 @@ namespace TNBCSurvey.Controllers
         [HttpPost]
         public void Add(Client newClient)
         {
-            _context.Client.Add(newClient);
-            _context.SaveChanges();
+            try
+            {
+                _context.Client.Add(newClient);
+                _context.SaveChanges();
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
         }
 
         [Route("delete/{id}")]

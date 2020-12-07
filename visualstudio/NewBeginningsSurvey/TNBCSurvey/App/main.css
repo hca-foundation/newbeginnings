@@ -17,6 +17,15 @@ nav > div {
     display: inline-flex;
 }
 
+#navbar-default {
+    width: 100%
+}
+
+.navbar_link-container {
+    display: flex;
+    align-items: center;
+}
+
 .navbar_link {
     padding: 0 1rem;
     color: #55555a;
@@ -32,51 +41,20 @@ nav > div {
     justify-content: center;
 }
 
+@media only screen and (max-width: 580px) {
+    .home_container {
+        width: 100%;
+    }
+
+    .page_banner {}
+}
+
     .page_banner p {
         font-family: Questrial;
         color: white;
         font-size: 38px;
     }
 
-.clientList_pagination {
-}
-
-.clientList_pagination-button-group {
-
-}
-
-.clientList_table-section {
-    background-color: white;
-}
-
-.clientList_table-container :after .clientList_pagination {
-    background-color: #f4f4f4;
-    box-shadow: 0.125rem 025rem rgba(0,0,0,.15);
-}
-
-#clientList_table {
-    display: flex;
-    background-color: white;
-    border-top: 2px solid #555;
-}
-
-.clientList_table-top-row {
-}
-
-.clientList_table-top-row td {
-    font: questrial;
-    font-size: 14px;
-    color: #555;
-}
-
-.clientList_table-body-row {
-    border: 1px solid #f4f4f4;
-}
-
-.clientList_table-body-row td {
-    font: questrial;
-    font-size: 14px;
-}
 
 .spinner_container {
     display: flex;
@@ -199,6 +177,8 @@ nav > div {
     cursor: pointer;
 }
 
+/************************** Home / Survey Dashboard styles*************************/
+
 .home_container {
 }
 
@@ -274,10 +254,13 @@ nav > div {
     color: #55555a;
 }
 
+.home_toggle-container p {
+    margin: 0;
+}
+
 .home_toggle-button {
     height: 20px;
     width: 36px;
-    padding: 0;
     background-color: #6ac186;
     border: 1px solid #6ac186;
     border-radius: 20px;
@@ -286,6 +269,7 @@ nav > div {
     justify-content: center;
     outline: none;
     cursor: pointer;
+    margin: 0 .75rem;
 }
 
 .home_submit-container {
@@ -362,6 +346,12 @@ nav > div {
 .home_survey-response-panel {
 }
 
+#home_survey-response-results-table {
+}
+
+.home_survey-response-result-row {
+}
+
 .home_survey-response-header {
     display: flex;
     color: #55555a;
@@ -383,11 +373,100 @@ nav > div {
     margin: 1rem;
 }
 
-.surveyDash_wrapper {
+/**********************************************************************************/
+
+/************************** Client List styles ************************************/
+
+.clientList_container {
+    font-family: Questrial;
+    color: #55555a;
+    font-size: 20px;
+    font-weight: 400;
+    background-color: #f8f6f8;
+}
+
+.clientList_pagination {
+}
+
+.clientList_pagination-button-group {
+
+}
+
+.clientList_table-section {
+    background-color: white;
+}
+
+.clientList_table-container :after .clientList_pagination {
+    background-color: #f4f4f4;
+    box-shadow: 0.125rem 025rem rgba(0,0,0,.15);
+}
+
+#clientList_table {
+    background-color: white;
+    font-family: Questrial;
+    color: #55555a;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#clientList_table-thead {
+    font-weight: 600;
+}
+
+.clientList_table-top-row td {
+    font: Questrial;
+    font-size: 14px;
+    color: #555;
+}
+
+.clientList_table-body-row {
+    border: 1px solid #f4f4f4;
+}
+
+.clientList_table-body-row td {
+    font: Questrial;
+    font-size: 14px;
+}
+/**********************************************************************************/
+/************************** New Client styles *************************************/
+
+.newClient_container {
+    font-family: Questrial;
+    color: #55555a;
+    font-size: 20px;
+    font-weight: 400;
+    background-color: #f8f6f8;
+}
+
+.newClient_wrapper {
+    font-family: Questrial;
+    color: #55555a;
+    font-size: 14px;
+    font-weight: 400;
     margin-left: 2rem;
 }
 
-.clientNew_wrapper {
+.newClient_wrapper h3 {
+    font-family: Questrial;
+    color: #55555a;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.newClient_form {
+
+}
+
+.newClient_form-group label {
+    font-family: Questrial;
+    color: #55555a;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/**********************************************************************************/
+
+.surveyDash_wrapper {
     margin-left: 2rem;
 }
 
@@ -398,12 +477,6 @@ nav > div {
 .surveyResponse_button {
 }
 
-.home_submit-container {
-}
-
-.home_submit-tabs {
-}
-
 #surveyResponse_table {
     margin: 1rem;
 }
@@ -412,7 +485,6 @@ nav > div {
     font-family: Questrial;
     font-size: 14px;
     color: #55555a;
-    display: flex;
     width: 100%;
     justify-content: space-between;
 }

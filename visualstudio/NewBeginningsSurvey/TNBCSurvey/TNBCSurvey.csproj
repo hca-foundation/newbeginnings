@@ -331,7 +331,6 @@
     <Content Include="App\partials\ClientView.html" />
     <Content Include="App\partials\Home.html" />
     <Content Include="App\partials\navbar.html" />
-    <Content Include="App\partials\Spinner.html" />
     <Content Include="App\partials\SurveyResultView.html" />
     <Content Include="App\partials\Survey.html" />
     <Content Include="App\QuestionList.js" />

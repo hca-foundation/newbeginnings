@@ -1,25 +1,51 @@
 ﻿app.controller("HomeCtrl", ['$scope', '$rootScope', '$http', '$location', function ($scope, $rootScope, $http, $location) {
-
+    $scope.loading = false;
+    $rootScope.loading
+    $scope.errorMessage = null;
     $scope.qtrs = [];
     $scope.selectedQtr = "";
     $scope.unsubmitteditems = [];
     $scope.submittedItems = [];
     $scope.isSubmitted = true;
-    $scope.showGlobalSurveyStatus = true;
     // Default Global Survey Status toggle is ON
-    $scope.globalSurveyToggle = "../../Content/images/toggle_on_white.png"
-    console.log("HomeCtrl > scope: ", $scope);
+    $scope.showGlobalSurveyStatus = true;
 
-    $scope.setGlobalSurveyToggle = function () {
-        if ($scope.showGlobalSurveyStatus === true) {
-            $scope.globalSurveyToggle = "../../Content/images/toggle_on_white.png"
-        }
-        if ($scope.showGlobalSurveyStatus === false) {
-            $scope.globalSurveyToggle = "../../Content/images/toggle_off_white.png"
-        }
+    /* TODO - For response rate, % completed, etc.
+    $scope.totalSurveyResponses = null;
+    $scope.submittedSurveyResponses = null;
+    $scope.responseRate = null;
+    */
+
+    $scope.closeAlert = function () {
+        $scope.errorMessage = null;
+    };
+
+    $scope.setGlobalSurveyToggle = function (t) {
+        if (t == true)
+            $scope.showGlobalSurveyStatus = false;
+        else
+            $scope.showGlobalSurveyStatus = true;
     }
 
-    var getQtrs = function() {
+    //$scope.getSurveyResponseRate = function () {
+    //    $http.get('/api/client/list')
+    //        .then(function (response) {
+    //            $scope.totalSurveyResponses = response.length;
+    //            //var clients = response.data;
+    //            var i;
+    //            for (i = 0; i < $scope.totalSurveyResponses; i++) {
+
+    //                if ($scope.items[i].Active == true) {
+    //                    console.log("$scope.items[i].Active: ", $scope.items[i].Active);
+    //                    $scope.submittedSurveyResponses = $scope.items[i].Active;
+    //                }
+
+    //                $scope.responseRate = $scope.submittedSurveyResponses / $scope.totalSurveyResponses;
+    //            }
+    //        });
+    //};
+
+    var getQtrs = function () {
         $scope.qtrs.push("2020Q4");
         var today = new Date();
         var yyyy = today.getFullYear();
@@ -41,15 +67,22 @@
     getQtrs();
 
     $scope.getSurveyItems = function (timePeriod) {
+        $scope.loading = true;
         $http.get(`/api/survey/list/${timePeriod}`)
             .then(function (res) {
                 if (res && res.data && res.data != undefined) {
                     $scope.submittedItems = res.data.filter(x => x.TokenUsed == true)
                     $scope.unsubmitteditems = res.data.filter(x => x.TokenUsed == false);
+                    $scope.loading = false;
                 }
+            })
+            .catch(function (err) {
+                console.log("getSurveyItems > err: ", err)
+                $scope.loading = false;
+                $scope.errorMessage = `${err.data.Message} Details: ${err.status} - ${err.statusText}`;
             });
     }
-    //getSurveyItems();
+    // getSurveyItems();
 
     $scope.ChangeTab = function (type) {
         if (type == "Submitted")
@@ -59,18 +92,26 @@
     }
 
     $scope.exportExcel = function (TimePeriod) {
+        $scope.loading = true;
         if (TimePeriod == undefined || TimePeriod.length < 1) {
             alert("A quarter option is needed!");
             return;
         }
         $http.get('/api/survey/csv/' + TimePeriod)
             .then(function (res) {
+                console.log("exportExcel > res: ", res);
                 var hiddenElement = document.createElement('a');
                 hiddenElement.href = 'data:attachment/csv,' + encodeURI(res.data);
                 hiddenElement.target = '_blank';
                 hiddenElement.download = TimePeriod + '.csv';
                 hiddenElement.click();
-        });
+                $scope.loading = false;
+            })
+            .catch(function (err) {
+                console.log("Error exporting to Excel. Error: ", err);
+                $scope.loading = false;
+                $scope.errorMessage = `${err.data.Message} Details: ${err.status} - ${err.statusText}`;
+            });
     }
 
     $scope.resendLinkEmail = function (itemId) {
@@ -86,10 +127,16 @@
     }
 
     $scope.viewResponse = function (id, TimePeriod) {
-        //$location.url(`/client/viewResponse/${id}/${TimePeriod}`);
+        //$scope.loading = true;
         $http.get(`/api/survey/getanswers/${id}/${TimePeriod}`)
             .then(function (oneItem) {
+                console.log("viewResponse > oneItem.data: ", oneItem.data)
+                //$scope.loading = false;
                 $scope.survey = oneItem.data[0];
+            })
+            .catch(function (err) {
+                //$scope.loading = false;
+                $scope.errorMessage = `${err.data.Message} Details: ${err.status} - ${err.statusText}`;
             });
     }
 

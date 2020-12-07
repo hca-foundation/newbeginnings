@@ -85,7 +85,6 @@
             })
             .catch(function (err) {
                 $scope.loading = false;
-                console.log("register error: ", err)
                 // We set the error message to err.data.Message here 
                 // instead of err.data.error_description because a 
                 // different object structure is returned from the endpoint

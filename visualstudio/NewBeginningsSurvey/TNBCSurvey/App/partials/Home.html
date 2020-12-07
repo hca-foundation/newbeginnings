@@ -1,417 +1,414 @@
 ﻿﻿<!-- Top-->
-<div class="home_container">
-    <!--<div class="home_header-container">
-        <header class="home_header">
-            <h1>Survey Dashboard</h1>
-        </header>
-    </div>-->
-    <select class="ui dropdown" name="quarter" ng-model="selectedQdiv" ng-options="val as val for val in qdivs" required>
+    <div class="home_container">
+        <!--<select class="ui dropdown" name="quarter" ng-model="selectedQtr" ng-options="val as val for val in qtrs" required>
         <option value="">Choose an option</option>
     </select>
-    <button id="timeperiod" class="surveyResponse_button" ng-click="getSurveyItems(selectedQdiv)">Get Quarter</button>
-    
-    <!-- Page Banner-->
-    <div class="page_banner">
-        <p>Survey Dashboard</p>
-    </div>
-
-    <!-- Survey Response Table -->
-    <div class="home_survey-response-container">
-        <div class="home_survey-stats-container">
-            <div class="home_survey-stats-left">
-                <div>
-                    <div class="home_stat-counter">{{}}</div>
-                    <div class="home_stat-header">Response Rate, %</div>
-                </div>
-                <div>
-                    <div class="home_stat-counter">{{}}</div>
-                    <div>Employees Completed, %</div>
-                </div>
-                <div>
-                    <div class="home_stat-counter">{{}}</div>
-                    <div>Days Until Deadline</div>
-                </div>
-            </div>
-            <div class="home_survey-stats-right">
-                <div>
-                    <div class="home_global-survey-status">Global Survey Status</div>
-                </div>
-                <div>
-                    Close
-                    <div class="home_toggle-button" ng-click="!showGlobalSurveyStatus">
-                        <!--<img src={{globalSurveyToggle}}/>-->
-                        <img src="../../Content/images/toggle_on_white.png" ng-show="showGlobalSurveyStatus === true" />
-                        <img src="../../Content/images/toggle_off_white.png" ng-show="showGlobalSurveyStatus === false" />
-                    </div>
-                    Open
-                </div>
-            </div>
+    <button id="timeperiod" class="surveyResponse_button" ng-click="getSurveyItems(selectedQtr)">Get Quarter</button>-->
+        <!-- Page Banner-->
+        <div class="page_banner">
+            <p>Survey Dashboard</p>
         </div>
 
-        <div class="home_submit-container" id="request-tabsdivip">
-            <div class="home_survey-response-header">Survey Responses</div>
-            <div class="home_survey-options">
-                <div class="home_submit-tabs">
-                    <!-- Submitted & Not Submitted Tabs-->
-                    <div class="home_submit-tabs-left">
-                        <div ng-Class="{'active': isSubmitted}" ng-click="ChangeTab('Submitted');">
-                            <div class="home_submit-tabs-text">
-                                Submitted
-                                <div class="home_submit-tabs-items">{{survey.submittedItems}}</div>
-                            </div>
-                        </div>
+        <!-- Survey Response Table -->
+        <div class="home_survey-response-container">
+            <div class="home_survey-stats-container">
+                <div class="home_survey-stats-left">
+                    <div>
+                        <select class="ui dropdown" name="quarter" ng-model="selectedQtr" ng-options="val as val for val in qtrs" required>
+                            <option value="">Choose an option</option>
+                        </select>
+                        <button id="timeperiod" class="surveyResponse_button" ng-click="getSurveyItems(selectedQtr)">Get Quarter</button>
                     </div>
-                    <div class="home_submit-tabs-right">
-                        <div ng-Class="{'active': !isSubmitted}" ng-click="ChangeTab('NotSubmitted');">
-                            <div class="home_submit-tabs-text">
-                                Not Submitted
-                                <div class="home_submit-tabs-items">{{survey.unsubmittedItems}}</div>
-                            </div>
-                        </div>
-                    </div> <!-- End Submitted & Not Submitted Tabs -->
-                </div>
-                <!-- Export to Excel Button -->
-                <div class="home_survey-response-export-container" ng-if="isSubmitted">
-                    <button ng-click="exportExcel(selectedQdiv)" class="export-button">Export to CSV</button>
-                </div> <!-- End Export to Excel Button -->
-            </div>
-        </div>
 
-
-        <div class="home_table-responsive">
-            <div ng-if="isSubmitted">
-                <!-- Search Input & Button -->
-                <div class="home_search-input">
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default"><i class="fa fa-search"></i></button>
-                        </span>
-                        <input type="text" class="form-condivol" placeholder="Search for ..." ng-model="searchText">
-                    </div>
-                </div> <!-- End Search & Input Button-->
-                <!--<table class="table table-sdiviped table-key-info alert-success table-responsive-sm" id="surveyResponse_table">-->
-                <div id="surveyResponse_table">
-                    <div class="home_survey-response-header-row">
-                        <div>Time Period</div>
-                        <div>Client Name</div>
-                        <div>Group#</div>
-                        <div>Email</div>
-                        <div>Date Submitted</div>
-                        <div>Action</div>
+                    <div>
+                        <div class="home_stat-counter">{{}}</div>
+                        <div class="home_stat-header">Response Rate, %</div>
                     </div>
                     <div>
-                        <div ng-repeat="item in submittedItems | filter: searchText | orderBy: ['TimePeriod', 'LastName', 'FirstName']" class="surveyResponse_row">
-                            <div>{{item.TimePeriod }}</div>
-                            <div>{{item.LastName + ", " + item.FirstName }}</div>
-                            <div>{{item.GroupNumber }}</div>
-                            <div>{{item.Email }}</div>
-                            <div>{{item.TokenUsedDate }}</div>
-                            <div>
-                                <!-- Button trigger modal-->
-                                <button type="button" class="btn fa fad fa-link" ng-click="viewResponse(item.Client_SID, item.TimePeriod)" data-toggle="modal" data-target="#modalSurveyResult1"></button>
+                        <div class="home_stat-counter">{{}}</div>
+                        <div>Employees Completed, %</div>
+                    </div>
+                    <div>
+                        <div class="home_stat-counter">{{}}</div>
+                        <div>Days Until Deadline</div>
+                    </div>
+                </div>
+                <div class="home_survey-stats-right">
+                    <div>
+                        <div class="home_global-survey-status">Global Survey Status</div>
+                    </div>
+                    <div class="home_toggle-container">
+                        <p>Close</p>
+                        <button class="home_toggle-button" ng-click="setGlobalSurveyToggle(showGlobalSurveyStatus)">
+                            <img src="../../Content/images/toggle_on_white.png" ng-if="showGlobalSurveyStatus === true" />
+                            <img src="../../Content/images/toggle_off_white.png" ng-if="showGlobalSurveyStatus === false" />
+                        </button>
+                        <p>Open</p>
+                    </div>
+                </div>
+            </div>
 
-                                <!--Modal: modalSurveyResult-->
-                                <div class="modal fade top" id="modalSurveyResult1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                     aria-hidden="true" data-backdrop="true">
-                                    <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
-                                        <!--Content-->
-                                        <div class="modal-content">
-                                            <!--Header-->
-                                            <div class="modal-header">
-                                                <h3 class="modal-title">Survey Response</h3>
-                                                <button type="button" class="close" data-dismiss="modal"><sdivong>X</sdivong></button>
-                                            </div>
-                                            <!--Body-->
-                                            <div class="modal-body">
-                                                <div class="row d-flex justify-content-center align-items-center">
-
-                                                    <div>
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                Client Name:
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.LastName}}, {{survey.FirstName}}
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                Program#:
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.GroupNumber}}
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                Survey Period:
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Question_Period}}
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                Have you lost additional weight?*
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Q1}}
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                Have you maintained your weight since graduating the program?*
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Q2}}
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                What is your current weight?
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Q3}}
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                What is your height (in inches)?
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Q4}}
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                Have you lost inches (waist) or decreased in clothing size(s)?
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Q5}}
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                Blood Pressure?
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Q6}}
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                Fasting Glucose/A1C?
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Q7}}
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                Cholesterol?
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Q8}}
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                Do you prepare meals in advance (food prep)?
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Q9}}
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                Do you exercise 2 to 5 times per week?
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Q10}}
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                Are you following the eating habits most of the time? Select an option
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Q11}}
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                Have you decreased or stopped taking any medications? If YES, please list what medications below.
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Q12}}
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                Are you currently taking any medications?
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Q13}}
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                Are you attending Reward Group Classes on Mondays and Wednesdays?
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Q14}}
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                Are you attending Saturday Bonus Classes?
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Q15}}
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                Do you need a follow-up call?
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Q16}}
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                If yes, please list the best phone number and/or e-mail address we can reach out to:
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Q17}}
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                What was the most challenging part of the program for you?
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Q18}}
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div width="75%" style="overflow-wrap: break-word">
-                                                                Share Your Success! Have a success story of how you implemented what you learned in class at The New Beginnings Center? Did it positively impact you, your family, and/or your life? Please share this with us so that we can use testimonies like yours to help us with recruiting, fundraising, and more!
-                                                            </div>
-                                                            <div width="25%">
-                                                                {{survey.Q19}}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">Close</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--/.Content-->
-                                    </div>
+            <div class="home_submit-container" id="request-tabsdivip">
+                <div class="home_survey-response-header">Survey Responses</div>
+                <div class="home_survey-options">
+                    <div class="home_submit-tabs">
+                        <!-- Submitted & Not Submitted Tabs-->
+                        <div class="home_submit-tabs-left">
+                            <div ng-Class="{'active': isSubmitted}" ng-click="ChangeTab('Submitted');">
+                                <div class="home_submit-tabs-text">
+                                    Submitted
+                                    <div class="home_submit-tabs-items">{{survey.submittedItems}}</div>
                                 </div>
-                                <!--Modal: modalSurveyResult-->
                             </div>
                         </div>
+                        <div class="home_submit-tabs-right">
+                            <div ng-Class="{'active': !isSubmitted}" ng-click="ChangeTab('NotSubmitted');">
+                                <div class="home_submit-tabs-text">
+                                    Not Submitted
+                                    <div class="home_submit-tabs-items">{{survey.unsubmittedItems}}</div>
+                                </div>
+                            </div>
+                        </div> <!-- End Submitted & Not Submitted Tabs -->
                     </div>
+                    <!-- Export to Excel Button -->
+                    <div class="home_survey-response-export-container" ng-if="isSubmitted">
+                        <button ng-click="exportExcel(selectedQtr)" class="export-button">Export to CSV</button>
+                    </div> <!-- End Export to Excel Button -->
                 </div>
             </div>
 
-           <div ng-if="!isSubmitted">
-                <!-- Search Input & Button -->
-                <div class="home_search-input">
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default"><i class="fa fa-search"></i></button>
-                        </span>
-                        <input type="text" class="form-condivol" placeholder="Search for ..." ng-model="searchText">
+            <!-- Error Container -->
+            <!-- TODO: Make this its own component,
+            add a conditional CSS class for colors (e.g., red and green)
+            and reuse for success/failures/other -->
+            <div class="auth_error-container" ng-show="errorMessage">
+                <div class="auth_error">
+                    <div class="auth_error-text">
+                        <p>{{errorMessage}}</p>
                     </div>
-                </div> <!-- End Search & Input Button-->
-                <div id="surveyResponse_table">
-                    <div class="home_survey-response-header-row">
-                        <div>Time Period</div>
-                        <div>Client Name</div>
-                        <div>Group#</div>
-                        <div>Email</div>
-                        <div>Action</div>
+                    <div class="auth_error-close">
+                        <img src="../../Content/images/close-icon-black.png" ng-click="closeAlert()" />
                     </div>
-                    <div>
-                        <div ng-repeat="item in unsubmittedItems | filter: searchText | orderBy: ['TimePeriod', 'LastName', 'FirstName']">
-                            <div>{{item.TimePeriod }}</div>
-                            <div>{{item.LastName + ", " + item.FirstName }}</div>
-                            <div>{{item.GroupNumber }}</div>
-                            <div>{{item.Email }}</div>
-                            <div>
-                                <button class="btn fa fa-envelope-o" ng-if="!item.TokenExpired" ng-click="resendLinkEmail(item.Client_SID)"></button>
-                                <button class="btn fa fa-paperclip" ng-if="!item.TokenExpired" ng-click="resendLink(item.Client_SID)"></button>
+                </div>
+            </div> <!--End Error Container-->
+            <!-- Loading Spinner Container-->
+            <div class="spinner_container" ng-show="loading === true">
+                <img src="../../Content/images/ajax-loader.gif" />
+            </div> <!-- End Spinner-->
 
-                            </div>
+            <div class="home_table-responsive" ng-if="loading === false && errorMessage === null">
+                <div ng-if="isSubmitted">
+                    <!-- Search Input & Button -->
+                    <div class="home_search-input">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </span>
+                            <input type="text" class="form-control" placeholder="Search for ..." ng-model="searchText">
                         </div>
-                    </div>
-                    <table class="table table-striped table-key-info alert-success table-responsive-sm">
+                    </div> <!-- End Search & Input Button-->
+                    <table class="table table-striped table-responsive" id="home_survey-response-results-table">
                         <thead>
-                        <tr>
-                            <td>Time Period</td>
-                            <td>Client Name</td>
-                            <td>Group#</td>
-                            <td>Email</td>
-                            <td>Action</td>
-                        </tr>
+                            <tr class="home_survey-response-header-row">
+                                <th>Time Period</th>
+                                <th>Client Name</th>
+                                <th>Group#</th>
+                                <th>Email</th>
+                                <th>Date Submitted</th>
+                                <th>Action</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="item in unsubmitteditems | filter: searchText | orderBy: ['TimePeriod', 'LastName', 'FirstName']">
-                            <td>{{item.TimePeriod }}</td>
-                            <td>{{item.LastName + ", " + item.FirstName }}</td>
-                            <td>{{item.GroupNumber }}</td>
-                            <td>{{item.Email }}</td>
-                            <td>
-                                <!--<button class="btn fa fa-envelope-o" ng-if="!item.TokenExpired" ng-click="resendLinkEmail(item.Client_SID)"></button>-->
-                                <button class="btn fa fa-paperclip" ng-if="!item.TokenExpired" ng-click="resendLink(item)"></button>
+                            <tr ng-repeat="item in submittedItems | filter: searchText | orderBy: ['TimePeriod', 'LastName', 'FirstName']" class="home_survey-response-result-row">
+                                <td>{{item.TimePeriod }}</td>
+                                <td>{{item.LastName + ", " + item.FirstName }}</td>
+                                <td>{{item.GroupNumber }}</td>
+                                <td>{{item.Email }}</td>
+                                <td>{{item.TokenUsedDate }}</td>
+                                <td>
+                                    <!-- Button trigger modal-->
+                                    <button type="button" class="btn fa fad fa-link" ng-click="viewResponse(item.Client_SID, item.TimePeriod)" data-toggle="modal" data-target="#modalSurveyResult1"></button>
 
-                            </td>
-                        </tr>
+                                    <!--Modal: modalSurveyResult-->
+                                    <div class="modal fade top" id="modalSurveyResult1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                         aria-hidden="true" data-backdrop="true">
+                                        <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
+                                            <!--Content-->
+                                            <div class="modal-content">
+                                                <!--Header-->
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title">Survey Response</h3>
+                                                    <button type="button" class="close" data-dismiss="modal"><strong>X</strong></button>
+                                                </div>
+                                                <!--Body-->
+                                                <div class="modal-body">
+                                                    <div class="row d-flex justify-content-center align-items-center">
+
+                                                        <div>
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    Client Name:
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.LastName}}, {{survey.FirstName}}
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    Program#:
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.GroupNumber}}
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    Survey Period:
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Question_Period}}
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    Have you lost additional weight?*
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Q1}}
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    Have you maintained your weight since graduating the program?*
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Q2}}
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    What is your current weight?
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Q3}}
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    What is your height (in inches)?
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Q4}}
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    Have you lost inches (waist) or decreased in clothing size(s)?
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Q5}}
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    Blood Pressure?
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Q6}}
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    Fasting Glucose/A1C?
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Q7}}
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    Cholesterol?
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Q8}}
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    Do you prepare meals in advance (food prep)?
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Q9}}
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    Do you exercise 2 to 5 times per week?
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Q10}}
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    Are you following the eating habits most of the time? Select an option
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Q11}}
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    Have you decreased or stopped taking any medications? If YES, please list what medications below.
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Q12}}
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    Are you currently taking any medications?
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Q13}}
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    Are you attending Reward Group Classes on Mondays and Wednesdays?
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Q14}}
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    Are you attending Saturday Bonus Classes?
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Q15}}
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    Do you need a follow-up call?
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Q16}}
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    If yes, please list the best phone number and/or e-mail address we can reach out to:
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Q17}}
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    What was the most challenging part of the program for you?
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Q18}}
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div width="75%" style="overflow-wrap: break-word">
+                                                                    Share Your Success! Have a success story of how you implemented what you learned in class at The New Beginnings Center? Did it positively impact you, your family, and/or your life? Please share this with us so that we can use testimonies like yours to help us with recruiting, fundraising, and more!
+                                                                </div>
+                                                                <div width="25%">
+                                                                    {{survey.Q19}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">Close</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/.Content-->
+                                        </div>
+                                    </div>
+                                    <!--Modal: modalSurveyResult-->
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-           </div>
+
+                <div ng-if="!isSubmitted">
+                    <!-- Search Input & Button -->
+                    <div class="home_search-input">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </span>
+                            <input type="text" class="form-control" placeholder="Search for ..." ng-model="searchText">
+                        </div>
+                    </div> <!-- End Search & Input Button-->
+                    <table class="table table-striped table-responsive" id="home_survey-response-results-table">
+                        <thead>
+                            <tr class="home_survey-response-header-row">
+                                <th>Time Period</th>
+                                <th>Client Name</th>
+                                <th>Group#</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="item in unsubmittedItems | filter: searchText | orderBy: ['TimePeriod', 'LastName', 'FirstName']">
+                            <!--<tr ng-repeat="item in unsubmittedItems | filter: searchText | orderBy: ['TimePeriod', 'LastName', 'FirstName']">-->
+                            <tr>
+                                <td>{{item.TimePeriod }}</td>
+                                <td>{{item.LastName + ", " + item.FirstName }}</td>
+                                <td>{{item.GroupNumber }}</td>
+                                <td>{{item.Email }}</td>
+                                <td>
+                                    <button class="btn fa fa-envelope-o" ng-if="!item.TokenExpired" ng-click="resendLinkEmail(item.Client_SID)"></button>
+                                    <button class="btn fa fa-paperclip" ng-if="!item.TokenExpired" ng-click="resendLink(item.Client_SID)"></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-</div>

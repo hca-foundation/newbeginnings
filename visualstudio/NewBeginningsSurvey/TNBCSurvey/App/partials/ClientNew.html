@@ -1,30 +1,37 @@
-﻿<div class="clientNew_wrapper">
-<h3>Client Information:</h3>
-<form>
-    <div calss="form-group">
-        <label>First Name</label>
-        <input type="text" class="form-control" placeholder="" ng-model="newItem.FirstName" required>
+﻿<div class="newClient_container">
+    <!-- Page Banner-->
+    <div class="page_banner">
+        <p>New Client</p>
     </div>
-    <div calss="form-group">
-        <label>Last Name</label>
-        <input type="text" class="form-control" placeholder="" ng-model="newItem.LastName" required>
+
+    <div class="newClient_wrapper">
+        <h3>Client Information:</h3>
+        <form class="newClient_form">
+            <div class="form-group" id="newClient_form-group">
+                <label >First Name</label>
+                <input type="text" class="form-control" placeholder="" ng-model="newItem.FirstName" required>
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" class="form-control" placeholder="" ng-model="newItem.LastName" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" placeholder="" ng-model="newItem.Email" required>
+            </div>
+            <div class="form-group">
+                <label>Group#</label>
+                <input type="number" class="form-control" placeholder="" ng-model="newItem.GroupNumber" required>
+            </div>
+            <div class="form-group">
+                <label>Program Start Date</label>
+                <input type="date" class="form-control" placeholder="" ng-model="newItem.ProgramStartDate" required>
+            </div>
+            <div class="form-group">
+                <label>Receive Survey</label>
+                <input type="checkbox" value="true" name="Active" ng-Model="newItem.Active" ng-checked="newItem.Active" required> Yes
+            </div>
+            <button type="button" class="btn btn-primary btn-lg col-xs-2 " ng-click="addNewItem()">Save Client</button>
+        </form>
     </div>
-    <div calss="form-group">
-        <label>Email</label>
-        <input type="email" class="form-control" placeholder="" ng-model="newItem.Email" required>
-    </div>
-    <div calss="form-group">
-        <label>Group#</label>
-        <input type="number" class="form-control" placeholder="" ng-model="newItem.GroupNumber" required>
-    </div>
-    <div calss="form-group">
-        <label>Program Start Date</label>
-        <input type="date" class="form-control" placeholder="" ng-model="newItem.ProgramStartDate" required>
-    </div>
-    <div calss="form-group">
-        <label>Receive Survey</label>
-        <input type="checkbox" value="true" name="Active" ng-Model="newItem.Active" ng-checked="newItem.Active" required> Yes
-    </div>
-    <button type="button" class="btn btn-primary btn-lg col-xs-2 " ng-click="addNewItem()">Save Client</button>
-</form>
 </div>
