@@ -92,6 +92,50 @@ namespace TNBCSurvey.DAL
             return Convert.ToInt32(_dbConnection.ExecuteScalar(sql, new { Client_SID = id, Token = token }));
         }
 
+        public void SetAppStatus(string status)
+        {
+            var sql = @"update dbo.ApplicationParameters set Para_Value = @Para_Value
+                            where Para_Desc = 'Survey_Enabled';";
+
+            _dbConnection.ExecuteScalar(sql, new { Para_Value = status });
+        }
+
+        public bool GetAppStatus()
+        {
+            var sql = @"select Para_Value from dbo.ApplicationParameters
+                            where Para_Desc = 'Survey_Enabled';";
+
+            var reader = _dbConnection.ExecuteReader(sql);
+            DataTable dt = new DataTable();
+            dt.Load(reader);
+            if (dt.Rows.Count > 0)
+                return dt.Rows[0]["Para_Value"].ToString() == "1";
+            return false;
+        }
+
+        public List<object> GetTicketTimePeriods()
+        {
+            var sql = @"exec dbo.GetTicketTimePeriods;";
+            var reader = _dbConnection.ExecuteReader(sql);
+            DataTable dt = new DataTable();
+            dt.Load(reader);
+            List<object> ct = new List<object>();
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    ct.Add(
+                        new
+                        {
+                            Time_Period = dt.Rows[i]["Time_Period"],
+                            Expiration_Date = dt.Rows[i]["Expiration_Date"]
+                        });
+                }
+            }
+
+            return ct;
+        }
+
         public List<object> GetClientTickets(string tiemPeriod)
         {
             var sql = @"exec dbo.getClientTicketList @TimePeriod;";

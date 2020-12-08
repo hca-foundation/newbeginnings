@@ -1,5 +1,7 @@
-﻿<div ng-if="dataLoading">
-    Verifying...
+﻿
+<!-- Loading Spinner Container-->
+<div class="spinner_container" ng-show="dataLoading === true">
+    <img src="../../Content/images/ajax-loader.gif" />
 </div>
 <div ng-if="!dataLoading && !validLink">
     Sorry, the link is invalid!
@@ -96,7 +98,7 @@
             <label>Share Your Success! Have a success story of how you implemented what you learned in class at The New Beginnings Center? Did it positively impact you, your family, and/or your life? Please share this with us so that we can use testimonies like yours to help us with recruiting, fundraising, and more!</label>
             <input type="text" class="form-control" placeholder="" ng-model="survey.Q19">
         </div>
-        <button type="button" class="btn btn-primary btn-lg col-xs-2 " ng-click="sendAnswers()">Submit</button>
+        <button type="button" class="btn btn-primary btn-sm col-xs-2 " ng-click="sendAnswers()">Submit</button>
     </form>
 </div>
 </div>

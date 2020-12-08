@@ -10,8 +10,7 @@ app.controller("ClientNewCtrl", ['$scope', '$rootScope', '$http', '$location', f
                 $scope.newItem = {};
             })
             .catch(function (error) {
-                if (error.data.InnerException.InnerException.ExceptionMessage.toString().indexOf("Violation of UNIQUE KEY constraint") !== -1)
-                    alert("This email address already exists!")
+                alert("This email address already exists or required fields missing!");
         });
     };
 

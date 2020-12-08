@@ -4,6 +4,14 @@ app.controller("SurveyCtrl", function ($scope, $rootScope, $location, $http) {
     $scope.validLink = false;
     $scope.thankyou = false;
     $scope.selectedItem = {};
+    $scope.survey = {};
+    var initSurveyAnswers = function () {
+        var i;
+        for (i = 1; i < 20; i++) {
+            $scope.survey["Q" + i] = null;
+        }
+    };
+
     var url = window.location.href;
     var strs = url.split("/");
     var id = strs[strs.length - 2];
@@ -13,23 +21,15 @@ app.controller("SurveyCtrl", function ($scope, $rootScope, $location, $http) {
         var token = strs[strs.length - 1];
         $http.get(`/api/survey/${id}/${token}`)
             .then(function (res) {
+                $scope.dataLoading = false;
                 if (res.data !== null) {
                     $scope.validLink = true;
                     $scope.selectedItem = res.data;
+                    initSurveyAnswers();
                 }
             });
     }
 
-    $scope.dataLoading = false;
-
-    $scope.survey = {};
-    var initSurveyAnswers = function () {
-        var i;
-        for (i = 1; i < 20; i++) {
-            $scope.survey["Q" + i] = null
-        }
-    };
-    initSurveyAnswers();
     $scope.sendAnswers = function () {
         var i;
         for (i = 1; i < 20; i++) {

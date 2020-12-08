@@ -1,14 +1,15 @@
-﻿app.controller("HomeCtrl", ['$scope', '$rootScope', '$http', '$location', function ($scope, $rootScope, $http, $location) {
+﻿app.controller("HomeCtrl", ['$scope', '$rootScope', '$http', '$location', '$filter', function ($scope, $rootScope, $http, $location, $filter) {
     $scope.loading = false;
-    $rootScope.loading
     $scope.errorMessage = null;
     $scope.qtrs = [];
     $scope.selectedQtr = "";
     $scope.unsubmitteditems = [];
     $scope.submittedItems = [];
     $scope.isSubmitted = true;
-    // Default Global Survey Status toggle is ON
-    $scope.showGlobalSurveyStatus = true;
+    $scope.Clients_Completed = null;
+    $scope.Days_Until_Deadline = null;
+    // Default App Status toggle is ON
+    $scope.showAppStatus = true;
 
     /* TODO - For response rate, % completed, etc.
     $scope.totalSurveyResponses = null;
@@ -20,49 +21,43 @@
         $scope.errorMessage = null;
     };
 
-    $scope.setGlobalSurveyToggle = function (t) {
-        if (t == true)
-            $scope.showGlobalSurveyStatus = false;
-        else
-            $scope.showGlobalSurveyStatus = true;
+    var getAppStatus = function () {
+        $http.get('/api/survey/appstatus')
+            .then(function (res) {
+                $scope.showAppStatus = res.data;
+            })
+            .catch(function (err) {
+                $scope.errorMessage = `${err.data.Message} Details: ${err.status} - ${err.statusText}`;
+            });
+    }
+    getAppStatus();
+
+    var setAppStatus = function (appStatus) {
+        $http.post(`/api/survey/appstatus/${appStatus}`)
+            .then(function (res) {
+                getAppStatus();
+            })
+            .catch(function (err) {
+                $scope.errorMessage = `${err.data.Message} Details: ${err.status} - ${err.statusText}`;
+            });
     }
 
-    //$scope.getSurveyResponseRate = function () {
-    //    $http.get('/api/client/list')
-    //        .then(function (response) {
-    //            $scope.totalSurveyResponses = response.length;
-    //            //var clients = response.data;
-    //            var i;
-    //            for (i = 0; i < $scope.totalSurveyResponses; i++) {
-
-    //                if ($scope.items[i].Active == true) {
-    //                    console.log("$scope.items[i].Active: ", $scope.items[i].Active);
-    //                    $scope.submittedSurveyResponses = $scope.items[i].Active;
-    //                }
-
-    //                $scope.responseRate = $scope.submittedSurveyResponses / $scope.totalSurveyResponses;
-    //            }
-    //        });
-    //};
+    $scope.setAppStatusToggle = function (t) {
+        if (t == true)
+            setAppStatus("0");
+        else
+            setAppStatus("1");
+    }
 
     var getQtrs = function () {
-        $scope.qtrs.push("2020Q4");
-        var today = new Date();
-        var yyyy = today.getFullYear();
-        if (yyyy <= 2020) return $scope.qtrs.push("all");
-        var mm = parseInt(String(today.getMonth() + 1).padStart(2, "0"), 10);
-        var qq = Math.floor((mm + 2) / 3);
-        var i;
-        for (i = 2021; i < yyyy; i++) {
-            $scope.qtrs.unshift(i + "Q1");
-            $scope.qtrs.unshift(i + "Q2");
-            $scope.qtrs.unshift(i + "Q3");
-            $scope.qtrs.unshift(i + "Q4");
-        }
-        for (i = 1; i <= qq; i++) {
-            $scope.qtrs.unshift(yyyy + "Q" + i);
-        }
-        $scope.qtrs.push("all");
+        $http.get('/api/survey/timeperiods')
+            .then(function (res) {
+                $scope.qtrs = res.data;
+                $scope.qtrs.push({ Time_Period : "all", Expiration_Date : "" });
+            })
+            .catch(function (err) {
+                $scope.errorMessage = `${err.data.Message} Details: ${err.status} - ${err.statusText}`;
+            });
     }
     getQtrs();
 
@@ -72,7 +67,20 @@
             .then(function (res) {
                 if (res && res.data && res.data != undefined) {
                     $scope.submittedItems = res.data.filter(x => x.TokenUsed == true)
+                    var i;
+                    for (i = 0; i < $scope.submittedItems.length; i++) {
+                        $scope.submittedItems[i].TokenUsedDate = $filter('date')($scope.submittedItems[i].TokenUsedDate, 'MM-dd-yyyy');
+                    }
                     $scope.unsubmitteditems = res.data.filter(x => x.TokenUsed == false);
+                    $scope.Clients_Completed =
+                        timePeriod == "all" ? null : Math.round($scope.submittedItems.length / res.data.length * 100);
+                    for (i = 0; i < $scope.qtrs.length; i++) {
+                        if ($scope.qtrs[i].Time_Period == timePeriod) {
+                            $scope.Days_Until_Deadline =
+                                timePeriod == "all" ? null : Math.floor((Date.parse($scope.qtrs[i].Expiration_Date) - Date.now()) / 86400000);
+                            break;
+                        }
+                    }
                     $scope.loading = false;
                 }
             })

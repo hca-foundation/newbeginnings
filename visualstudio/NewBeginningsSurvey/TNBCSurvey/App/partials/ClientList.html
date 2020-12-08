@@ -5,16 +5,27 @@
     </div>
 
     <div class="row">
-        <div class="col-xs-6 col-xs-offset-3">
-            <div class="input-group">
-                <span class="input-group-btn">
-                    <button class="btn btn-default"><i class="fa fa-search"></i></button>
-                </span>
-                <input type="text" class="form-control" placeholder="Search for ..." ng-model="searchText">
+        <!-- To specify your choice of items Per Pages-->
+        <div class="btn-group">
+            <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Left'" data-ng-click="previousPage()">Previous</label>
+            <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Middle'" data-ng-click="setItems(10)">10</label>
+            <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Middle'" data-ng-click="setItems(20)">20</label>
+            <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Middle'" data-ng-click="setItems(50)">50</label>
+            <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Right'" data-ng-click="nextPage()">Next</label>
+            <label class="btn btn-primary">Client {{start}} - {{end}} of {{total}}</label>
+        </div>
+        <pagination total-items="total" items-per-page="itemPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+        <div class="row">
+            <div class="col-xs-6 col-xs-offset-3">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Search for ..." ng-model="searchText">
+                </div>
             </div>
         </div>
     </div>
-
     <!-- table here -->
     <table class="table table-striped table-key-info alert-success" id="clientList_table">
         <thead>
@@ -27,7 +38,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="item in items | filter: searchText | orderBy: ['LastName', 'FirstName'] | offset: start | limitTo: itemPerPage">
+            <tr ng-repeat="item in items | filter: searchText | orderBy: ['LastName', 'FirstName'] | offset: start-1 | limitTo: itemPerPage">
                 <td>{{item.LastName +  ", " + item.FirstName }}</td>
 
                 <!--<td><button class="btn btn-primary" ng-click="questionItem(item.Client_SID)">Create Email</button></td>
@@ -41,16 +52,6 @@
             </tr>
         </tbody>
     </table>
-    <!-- To specify your choice of items Per Pages-->
-    <div class="btn-group">
-        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Left'" data-ng-click="previousPage()">Previous</label>
-        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Middle'" data-ng-click="setItems(10)">10</label>
-        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Middle'" data-ng-click="setItems(20)">20</label>
-        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Middle'" data-ng-click="setItems(50)">50</label>
-        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Right'" data-ng-click="nextPage()">Next</label>
-        <label class="btn btn-primary">Client {{start}} - {{end}} of {{total}}</label>
-    </div>
-    <pagination total-items="total" items-per-page="itemPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>
 
 </div>
 

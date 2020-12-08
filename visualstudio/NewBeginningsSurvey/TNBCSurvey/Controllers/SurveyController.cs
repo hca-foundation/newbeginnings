@@ -85,6 +85,8 @@ namespace TNBCSurvey.Controllers
         [HttpGet]
         public Client validSurveyLink(int id, string token)
         {
+            if (_repoT.GetAppStatus() == false) //App closed
+                return null;
             if (_repoT.GetOneByToken(id, token) != null) //ticket is valid
                 return _context.Client.Find(id);
             return null;
@@ -139,6 +141,26 @@ namespace TNBCSurvey.Controllers
             output.Add(row);
             return output;
             
+        }
+
+        [Route("api/survey/appstatus")]
+        [HttpGet]
+        public bool GetAppStatus()
+        {
+            return _repoT.GetAppStatus();
+        }
+
+        [Route("api/survey/appstatus/{appStatus}")]
+        [HttpPost]
+        public void SetAppStatus(string appStatus)
+        {
+            _repoT.SetAppStatus(appStatus);
+        }
+
+        [Route("api/survey/timeperiods")]
+        public List<object> GetTicketTimePeriods()
+        {
+            return _repoT.GetTicketTimePeriods();
         }
 
         [Route("api/survey/list/{timePeriod}")]

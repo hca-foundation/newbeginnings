@@ -9,41 +9,40 @@
             <p>Survey Dashboard</p>
         </div>
 
-        <!-- Survey Response Table -->
+    <!-- Survey Response Table -->
+    <div class="home_survey-response-container">
+        <div class="home_survey-stats-right">
+            <div>
+                <div class="home_global-survey-status">Survey App Status</div>
+            </div>
+            <div class="home_toggle-container">
+                <p>Off</p>
+                <button class="home_toggle-button" ng-click="setAppStatusToggle(showAppStatus)">
+                    <img src="../../Content/images/toggle_on_white.png" ng-if="showAppStatus === true" />
+                    <img src="../../Content/images/toggle_off_white.png" ng-if="showAppStatus === false" />
+                </button>
+                <p>On</p>
+            </div>
+        </div>
+    </div>
+    <div class="home_survey-response-container"></div>
         <div class="home_survey-response-container">
             <div class="home_survey-stats-container">
                 <div class="home_survey-stats-left">
                     <div>
-                        <select class="ui dropdown" name="quarter" ng-model="selectedQtr" ng-options="val as val for val in qtrs" required>
+                        <select class="ui dropdown" name="quarter" ng-model="selectedQtr" ng-options="qtr.Time_Period as qtr.Time_Period for qtr in qtrs" required>
                             <option value="">Choose an option</option>
                         </select>
                         <button id="timeperiod" class="surveyResponse_button" ng-click="getSurveyItems(selectedQtr)">Get Quarter</button>
                     </div>
 
                     <div>
-                        <div class="home_stat-counter">{{}}</div>
-                        <div class="home_stat-header">Response Rate, %</div>
+                        <div class="home_stat-counter">{{Clients_Completed}}</div>
+                        <div>% Clients Completed</div>
                     </div>
                     <div>
-                        <div class="home_stat-counter">{{}}</div>
-                        <div>Employees Completed, %</div>
-                    </div>
-                    <div>
-                        <div class="home_stat-counter">{{}}</div>
+                        <div class="home_stat-counter">{{Days_Until_Deadline}}</div>
                         <div>Days Until Deadline</div>
-                    </div>
-                </div>
-                <div class="home_survey-stats-right">
-                    <div>
-                        <div class="home_global-survey-status">Global Survey Status</div>
-                    </div>
-                    <div class="home_toggle-container">
-                        <p>Close</p>
-                        <button class="home_toggle-button" ng-click="setGlobalSurveyToggle(showGlobalSurveyStatus)">
-                            <img src="../../Content/images/toggle_on_white.png" ng-if="showGlobalSurveyStatus === true" />
-                            <img src="../../Content/images/toggle_off_white.png" ng-if="showGlobalSurveyStatus === false" />
-                        </button>
-                        <p>Open</p>
                     </div>
                 </div>
             </div>
@@ -394,16 +393,14 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody ng-repeat="item in unsubmittedItems | filter: searchText | orderBy: ['TimePeriod', 'LastName', 'FirstName']">
-                            <!--<tr ng-repeat="item in unsubmittedItems | filter: searchText | orderBy: ['TimePeriod', 'LastName', 'FirstName']">-->
-                            <tr>
+                        <tbody>
+                            <tr ng-repeat="item in unsubmitteditems | filter: searchText | orderBy: ['TimePeriod', 'LastName', 'FirstName']">
                                 <td>{{item.TimePeriod }}</td>
                                 <td>{{item.LastName + ", " + item.FirstName }}</td>
                                 <td>{{item.GroupNumber }}</td>
                                 <td>{{item.Email }}</td>
                                 <td>
-                                    <button class="btn fa fa-envelope-o" ng-if="!item.TokenExpired" ng-click="resendLinkEmail(item.Client_SID)"></button>
-                                    <button class="btn fa fa-paperclip" ng-if="!item.TokenExpired" ng-click="resendLink(item.Client_SID)"></button>
+                                    <button class="btn fa fa-paperclip" ng-if="!item.TokenExpired" ng-click="resendLink(item)"></button>
                                 </td>
                             </tr>
                         </tbody>
