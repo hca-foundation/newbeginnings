@@ -4,7 +4,7 @@
         <p>All Clients</p>
     </div>
 
-    <div class="row">
+    <div>
         <!-- To specify your choice of items Per Pages-->
         <div class="btn-group">
             <label class="btn btn-success" ng-model="radioModel" btn-radio="'Left'" data-ng-click="previousPage()">Previous</label>
@@ -15,15 +15,11 @@
             <label class="btn btn-success">Client {{start}} - {{end}} of {{total}}</label>
         </div>
         <pagination total-items="total" items-per-page="itemPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>
-        <div class="row">
-            <div class="col-xs-6 col-xs-offset-3">
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default"><i class="fa fa-search"></i></button>
-                    </span>
-                    <input type="text" class="form-control" placeholder="Search for ..." ng-model="searchText">
-                </div>
-            </div>
+        <div class="input-group">
+            <span class="input-group-btn">
+                <button class="btn btn-default"><i class="fa fa-search"></i></button>
+            </span>
+            <input type="text" class="form-control" placeholder="Search for ..." ng-model="searchText">
         </div>
     </div>
     <!-- table here -->
