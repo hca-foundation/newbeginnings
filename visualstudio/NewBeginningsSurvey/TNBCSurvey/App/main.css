@@ -235,6 +235,7 @@ nav > div {
 
 .home_survey-stats-right {
     display: inline-flex;
+    margin-left: auto;
     align-items: center;
 }
 

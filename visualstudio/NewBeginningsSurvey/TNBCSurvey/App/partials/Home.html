@@ -25,7 +25,7 @@
             </div>
         </div>
     </div>
-    <div class="home_survey-response-container"></div>
+
         <div class="home_survey-response-container">
             <div class="home_survey-stats-container">
                 <div class="home_survey-stats-left">
@@ -35,7 +35,9 @@
                         </select>
                         <button id="timeperiod" class="surveyResponse_button" ng-click="getSurveyItems(selectedQtr)">Get Quarter</button>
                     </div>
+                </div>
 
+                <div class="home_survey-stats-right">
                     <div>
                         <div class="home_stat-counter">{{Clients_Completed}}</div>
                         <div>% Clients Completed</div>
@@ -136,14 +138,13 @@
                                             <div class="modal-content">
                                                 <!--Header-->
                                                 <div class="modal-header">
-                                                    <h3 class="modal-title">Survey Response</h3>
-                                                    <button type="button" class="close" data-dismiss="modal"><strong>X</strong></button>
+                                                    <h3 class="modal-title">Survey Response<button type="button" class="close btn-success" data-dismiss="modal"><strong>X</strong></button></h3>
                                                 </div>
                                                 <!--Body-->
                                                 <div class="modal-body">
                                                     <div class="row d-flex justify-content-center align-items-center">
 
-                                                        <div>
+                                                        <div style="padding: 3px">
                                                             <div class="form-group">
                                                                 <div width="75%" style="overflow-wrap: break-word">
                                                                     Client Name:
