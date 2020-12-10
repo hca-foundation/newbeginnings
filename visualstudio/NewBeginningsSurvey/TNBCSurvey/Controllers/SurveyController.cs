@@ -93,6 +93,7 @@ namespace TNBCSurvey.Controllers
         }
 
         [Route("api/survey/answers/{id}/{token}")]
+        [AllowAnonymous]
         [HttpPost]
         public void saveSurveyAnswers(int id, string token, [FromBody]dynamic value)
         {
