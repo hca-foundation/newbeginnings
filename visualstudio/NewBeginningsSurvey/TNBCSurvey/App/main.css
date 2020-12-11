@@ -1,12 +1,18 @@
 ﻿html, body {
     height: 100%;
-    margin: 0;
+    margin: 0rem !important;
     padding: 0;
     font-family: Questrial;
+    background-color: #f7f7f8;
     /*
     color: #858585;
     font-size: 16px;
     */
+}
+
+.input-group {
+    display: flex;
+    margin-bottom: 1rem;
 }
 
 nav > div {
@@ -14,11 +20,20 @@ nav > div {
 }
 
 .navbar {
-    display: inline-flex;
+    display: flex;
+    align-items: flex-end;
+    margin: 0;
+}
+
+.navbar-header {
+    display: flex;
+    align-items: center;
 }
 
 #navbar-default {
-    width: 100%
+    width: 100%;
+    display: flex;
+    box-shadow: 2px 3px 8px 0px rgba(4,8,16,0.4);
 }
 
 .navbar_link-container {
@@ -98,7 +113,7 @@ nav > div {
 
 #auth_input-container > input {
     width: 100%;
-    background-color: white;
+    background-color: transparent;
     border-top: 0px;
     border-left: 0px;
     border-right: 0px;
@@ -179,15 +194,6 @@ nav > div {
 
 /************************** Home / Survey Dashboard styles*************************/
 
-.home_container {
-}
-
-.home_header-container {
-}
-
-.home_header {
-}
-
 .home_header h1 {
     font-family: Questrial;
     color: #55555a;
@@ -197,6 +203,23 @@ nav > div {
 
 .home_survey-response-container {
     background-color: #f8f6f8;
+    padding: 1rem;
+}
+
+#timeperiod {
+    border: 1px solid #d7d7d8;
+    border-radius: 6px;
+    margin: .5rem;
+    color: #55555a;
+    outline-color: #d7d7d8;
+}
+
+#quarter-dropdown {
+    border: 1px solid #d7d7d8;
+    border-radius: 6px;
+    margin: .5rem;
+    color: #55555a;
+    outline-color: #d7d7d8;
 }
 
 .home_survey-stats-container {
@@ -205,18 +228,16 @@ nav > div {
 }
 
 .home_survey-stats-left {
-    display: inline-flex;
-    align-items: center;
+    display: flex;
 }
 
 .home_survey-stats-left div {
-    display: inline-flex;
+    display: flex;
     margin: .5rem .25rem .5rem .5rem;
     font-family: Questrial;
     font-size: 14px;
     color: #55555a;
     font-weight: 600;
-    align-items: center;
 }
 
 .home_stat-counter {
@@ -224,6 +245,8 @@ nav > div {
     border-radius: 24px;
     height: 24px;
     width: 24px;
+    align-items: center;
+    justify-content: center;
 }
 
 .home_stat-counter p {
@@ -308,10 +331,6 @@ nav > div {
     font-weight: 600;
 }
 
-.home_submit-tabs-items {
-
-}
-
 .home_submit-tabs-right .active {
     background-color: #55555a;
     box-shadow: inset -2px 3px 8px -7px rgba(0,0,0,.5);
@@ -348,6 +367,8 @@ nav > div {
 }
 
 #home_survey-response-results-table {
+    background-color: white;
+    box-shadow: 2px 3px 8px 0px rgba(4,8,16,0.4);
 }
 
 .home_survey-response-result-row {
@@ -362,8 +383,7 @@ nav > div {
 }
 
 .home_survey-response-container {
-    /*box-shadow: 2px 3px 8px 0px rgba(4,8,16,0.4);*/
-    /*box-shadow: 0.125rem 025rem rgba(0,0,0,.15);*/
+    padding: 0 1rem;
 }
 
 .home_survey-response-export-container {
@@ -384,9 +404,14 @@ nav > div {
     font-size: 20px;
     font-weight: 400;
     background-color: #f8f6f8;
+    padding: 1rem;
 }
 
 .clientList_pagination {
+}
+
+#pagination-label {
+    background-color:#63b483; 
 }
 
 .clientList_pagination-button-group {
@@ -408,6 +433,7 @@ nav > div {
     color: #55555a;
     font-size: 14px;
     font-weight: 400;
+    box-shadow: 2px 3px 8px 0px rgba(4,8,16,0.4);
 }
 
 #clientList_table-thead {
@@ -432,6 +458,7 @@ nav > div {
 /************************** New Client styles *************************************/
 
 .newClient_container {
+    display: grid; 
     font-family: Questrial;
     color: #55555a;
     font-size: 20px;
@@ -463,6 +490,50 @@ nav > div {
     color: #55555a;
     font-size: 14px;
     font-weight: 400;
+}
+
+#newClient_save-button {
+    background-color: gray;
+    outline: gray;
+    border-color: transparent;
+}
+
+.btn btn-primary btn-lg col-xs-2:after {
+    background-color: gray;
+}
+
+.newClient_error-container {
+    background-color: #ffb4b4;
+    border: 2px solid red;
+    border-radius: 8px;
+    margin-top: 2rem;
+    display: flex;
+    width: fit-content;
+}
+
+.newClient_error {
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem;
+}
+
+.newClient_error-text {
+    color: black;
+    font-size: 16px;
+    padding: 0 1rem 0 .5rem;
+}
+
+.newClient_error img {
+    background-color: transparent;
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+}
+
+#newClient_try-again {
+    background-color: gray;
+    outline: gray;
+    border-color: transparent;
 }
 
 /**********************************************************************************/

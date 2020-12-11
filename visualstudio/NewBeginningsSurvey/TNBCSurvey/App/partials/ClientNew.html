@@ -1,15 +1,15 @@
-﻿<div class="newClient_container">
-    <!-- Page Banner-->
-    <div class="page_banner">
-        <p>New Client</p>
-    </div>
+﻿<!-- Page Banner-->
+<div class="page_banner">
+    <p>New Client</p>
+</div>
+<div class="newClient_container">
 
     <div class="newClient_wrapper">
         <h3>Client Information:</h3>
         <form class="newClient_form">
             <div class="form-group" id="newClient_form-group">
-                <label >First Name</label>
-                <input type="text" class="form-control" placeholder="" ng-model="newItem.FirstName" required>
+                <label>First Name</label>
+                <input type="text" class="form-control" placeholder="" ng-model="newItem.FirstName" required ng-form="">
             </div>
             <div class="form-group">
                 <label>Last Name</label>
@@ -31,7 +31,24 @@
                 <label>Receive Survey</label>
                 <input type="checkbox" value="true" name="Active" ng-Model="newItem.Active" ng-checked="newItem.Active" required> Yes
             </div>
-            <button type="button" class="btn btn-primary btn-lg col-xs-2 " ng-click="addNewItem()">Save Client</button>
+            <button id="newClient_save-button" type="button" class="btn btn-primary btn-lg col-xs-2" ng-click="addNewItem()">Save Client</button>
         </form>
     </div>
+</div>
+<div>
+    <!-- Error Container -->
+    <div class="newClient_error-container" ng-show="errorMessage">
+        <div class="newClient_error">
+            <div class="newClient_error-text">
+                <p>{{errorMessage}}</p>
+            </div>
+            <div class="newClient_error-close">
+                <img src="../../Content/images/close-icon-black.png" ng-click="closeAlert()" />
+            </div>
+        </div>
+    </div> <!--End Error Container-->
+    <!-- Loading Spinner Container-->
+    <div class="spinner_container" ng-show="loading === true">
+        <img src="../../Content/images/ajax-loader.gif" />
+    </div> <!-- End Spinner-->
 </div>

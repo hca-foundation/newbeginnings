@@ -11,12 +11,6 @@
     // Default App Status toggle is ON
     $scope.showAppStatus = true;
 
-    /* TODO - For response rate, % completed, etc.
-    $scope.totalSurveyResponses = null;
-    $scope.submittedSurveyResponses = null;
-    $scope.responseRate = null;
-    */
-
     $scope.closeAlert = function () {
         $scope.errorMessage = null;
     };

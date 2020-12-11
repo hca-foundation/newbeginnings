@@ -1,13 +1,9 @@
 ﻿﻿<!-- Top-->
+<!-- Page Banner-->
+<div class="page_banner">
+    <p>Survey Dashboard</p>
+</div>
     <div class="home_container">
-        <!--<select class="ui dropdown" name="quarter" ng-model="selectedQtr" ng-options="val as val for val in qtrs" required>
-        <option value="">Choose an option</option>
-    </select>
-    <button id="timeperiod" class="surveyResponse_button" ng-click="getSurveyItems(selectedQtr)">Get Quarter</button>-->
-        <!-- Page Banner-->
-        <div class="page_banner">
-            <p>Survey Dashboard</p>
-        </div>
 
     <!-- Survey Response Table -->
     <div class="home_survey-response-container">
@@ -30,7 +26,7 @@
             <div class="home_survey-stats-container">
                 <div class="home_survey-stats-left">
                     <div>
-                        <select class="ui dropdown" name="quarter" ng-model="selectedQtr" ng-options="qtr.Time_Period as qtr.Time_Period for qtr in qtrs" required>
+                        <select class="ui dropdown" id="quarter-dropdown" name="quarter" ng-model="selectedQtr" ng-options="qtr.Time_Period as qtr.Time_Period for qtr in qtrs" required>
                             <option value="">Choose an option</option>
                         </select>
                         <button id="timeperiod" class="surveyResponse_button" ng-click="getSurveyItems(selectedQtr)">Get Quarter</button>
@@ -102,10 +98,10 @@
                     <!-- Search Input & Button -->
                     <div class="home_search-input">
                         <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for ..." ng-model="searchText">
                             <span class="input-group-btn">
                                 <button class="btn btn-default"><i class="fa fa-search"></i></button>
                             </span>
-                            <input type="text" class="form-control" placeholder="Search for ..." ng-model="searchText">
                         </div>
                     </div> <!-- End Search & Input Button-->
                     <table class="table table-striped table-responsive" id="home_survey-response-results-table">
@@ -378,10 +374,10 @@
                     <!-- Search Input & Button -->
                     <div class="home_search-input">
                         <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for ..." ng-model="searchText">
                             <span class="input-group-btn">
                                 <button class="btn btn-default"><i class="fa fa-search"></i></button>
                             </span>
-                            <input type="text" class="form-control" placeholder="Search for ..." ng-model="searchText">
                         </div>
                     </div> <!-- End Search & Input Button-->
                     <table class="table table-striped table-responsive" id="home_survey-response-results-table">
