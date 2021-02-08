@@ -1,0 +1,2 @@
+This is a web app that enables the organization staff to manage their client list, collect, view and download client survey data. An app switch is provided to let the staff shut down the survey when necessary. The web app is facing the public, but only users added in admin table upfront can regiester and login.
+There is a webjob that is scheduled to run quarterly that sends survey invitation link to eligible clients.
