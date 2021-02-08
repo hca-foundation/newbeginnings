@@ -1,0 +1,9 @@
+﻿{
+  "$schema": "http://schemastore.org/schemas/json/webjob-publish-settings.json",
+  "webJobName": "ScheduledEmailSender",
+  "runMode": "OnDemand",
+  "startTime": "2020-11-06T00:00:00-06:00",
+  "endTime": "2040-11-06T00:00:00-06:00",
+  "jobRecurrenceFrequency": "Day",
+  "interval": 1
+}

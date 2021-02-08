@@ -1,0 +1,85 @@
+﻿element.style {
+}
+
+body {
+    overflow-x: auto;
+    overflow-y: scroll;
+}
+
+body, html {
+    height: 100%;
+}
+
+body {
+    font-size: 10px;
+    font-family: questrial,Arial,Helvetica,sans-serif;
+}
+
+a, abbr, acronym, address, applet, b, big, blockquote, body, button, caption, center, cite, code, dd, del, dfn, div, dl, dt, em, fieldset, font, footer, form, h1, h2, h3, h4, h5, h6, header, html, i, iframe, img, ins, kbd, label, legend, li, nav, object, ol, p, pre, q, s, samp, section, small, span, strike, strong, sub, sup, table, tbody, td, tfoot, th, thead, title, tr, tt, u, ul, var {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+user agent stylesheet
+body {
+    display: block;
+    margin: 8px;
+}
+
+:root {
+    --color_0: 255,255,255;
+    --color_1: 0,0,0;
+    --color_2: 25,64,86;
+    --color_3: 25,25,25;
+    --color_4: 247,247,247;
+    --color_5: 253,219,77;
+    --color_6: 255,255,255;
+    --color_7: 191,191,191;
+    --color_8: 128,128,128;
+    --color_9: 64,64,64;
+    --color_10: 0,0,0;
+    --color_11: 255,255,255;
+    --color_12: 191,191,191;
+    --color_13: 128,128,128;
+    --color_14: 64,64,64;
+    --color_15: 0,0,0;
+    --color_16: 152,199,225;
+    --color_17: 55,141,189;
+    --color_18: 25,64,86;
+    --color_19: 17,43,57;
+    --color_20: 8,21,29;
+    --color_21: 209,209,209;
+    --color_22: 163,163,163;
+    --color_23: 117,117,117;
+    --color_24: 71,71,71;
+    --color_25: 25,25,25;
+    --color_26: 251,251,251;
+    --color_27: 247,247,247;
+    --color_28: 185,185,185;
+    --color_29: 124,124,124;
+    --color_30: 62,62,62;
+    --color_31: 254,237,166;
+    --color_32: 253,219,77;
+    --color_33: 245,198,3;
+    --color_34: 163,132,2;
+    --color_35: 82,66,1;
+    --font_0: normal normal normal 22px/1.41em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;
+    --font_1: normal normal normal 14px/1.79em avenir-lt-w01_35-light1475496,sans-serif;
+    --font_2: normal normal normal 28px/1.375em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;
+    --font_3: normal normal normal 88px/1.2em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;
+    --font_4: normal normal normal 72px/1.25em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;
+    --font_5: normal normal normal 50px/1.34em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;
+    --font_6: normal normal normal 40px/1.35em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;
+    --font_7: normal normal normal 20px/1.67em avenir-lt-w01_35-light1475496,sans-serif;
+    --font_8: normal normal normal 18px/1.75em avenir-lt-w01_35-light1475496,sans-serif;
+    --font_9: normal normal normal 15px/1.875em avenir-lt-w01_35-light1475496,sans-serif;
+    --font_10: normal normal normal 14px/1.79em avenir-lt-w01_35-light1475496,sans-serif;
+    --wix-ads-height: 0px;
+    --wix-ads-top-height: 0px;
+    --site-width: 980px;
+    Show All Properties (3 more)
+}

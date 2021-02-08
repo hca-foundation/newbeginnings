@@ -1,0 +1,209 @@
+﻿
+<!-- Loading Spinner Container-->
+<div class="spinner_container" ng-show="dataLoading === true">
+    <img src="../../Content/images/ajax-loader.gif" />
+</div>
+<div class="survey_wrapper">
+    <h3 ng-if="!dataLoading && !validLink">
+        Sorry, the link is invalid!
+    </h3>
+</div>
+<div ng-if="!dataLoading && validLink && !thankyou">
+
+<div class="survey_wrapper">
+    <h2>Hello {{selectedItem.FirstName + " " + selectedItem.LastName}}</h2>
+    <h3>Survey Questions:</h3>
+    <form>
+        <div class="form-group">
+            <label>1. Are you following the nutritional habits you learned in the New Beginnings program most (70% or more) of the time?</label>
+            <input type="radio" value="Yes" name="Q1" ng-Model="survey.Q1"> Yes
+            <input type="radio" value="No" name="Q1" ng-Model="survey.Q1"> No
+            <div class="auth_error-container" ng-show="errorMessageQ1">
+                <div class="auth_error">
+                    <div class="auth_error-text">
+                        <p>{{errorMessageQ1}}</p>
+                    </div>
+                    <div class="auth_error-close">
+                        <img src="../../Content/images/close-icon-black.png" ng-click="closeAlert()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>2. Do you prepare meals in advance?</label>
+            <input type="radio" value="Yes" name="Q2" ng-Model="survey.Q2"> Yes
+            <input type="radio" value="No" name="Q2" ng-Model="survey.Q2"> No
+            <div class="auth_error-container" ng-show="errorMessageQ2">
+                <div class="auth_error">
+                    <div class="auth_error-text">
+                        <p>{{errorMessageQ2}}</p>
+                    </div>
+                    <div class="auth_error-close">
+                        <img src="../../Content/images/close-icon-black.png" ng-click="closeAlert()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>3. Do you exercise 2-5 times per week?</label>
+            <input type="radio" value="Yes" name="Q3" ng-Model="survey.Q3"> Yes
+            <input type="radio" value="No" name="Q3" ng-Model="survey.Q3"> No
+            <div class="auth_error-container" ng-show="errorMessageQ3">
+                <div class="auth_error">
+                    <div class="auth_error-text">
+                        <p>{{errorMessageQ3}}</p>
+                    </div>
+                    <div class="auth_error-close">
+                        <img src="../../Content/images/close-icon-black.png" ng-click="closeAlert()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>4. Have you maintained your weight since graduating from New Beginnings?</label>
+            <input type="radio" value="Yes" name="Q4" ng-Model="survey.Q4"> Yes
+            <input type="radio" value="No" name="Q4" ng-Model="survey.Q4"> No
+            <div class="auth_error-container" ng-show="errorMessageQ4">
+                <div class="auth_error">
+                    <div class="auth_error-text">
+                        <p>{{errorMessageQ4}}</p>
+                    </div>
+                    <div class="auth_error-close">
+                        <img src="../../Content/images/close-icon-black.png" ng-click="closeAlert()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>5. Have you lost additional weight after graduating from New Beginnings?</label>
+            <input type="radio" value="Yes" name="Q5" ng-Model="survey.Q5"> Yes
+            <input type="radio" value="No" name="Q5" ng-Model="survey.Q5"> No
+            <div class="auth_error-container" ng-show="errorMessageQ5">
+                <div class="auth_error">
+                    <div class="auth_error-text">
+                        <p>{{errorMessageQ5}}</p>
+                    </div>
+                    <div class="auth_error-close">
+                        <img src="../../Content/images/close-icon-black.png" ng-click="closeAlert()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>6. Have you lost inches around your waist or decreased your clothing size since graduating from New Beginnings?</label>
+            <input type="radio" value="Yes" name="Q6" ng-Model="survey.Q6"> Yes
+            <input type="radio" value="No" name="Q6" ng-Model="survey.Q6"> No
+            <div class="auth_error-container" ng-show="errorMessageQ6">
+                <div class="auth_error">
+                    <div class="auth_error-text">
+                        <p>{{errorMessageQ6}}</p>
+                    </div>
+                    <div class="auth_error-close">
+                        <img src="../../Content/images/close-icon-black.png" ng-click="closeAlert()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>7. What is your current weight?</label>
+            <input type="text" class="form-control" placeholder="" ng-model="survey.Q7">
+            <div class="auth_error-container" ng-show="errorMessageQ7">
+                <div class="auth_error">
+                    <div class="auth_error-text">
+                        <p>{{errorMessageQ7}}</p>
+                    </div>
+                    <div class="auth_error-close">
+                        <img src="../../Content/images/close-icon-black.png" ng-click="closeAlert()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>8. If known, your most recent Blood Pressure reading? </label>
+            <input type="text" class="form-control" placeholder="" ng-model="survey.Q8">
+        </div>
+        <div class="form-group">
+            <label>9. If known, your most recent Fasting Glucose/A1c?</label>
+            <input type="text" class="form-control" placeholder="" ng-model="survey.Q9">
+        </div>
+        <div class="form-group">
+            <label>10. If known, your most recent Cholesterol reading?</label>
+            <input type="text" class="form-control" placeholder="" ng-model="survey.Q10">
+        </div>
+        <div class="form-group">
+            <label>11. Are you currently taking any medications? </label>
+            <input type="radio" value="Yes" name="Q11" ng-Model="survey.Q11"> Yes
+            <input type="radio" value="No" name="Q11" ng-Model="survey.Q11"> No
+            <div class="auth_error-container" ng-show="errorMessageQ11">
+                <div class="auth_error">
+                    <div class="auth_error-text">
+                        <p>{{errorMessageQ11}}</p>
+                    </div>
+                    <div class="auth_error-close">
+                        <img src="../../Content/images/close-icon-black.png" ng-click="closeAlert()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>12. Have you decreased or stop taking medications since graduating from New Beginnings?</label>
+            <input type="radio" value="Yes" name="Q12" ng-Model="survey.Q12"> Yes
+            <input type="radio" value="No" name="Q12" ng-Model="survey.Q12"> No
+            <div class="auth_error-container" ng-show="errorMessageQ12">
+                <div class="auth_error">
+                    <div class="auth_error-text">
+                        <p>{{errorMessageQ12}}</p>
+                    </div>
+                    <div class="auth_error-close">
+                        <img src="../../Content/images/close-icon-black.png" ng-click="closeAlert()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>13. If you have stopped taking medications or reduced dosages, please list which medications and if your dosage has been reduced or eliminated:</label>
+            <input type="text" class="form-control" placeholder="" ng-model="survey.Q13">
+        </div>
+        <div class="form-group">
+            <label>14. Are you attending Rewards Classes on Mondays and Wednesdays at 6:00pm?</label>
+            <input type="radio" value="Yes" name="Q14" ng-Model="survey.Q14"> Yes
+            <input type="radio" value="No" name="Q14" ng-Model="survey.Q14"> No
+            <div class="auth_error-container" ng-show="errorMessageQ14">
+                <div class="auth_error">
+                    <div class="auth_error-text">
+                        <p>{{errorMessageQ14}}</p>
+                    </div>
+                    <div class="auth_error-close">
+                        <img src="../../Content/images/close-icon-black.png" ng-click="closeAlert()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>15. Are you attending Bonus Classes on Saturdays at 10:00am?</label>
+            <input type="radio" value="Yes" name="Q15" ng-Model="survey.Q15"> Yes
+            <input type="radio" value="No" name="Q15" ng-Model="survey.Q15"> No
+            <div class="auth_error-container" ng-show="errorMessageQ15">
+                <div class="auth_error">
+                    <div class="auth_error-text">
+                        <p>{{errorMessageQ15}}</p>
+                    </div>
+                    <div class="auth_error-close">
+                        <img src="../../Content/images/close-icon-black.png" ng-click="closeAlert()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>16. If you would like a follow-up call from a coach, please provide your phone number:</label>
+            <input type="text" class="form-control" placeholder="" ng-model="survey.Q16">
+        </div>
+        <button type="button" class="btn btn-success btn-sm col-xs-2 " ng-click="sendAnswers()">Submit</button>
+    </form>
+</div>
+</div>
+<div class="survey_wrapper">
+    <h3 ng-if="thankyou">
+        Your survey answers submitted. Thank you!
+    </h3>
+</div>

@@ -1,0 +1,30 @@
+﻿<nav class="navbar navbar-default" id="navbar-default" ng-controller="NavCtrl">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="navbar-header">
+            <img src="/Content/images/newBeginnings.png" width="150" height="50" alt="">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" ng-show="user">
+                <i class="fa fa-bars" aria-hidden="true" />
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right" ng-show="user">
+                <li><a class="navbar-nav-link" ng-click="loadPartials('/logout')">Logout {{user.userName}}</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" ng-repeat="thing in navItems" ng-show="user">
+                <li><a class="navbar-nav-link" ng-click="loadPartials(thing.url)">{{thing.name}}</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-if="false === true">
+                <li class="icon-bar" ng-repeat="thing in navItems">
+                    <a class="navbar_link" ng-click="loadPartials(thing.url)">{{thing.name}}</a>
+                </li>
+                <li class="icon-bar">
+                    <a class="navbar_link" ng-click="loadPartials('/logout')">Logout {{user.userName}}</a>
+                </li>
+        </div>
+    </div><!-- /.container-fluid -->
+</nav>
+

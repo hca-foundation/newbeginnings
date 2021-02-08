@@ -1,0 +1,54 @@
+﻿<!-- Page Banner-->
+<div class="page_banner">
+    <p>All Clients</p>
+</div>
+<div class="clientList_container">
+    <!-- Search -->
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for ..." ng-model="searchText">
+        <span class="input-group-btn">
+            <button class="btn btn-default"><i class="fa fa-search"></i></button>
+        </span>
+    </div>
+
+    <!-- table here -->
+    <table class="table table-striped table-key-info alert-success" id="clientList_table">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Group#</td>
+                <td>Program Start Date</td>
+                <td>Receive Survey</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items | filter: searchText | orderBy: ['LastName', 'FirstName'] | offset: start-1 | limitTo: itemPerPage">
+                <td>{{item.LastName +  ", " + item.FirstName }}</td>
+
+                <!--<td><button class="btn btn-primary" ng-click="questionItem(item.Client_SID)">Create Email</button></td>
+                <td><button class="btn btn-primary" ng-click="resendquestionItem(item.Client_SID)">Resend Email</button></td>-->
+
+                <td>{{item.Email }}</td>
+                <td>{{item.GroupNumber }}</td>
+                <td>{{item.ProgramStartDate }}</td>
+                <td>{{item.Active }}</td>
+                <td><button class="btn btn-info fa fa-pencil-square-o" ng-click="editItem(item.Client_SID)"></button> || <button class="btn btn-danger fa fa-trash-o" ng-confirm-click="Are you sure you want to delete this record? You will lose the survey information of this client!" confirmed-click="deleteItem(item.Client_SID)"></button></td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- Pagination -->
+    <div>
+        <!-- To specify your choice of items Per Pages-->
+        <div class="btn-group">
+            <label class="btn btn-success" id="pagination-label" ng-model="radioModel" btn-radio="'Left'" data-ng-click="previousPage()">Previous</label>
+            <label class="btn btn-success" id="pagination-label" ng-model="radioModel" btn-radio="'Middle'" data-ng-click="setItems(10)">10</label>
+            <label class="btn btn-success" id="pagination-label" ng-model="radioModel" btn-radio="'Middle'" data-ng-click="setItems(20)">20</label>
+            <label class="btn btn-success" id="pagination-label" ng-model="radioModel" btn-radio="'Middle'" data-ng-click="setItems(50)">50</label>
+            <label class="btn btn-success" id="pagination-label" ng-model="radioModel" btn-radio="'Right'" data-ng-click="nextPage()">Next</label>
+            <label class="btn btn-success" id="pagination-label">Client {{start}} - {{end}} of {{total}}</label>
+        </div>
+        <pagination total-items="total" items-per-page="itemPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+    </div>
+</div>
+
